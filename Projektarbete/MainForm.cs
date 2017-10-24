@@ -179,6 +179,7 @@ namespace Projektarbete
                 };
                 u.Controls.Add(picture);
                 NewCart.Controls.Add(u);
+                //test
             }
 
         }
