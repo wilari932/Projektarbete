@@ -102,22 +102,26 @@ namespace Projektarbete
                 };
                 buttons.Click += Buttons_Click;
 
-                TableLayoutPanel f = new TableLayoutPanel
-                {
-                    RowCount = 4,
-                    Width = 200,
-                    Height = 200
-                };
-                f.Controls.Add(boc);
-                f.Controls.Add(labelName);
-                f.Controls.Add(labelPrice);
-                f.Controls.Add(buttons);
-                f.RowStyles.Add(new RowStyle(SizeType.Percent, 60));
-                f.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
-                f.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
-                f.RowStyles.Add(new RowStyle(SizeType.Percent, 20));
-                CenterPanel.Controls.Add(f);
-            }
+
+
+
+                    TableLayoutPanel f = new TableLayoutPanel
+                    {
+                        RowCount = 4,
+                        Width = 200,
+                        Height = 200
+                    };
+                    f.Controls.Add(boc);
+                    f.Controls.Add(labelName);
+                    f.Controls.Add(labelPrice);
+                    f.Controls.Add(buttons);
+                    f.RowStyles.Add(new RowStyle(SizeType.Percent, 60));
+                    f.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
+                    f.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
+                    f.RowStyles.Add(new RowStyle(SizeType.Percent, 20));
+                    CenterPanel.Controls.Add(f);
+
+                }
 
             RootPanel = new TableLayoutPanel
             {
@@ -134,6 +138,8 @@ namespace Projektarbete
         private void Buttons_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
+           
+
         }
     }
 }
