@@ -22,7 +22,10 @@ namespace Projektarbete
 
         public MainForm()
         {
-            LeftMenuPanel = new TableLayoutPanel
+            Width = 1280;
+            Height = 600; 
+
+             LeftMenuPanel = new TableLayoutPanel
             {
                 Dock = DockStyle.Fill,
                 RowCount = 2,
