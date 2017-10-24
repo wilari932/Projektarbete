@@ -9,13 +9,13 @@ using System.Drawing;
 
 namespace Projektarbete
 {
-   
-    class GetProducs 
+
+    class GetProducs
     {
         private string path = @"Resources\products.txt";
         public List<Product> Products = new List<Product>();
-        
-           
+       public List<Product> CartProductsList = new List<Product>();
+
 
         public GetProducs()
         {
@@ -35,7 +35,7 @@ namespace Projektarbete
                     s.Name = entries[1];
                     s.PictureName = entries[2];
                     s.Price = Double.Parse(entries[3]);
-                    
+
                     Products.Add(s);
 
                 }
@@ -46,8 +46,16 @@ namespace Projektarbete
             }
 
 
-            }
+        }
+
+        public void CartProducts(int ID)
+    {
+
+            CartProductsList.Add(Products[ID]);
+           
+
+
         }
       
     }
-
+}

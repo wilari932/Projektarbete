@@ -19,24 +19,37 @@ namespace Projektarbete
         private Button LeftMenuPanelBtnPurchase { get; set; }
         private TableLayoutPanel LeftMenuPanelUp { get; set; }
         private TableLayoutPanel LeftMenuPanelDown { get; set; }
-
+       public TableLayoutPanel NewCart { get; set; }
+        private int NewCartRows { get; set; }
+        GetProducs G = new GetProducs();
         public MainForm()
         {
             Width = 1100;
-            Height = 675; 
-
-             LeftMenuPanel = new TableLayoutPanel
+            Height = 675;
+            //Left Menu Objects
+            LeftMenuPanel = new TableLayoutPanel
             {
                 Dock = DockStyle.Fill,
                 RowCount = 2,
                 BackColor = Color.Gray
             };
+            NewCart = new TableLayoutPanel
+            {
+                RowCount = NewCartRows,
+                AutoScroll = true,
+                Dock = DockStyle.Fill
+            };
             LeftMenuPanelUp = new TableLayoutPanel
             {
                 Dock = DockStyle.Fill,
                 RowCount = 1,
-                BackColor = Color.Gray
+                BackColor = Color.Gray,
+                AutoScroll = true
+                
             };
+
+            LeftMenuPanelUp.Controls.Add(NewCart);
+            LeftMenuPanelUp.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
             LeftMenuPanelDown = new TableLayoutPanel
             {
                 Dock = DockStyle.Fill,
@@ -48,6 +61,8 @@ namespace Projektarbete
                 Text = "Remove",
                 Dock = DockStyle.Fill
             };
+
+          
             LeftMenuPanelBtnPurchase = new Button
             {
                 Text = "COMPLETE PURCHASE",
@@ -60,7 +75,7 @@ namespace Projektarbete
             LeftMenuPanel.Controls.Add(LeftMenuPanelDown);
             LeftMenuPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 90));
             LeftMenuPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
-
+            //CenterMenu Objects
             CenterPanel = new FlowLayoutPanel
             {
                 BackColor = Color.WhiteSmoke,
@@ -68,9 +83,10 @@ namespace Projektarbete
                 AutoScroll = true,
             };
 
-            GetProducs G = new GetProducs();
+          
             foreach (Product a in G.Products)
             {
+                
                 PictureBox boc = new PictureBox
                 {
                     BackColor = Color.WhiteSmoke,
@@ -95,12 +111,13 @@ namespace Projektarbete
 
                 Button buttons = new Button
                 {
-                    Name = labelPrice.Text,
+                    Name = a.Id.ToString(),
                     Dock = DockStyle.Fill,
                     Text = "Buy now",
                     BackColor = Color.Azure
                 };
                 buttons.Click += Buttons_Click;
+                
 
 
 
@@ -137,8 +154,32 @@ namespace Projektarbete
 
         private void Buttons_Click(object sender, EventArgs e)
         {
+
             Button btn = (Button)sender;
-           
+            MessageBox.Show(btn.Name);
+            G.CartProducts(int.Parse(btn.Name));
+            foreach (Product b in G.CartProductsList)
+            {
+                NewCartRows++;
+                TableLayoutPanel u = new TableLayoutPanel {
+
+                    Height = 100,
+                    Width =200
+
+
+                };
+                PictureBox picture = new PictureBox
+                {
+                    BackColor = Color.WhiteSmoke,
+                    Dock = DockStyle.Fill,
+                    SizeMode = PictureBoxSizeMode.StretchImage,
+                   
+                    Image = Image.FromFile(@"Resources\" + b.PictureName)
+                    
+                };
+                u.Controls.Add(picture);
+                NewCart.Controls.Add(u);
+            }
 
         }
     }
