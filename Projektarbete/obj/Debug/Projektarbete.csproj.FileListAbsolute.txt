@@ -17,3 +17,4 @@ C:\Users\agust\Documents\GitHub\Projektarbete\Projektarbete\obj\Debug\Projektarb
 C:\Users\agust\Documents\GitHub\Projektarbete\Projektarbete\obj\Debug\Projektarbete.csproj.CoreCompileInputs.cache
 C:\Users\agust\Documents\GitHub\Projektarbete\Projektarbete\obj\Debug\Projektarbete.exe
 C:\Users\agust\Documents\GitHub\Projektarbete\Projektarbete\obj\Debug\Projektarbete.pdb
+C:\Users\Izabelle\Documents\Projektarbete\Projektarbete\obj\Debug\Projektarbete.csproj.CoreCompileInputs.cache
