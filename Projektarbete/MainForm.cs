@@ -82,75 +82,76 @@ namespace Projektarbete
                 Dock = DockStyle.Fill,
                 AutoScroll = true,
                 
+                
             };
 
 
-
-            GetProducs G = new GetProducs();
-            foreach (Product a in G.Products)
-            {
-
-                PictureBox boc = new PictureBox
-                {
-                    BackColor = Color.WhiteSmoke,
-                    Dock = DockStyle.Fill,
-                    SizeMode = PictureBoxSizeMode.StretchImage,
-                    Image = Image.FromFile(@"Resources\" + a.PictureName)
-
-                };
-                Label labelName = new Label
+        
+                GetProducs G = new GetProducs();
+                foreach (Product a in G.Products)
                 {
 
-                    Text = a.Name,
-                    Font = new Font("Arial", 12, FontStyle.Bold),
-                    Dock = DockStyle.Fill
+                    PictureBox boc = new PictureBox
+                    {
+                        BackColor = Color.WhiteSmoke,
+                        Dock = DockStyle.Fill,
+                        SizeMode = PictureBoxSizeMode.StretchImage,
+                        Image = Image.FromFile(@"Resources\" + a.PictureName)
 
-                };
-                Label labelPrice = new Label
-                {
+                    };
+                    Label labelName = new Label
+                    {
 
-                    Text = "$" + a.Price.ToString(),
-                    Font = new Font("Arial", 12, FontStyle.Bold),
-                    Dock = DockStyle.Fill
+                        Text = a.Name,
+                        Font = new Font("Arial", 12, FontStyle.Bold),
+                        Dock = DockStyle.Fill
 
-                };
+                    };
+                    Label labelPrice = new Label
+                    {
 
-                Button buttons = new Button
-                {
-                    Name = labelPrice.Text,
-                    Dock = DockStyle.Fill,
-                    Text = "Buy now",
-                    BackColor = Color.Azure
+                        Text = "$" + a.Price.ToString(),
+                        Font = new Font("Arial", 12, FontStyle.Bold),
+                        Dock = DockStyle.Fill
+
+                    };
+
+                    Button buttons = new Button
+                    {
+                        Name = labelPrice.Text,
+                        Dock = DockStyle.Fill,
+                        Text = "Buy now",
+                        BackColor = Color.Azure
 
 
 
-                };
-                buttons.Click += Buttons_Click;
-                boc.Click += Buttons_Click;
-
-
-
-                TableLayoutPanel f = new TableLayoutPanel
-                {
-                    RowCount = 4,
-                    Width = 200,
-                    Height = 200
-                };
-                f.Controls.Add(boc);
-                f.Controls.Add(labelName);
-                f.Controls.Add(labelPrice);
-                f.Controls.Add(buttons);
-                f.RowStyles.Add(new RowStyle(SizeType.Percent, 60));
-                f.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
-                f.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
-                f.RowStyles.Add(new RowStyle(SizeType.Percent, 20));
-                CenterPanel.Controls.Add(f);
-
-            }
+                    };
+                    buttons.Click += Buttons_Click;
 
 
 
 
+                    TableLayoutPanel f = new TableLayoutPanel
+                    {
+                        RowCount = 4,
+                        Width = 200,
+                        Height = 200
+                    };
+                    f.Controls.Add(boc);
+                    f.Controls.Add(labelName);
+                    f.Controls.Add(labelPrice);
+                    f.Controls.Add(buttons);
+                    f.RowStyles.Add(new RowStyle(SizeType.Percent, 60));
+                    f.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
+                    f.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
+                    f.RowStyles.Add(new RowStyle(SizeType.Percent, 20));
+                    CenterPanel.Controls.Add(f);
+
+                }
+
+
+
+            
 
             RootPanel = new TableLayoutPanel
             {
@@ -172,8 +173,7 @@ namespace Projektarbete
         private void Buttons_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            PictureBox c = (PictureBox)sender;
-            c.Enabled = false;
+           
 
         }
     }
