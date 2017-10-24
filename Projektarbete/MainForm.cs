@@ -101,7 +101,8 @@ namespace Projektarbete
                     Font = new Font("Arial", 12, FontStyle.Bold),
                     Dock = DockStyle.Fill
                 };
-
+                
+                //test2
                 Label labelPrice = new Label
                 {
                     Text = "$" + a.Price.ToString(),
