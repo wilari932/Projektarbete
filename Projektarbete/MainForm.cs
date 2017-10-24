@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
-
+//eeeeeeeeeeeeeeeeeee
 namespace Projektarbete
 {
     class MainForm : Form
@@ -22,7 +22,6 @@ namespace Projektarbete
 
         public MainForm()
         {
-
             LeftMenuPanel = new TableLayoutPanel
             {
                 Dock = DockStyle.Fill,
@@ -51,9 +50,9 @@ namespace Projektarbete
                 Text = "complete purchase",
                 Dock = DockStyle.Fill
             };
+
             LeftMenuPanelDown.Controls.Add(LeftMenuPanelBtnDelete);
             LeftMenuPanelDown.Controls.Add(LeftMenuPanelBtnPurchase);
-
             LeftMenuPanel.Controls.Add(LeftMenuPanelUp);
             LeftMenuPanel.Controls.Add(LeftMenuPanelDown);
             LeftMenuPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 90));
