@@ -10,4 +10,10 @@ C:\Users\Izabelle\Documents\Projektarbete\Projektarbete\obj\Debug\Projektarbete.
 C:\Users\Izabelle\Documents\Projektarbete\Projektarbete\bin\Debug\Projektarbete.exe
 C:\Users\Izabelle\Documents\Projektarbete\Projektarbete\bin\Debug\Projektarbete.pdb
 C:\Users\Izabelle\Documents\Projektarbete\Projektarbete\obj\Debug\Projektarbete.csprojResolveAssemblyReference.cache
-C:\Users\Izabelle\Documents\Projektarbete\Projektarbete\obj\Debug\Projektarbete.csproj.CoreCompileInputs.cache
+C:\Users\agust\Documents\GitHub\Projektarbete\Projektarbete\bin\Debug\Projektarbete.exe.config
+C:\Users\agust\Documents\GitHub\Projektarbete\Projektarbete\bin\Debug\Projektarbete.exe
+C:\Users\agust\Documents\GitHub\Projektarbete\Projektarbete\bin\Debug\Projektarbete.pdb
+C:\Users\agust\Documents\GitHub\Projektarbete\Projektarbete\obj\Debug\Projektarbete.csprojResolveAssemblyReference.cache
+C:\Users\agust\Documents\GitHub\Projektarbete\Projektarbete\obj\Debug\Projektarbete.csproj.CoreCompileInputs.cache
+C:\Users\agust\Documents\GitHub\Projektarbete\Projektarbete\obj\Debug\Projektarbete.exe
+C:\Users\agust\Documents\GitHub\Projektarbete\Projektarbete\obj\Debug\Projektarbete.pdb
