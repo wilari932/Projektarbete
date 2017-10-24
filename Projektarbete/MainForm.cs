@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
-//eeeeeeeeeeeeeeeeeee
+
 namespace Projektarbete
 {
     class MainForm : Form
@@ -22,8 +22,8 @@ namespace Projektarbete
 
         public MainForm()
         {
-            Width = 1280;
-            Height = 600; 
+            Width = 1100;
+            Height = 675; 
 
              LeftMenuPanel = new TableLayoutPanel
             {
