@@ -45,12 +45,12 @@ namespace Projektarbete
             };
             LeftMenuPanelBtnDelete = new Button
             {
-                Text = "Delte",
+                Text = "Remove",
                 Dock = DockStyle.Fill
             };
             LeftMenuPanelBtnPurchase = new Button
             {
-                Text = "complete purchase",
+                Text = "COMPLETE PURCHASE",
                 Dock = DockStyle.Fill
             };
 
