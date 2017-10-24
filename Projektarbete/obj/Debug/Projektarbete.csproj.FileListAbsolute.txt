@@ -10,3 +10,4 @@ C:\Users\Izabelle\Documents\Projektarbete\Projektarbete\obj\Debug\Projektarbete.
 C:\Users\Izabelle\Documents\Projektarbete\Projektarbete\bin\Debug\Projektarbete.exe
 C:\Users\Izabelle\Documents\Projektarbete\Projektarbete\bin\Debug\Projektarbete.pdb
 C:\Users\Izabelle\Documents\Projektarbete\Projektarbete\obj\Debug\Projektarbete.csprojResolveAssemblyReference.cache
+C:\Users\Izabelle\Documents\Projektarbete\Projektarbete\obj\Debug\Projektarbete.csproj.CoreCompileInputs.cache

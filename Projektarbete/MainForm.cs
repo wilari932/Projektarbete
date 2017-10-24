@@ -21,9 +21,6 @@ namespace Projektarbete
         private TableLayoutPanel LeftMenuPanelUp { get; set; }
         private TableLayoutPanel LeftMenuPanelDown { get; set; }
 
-
-
-
         public MainForm()
         {
 
@@ -129,8 +126,6 @@ namespace Projektarbete
                     buttons.Click += Buttons_Click;
 
 
-
-
                     TableLayoutPanel f = new TableLayoutPanel
                     {
                         RowCount = 4,
@@ -173,8 +168,8 @@ namespace Projektarbete
         private void Buttons_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-           
-
+          
+            
         }
     }
 

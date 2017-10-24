@@ -14,6 +14,8 @@ namespace Projektarbete
     {
         private string path = @"Resources\products.txt";
         public List<Product> Products = new List<Product>();
+        
+           
 
         public GetProducs()
         {
@@ -29,9 +31,11 @@ namespace Projektarbete
 
                     string[] entries = lines.Split(',');
                     Product s = new Product();
-                    s.Name = entries[0];
-                    s.PictureName = entries[1];
-                    s.Price = Double.Parse(entries[2]);
+                    s.Id = int.Parse(entries[0]);
+                    s.Name = entries[1];
+                    s.PictureName = entries[2];
+                    s.Price = Double.Parse(entries[3]);
+                    
                     Products.Add(s);
 
                 }

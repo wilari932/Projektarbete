@@ -1,7 +1,7 @@
-﻿Asus,laptop.png,3000
-Asus,laptop2.png,3000
-Asus,grafikcard.png,3000
-Gamepc,gmingpc.png,3000
-VR,vr.png,3000
-Playstation 4,ps4.png,1000
-Xbox One,xboxone.png,2000
+﻿0,Asus,laptop.png,3000
+1,Asus,laptop2.png,3000
+2,Asus,grafikcard.png,3000
+3,Gamepc,gmingpc.png,3000
+4,VR,vr.png,3000
+5,Playstation 4,ps4.png,1000
+6,Xbox One,xboxone.png,2000
