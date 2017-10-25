@@ -34,7 +34,7 @@ namespace Projektarbete
                     Image = Image.FromFile(@"Resources\" + ProducFinder.PictureName)
 
                 };
-                u.Controls.Add(picture);
+                PanelWithProducs.Controls.Add(picture);
 
                 
               
