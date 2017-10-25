@@ -29,8 +29,8 @@ namespace Projektarbete
             Height = 500;
            
             LeftMenuPanel = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 2, BackColor = Color.Gray };
-            VisualCartPanel = new TableLayoutPanel { Dock = DockStyle.Fill };
-            LeftMenuPanelUp = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 1, BackColor = Color.Gray, AutoScroll = true };
+            VisualCartPanel = new TableLayoutPanel { Dock = DockStyle.Fill, AutoScroll=true };
+            LeftMenuPanelUp = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 1, BackColor = Color.Gray,  };
 
 
             LeftMenuPanelUp.Controls.Add(VisualCartPanel);
