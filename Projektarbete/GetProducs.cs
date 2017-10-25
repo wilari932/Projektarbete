@@ -15,6 +15,7 @@ namespace Projektarbete
         private string path = @"Resources\products.txt";
         public List<Product> Products = new List<Product>();
        public List<Product> CartProductsList = new List<Product>();
+      
 
 
         public GetProducs()
@@ -39,6 +40,13 @@ namespace Projektarbete
                     Products.Add(s);
 
                 }
+
+            
+
+            
+
+
+
             }
             catch
             {
