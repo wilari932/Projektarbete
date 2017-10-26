@@ -21,23 +21,38 @@ namespace Projektarbete
                 {
 
                     Height = 100,
-                    Width = 200
-
-
+                    Width = 400,
+                    ColumnCount = 2,
+                    RowCount = 1,
+                    CellBorderStyle = TableLayoutPanelCellBorderStyle.InsetDouble,
+                    BackColor = Color.WhiteSmoke,
+                    Dock = DockStyle.Top,
                 };
+                
                 PictureBox picture = new PictureBox
                 {
-                    BackColor = Color.WhiteSmoke,
+                    //BackColor = Color.WhiteSmoke,
                     Dock = DockStyle.Fill,
                     SizeMode = PictureBoxSizeMode.StretchImage,
-
                     Image = Image.FromFile(@"Resources\" + ProducFinder.PictureName)
 
                 };
-                PanelWithProducs.Controls.Add(picture);
-
                 
-              
+
+                Label info = new Label
+                {
+                    Text = ProducFinder.Name + " " + ProducFinder.Price,
+                    Font = new Font("Arial", 12, FontStyle.Bold),
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Dock = DockStyle.Fill,
+                    
+                };
+
+                PanelWithProducs.Controls.Add(picture);
+                PanelWithProducs.Controls.Add(info);
+
+
+
 
 
             }
