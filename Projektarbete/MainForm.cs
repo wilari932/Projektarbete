@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
 
-//ytduyhvibiuib
+
 
 namespace Projektarbete
 {

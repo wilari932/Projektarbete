@@ -25,7 +25,7 @@ namespace Projektarbete
             {
 
                 List<string> ReadLines = File.ReadAllLines(path).ToList();
-
+                MessageBox.Show("Text Filen Finns inte !");
 
                 foreach (string lines in ReadLines)
                 {
