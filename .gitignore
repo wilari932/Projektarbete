@@ -16,3 +16,6 @@
 *.exe
 *.pdb
 /.vs/config
+*.exe
+*.exe
+*.pdb
