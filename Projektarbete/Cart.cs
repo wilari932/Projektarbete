@@ -19,44 +19,30 @@ namespace Projektarbete
                 // NewCartRows++;
                 PanelWithProducs = new TableLayoutPanel
                 {
-
                     Height = 100,
                     Width = 400,
                     ColumnCount = 2,
                     RowCount = 1,
                     CellBorderStyle = TableLayoutPanelCellBorderStyle.InsetDouble,
-                    BackColor = Color.WhiteSmoke,
+                    BackColor = Color.White,
                     Dock = DockStyle.Top,
                 };
-                
                 PictureBox picture = new PictureBox
                 {
-                    //BackColor = Color.WhiteSmoke,
                     Dock = DockStyle.Fill,
                     SizeMode = PictureBoxSizeMode.StretchImage,
                     Image = Image.FromFile(@"Resources\" + ProducFinder.PictureName)
-
                 };
-                
-
                 Label info = new Label
                 {
                     Text = ProducFinder.Name + " " + ProducFinder.Price,
-                    Font = new Font("Arial", 12, FontStyle.Regular),
-                    TextAlign = ContentAlignment.MiddleCenter,
+                    Font = new Font("Arial", 11, FontStyle.Regular),
+                    TextAlign = ContentAlignment.TopCenter,
                     Dock = DockStyle.Fill,
-                    
                 };
-
                 PanelWithProducs.Controls.Add(picture);
                 PanelWithProducs.Controls.Add(info);
-
-
-
-
-
             }
         }
-        //ahhhhhhhhhhhhhhh
     }
 }

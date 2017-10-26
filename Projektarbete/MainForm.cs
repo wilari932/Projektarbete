@@ -7,13 +7,10 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
 
-
-
 namespace Projektarbete
 {
     class MainForm : Form
     {
-        
         private TableLayoutPanel RootPanel { get; set; }
         public FlowLayoutPanel RightMenuPanel { get; set; }
         private TableLayoutPanel LeftMenuPanel { get; set; }
@@ -26,23 +23,18 @@ namespace Projektarbete
 
         public MainForm()
         {
-            
-           
             Width = 1100;
-            Height = 500;
-            
-           
-            LeftMenuPanel = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 2, BackColor = Color.DimGray };
-            VisualCartPanel = new TableLayoutPanel { Dock = DockStyle.Fill, AutoScroll=true };
-            LeftMenuPanelUp = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 1, BackColor = Color.DimGray};
+            Height = 670;
 
+            LeftMenuPanel = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 2 }; 
+            VisualCartPanel = new TableLayoutPanel { Dock = DockStyle.Fill, AutoScroll = true };
+            LeftMenuPanelUp = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 1, BackColor = Color.WhiteSmoke, BorderStyle = BorderStyle.Fixed3D };
 
             LeftMenuPanelUp.Controls.Add(VisualCartPanel);
             LeftMenuPanelUp.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-            LeftMenuPanelDown = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, BackColor = Color.Gray };
-            LeftMenuPanelBtnDelete = new Button { Text = "Delete", Dock = DockStyle.Fill, FlatStyle = FlatStyle.Flat, BackColor = Color.LightGray, Font = new Font("Arial", 12, FontStyle.Regular) };
-            BtnPurchase = new Button { Text = "COMPLETE PURCHASE", Dock = DockStyle.Fill, FlatStyle = FlatStyle.Flat, BackColor = Color.AntiqueWhite, Font = new Font("Arial",  12, FontStyle.Regular) };
-           
+            LeftMenuPanelDown = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, BackColor = Color.WhiteSmoke };
+            LeftMenuPanelBtnDelete = new Button { Text = "Delete", Dock = DockStyle.Fill, FlatStyle = FlatStyle.Flat, BackColor = Color.WhiteSmoke, Font = new Font("Arial", 10, FontStyle.Regular) };
+            BtnPurchase = new Button { Text = "COMPLETE PURCHASE", Dock = DockStyle.Fill, FlatStyle = FlatStyle.Flat, BackColor = Color.LightGreen, Font = new Font("Arial", 11, FontStyle.Regular) };
 
             LeftMenuPanelDown.Controls.Add(LeftMenuPanelBtnDelete);
             LeftMenuPanelDown.Controls.Add(BtnPurchase);
@@ -52,11 +44,10 @@ namespace Projektarbete
             LeftMenuPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
 
             // RightMenuPanel Objekt
-            RightMenuPanel = new FlowLayoutPanel { BackColor = Color.WhiteSmoke, Dock = DockStyle.Fill, AutoScroll = true ,BorderStyle = BorderStyle.Fixed3D};
+            RightMenuPanel = new FlowLayoutPanel { BackColor = Color.WhiteSmoke, Dock = DockStyle.Fill, AutoScroll = true, BorderStyle = BorderStyle.Fixed3D };
 
             foreach (Product a in GetProducsFromList.Products)
             {
-                
                 PictureBox boc = new PictureBox
                 {
                     BackColor = Color.WhiteSmoke,
@@ -68,15 +59,14 @@ namespace Projektarbete
                 Label labelName = new Label
                 {
                     Text = a.Name,
-                    Font = new Font("Arial", 12, FontStyle.Regular),
+                    Font = new Font("Arial", 11, FontStyle.Regular),
                     Dock = DockStyle.Fill
                 };
-                
-                
+
                 Label labelPrice = new Label
                 {
                     Text = "$" + a.Price.ToString(),
-                    Font = new Font("Arial", 12, FontStyle.Regular),
+                    Font = new Font("Arial", 11, FontStyle.Regular),
                     Dock = DockStyle.Fill
                 };
 
@@ -85,35 +75,32 @@ namespace Projektarbete
                     Name = a.Id.ToString(),
                     Dock = DockStyle.Fill,
                     Text = "Buy now",
-                    BackColor = Color.Azure
+                    BackColor = Color.White
                 };
+
                 buttons.Click += Buttons_Click;
-                
 
+                TableLayoutPanel productRangePanel = new TableLayoutPanel
+                {
+                    RowCount = 4,
+                    Width = 200,
+                    Height = 200,
+                    //CellBorderStyle = TableLayoutPanelCellBorderStyle.OutsetPartial        
+                };
+                productRangePanel.Controls.Add(boc);
+                productRangePanel.Controls.Add(labelName);
+                productRangePanel.Controls.Add(labelPrice);
+                productRangePanel.Controls.Add(buttons);
+                productRangePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 60));
+                productRangePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
+                productRangePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
+                productRangePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 20));
 
-                    TableLayoutPanel productRangePanel = new TableLayoutPanel
-                    {
-                        RowCount = 4,
-                        Width = 200,
-                        Height = 200,
-                        //CellBorderStyle = TableLayoutPanelCellBorderStyle.OutsetPartial
-                        
-                    };
-                    productRangePanel.Controls.Add(boc);
-                    productRangePanel.Controls.Add(labelName);
-                    productRangePanel.Controls.Add(labelPrice);
-                    productRangePanel.Controls.Add(buttons);
-                    productRangePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 60));
-                    productRangePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
-                    productRangePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
-                    productRangePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 20));
-                   
                 RightMenuPanel.Controls.Add(productRangePanel);
-
-                }
+            }
 
             RootPanel = new TableLayoutPanel { ColumnCount = 2, Dock = DockStyle.Fill };
-          
+
             this.Controls.Add(RootPanel);
             RootPanel.Controls.Add(LeftMenuPanel);
             RootPanel.Controls.Add(RightMenuPanel);
