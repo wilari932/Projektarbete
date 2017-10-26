@@ -40,8 +40,8 @@ namespace Projektarbete
             LeftMenuPanelUp.Controls.Add(VisualCartPanel);
             LeftMenuPanelUp.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
             LeftMenuPanelDown = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, BackColor = Color.Gray };
-            LeftMenuPanelBtnDelete = new Button { Text = "delete", Dock = DockStyle.Fill, FlatStyle = FlatStyle.Flat, BackColor = Color.MediumPurple, Font = new Font("Arial", 12, FontStyle.Bold) };
-            BtnPurchase = new Button { Text = "COMPLETE PURCHASE", Dock = DockStyle.Fill, FlatStyle = FlatStyle.Flat ,BackColor = Color.MediumPurple , Font = new Font("Arial",  12, FontStyle.Bold) };
+            LeftMenuPanelBtnDelete = new Button { Text = "delete", Dock = DockStyle.Fill, FlatStyle = FlatStyle.Flat, BackColor = Color.WhiteSmoke, Font = new Font("Arial", 12, FontStyle.Regular) };
+            BtnPurchase = new Button { Text = "COMPLETE PURCHASE", Dock = DockStyle.Fill, FlatStyle = FlatStyle.Flat, BackColor = Color.WhiteSmoke , Font = new Font("Arial",  12, FontStyle.Regular) };
            
 
             LeftMenuPanelDown.Controls.Add(LeftMenuPanelBtnDelete);
