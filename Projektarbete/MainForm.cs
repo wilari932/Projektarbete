@@ -68,7 +68,7 @@ namespace Projektarbete
                 Label labelName = new Label
                 {
                     Text = a.Name,
-                    Font = new Font("Arial", 12, FontStyle.Bold),
+                    Font = new Font("Arial", 12, FontStyle.Regular),
                     Dock = DockStyle.Fill
                 };
                 
@@ -76,7 +76,7 @@ namespace Projektarbete
                 Label labelPrice = new Label
                 {
                     Text = "$" + a.Price.ToString(),
-                    Font = new Font("Arial", 12, FontStyle.Bold),
+                    Font = new Font("Arial", 12, FontStyle.Regular),
                     Dock = DockStyle.Fill
                 };
 

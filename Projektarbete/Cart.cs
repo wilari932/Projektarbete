@@ -42,7 +42,7 @@ namespace Projektarbete
                 Label info = new Label
                 {
                     Text = ProducFinder.Name + " " + ProducFinder.Price,
-                    Font = new Font("Arial", 12, FontStyle.Bold),
+                    Font = new Font("Arial", 12, FontStyle.Regular),
                     TextAlign = ContentAlignment.MiddleCenter,
                     Dock = DockStyle.Fill,
                     
