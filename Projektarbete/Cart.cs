@@ -35,13 +35,35 @@ namespace Projektarbete
                 };
                 Label info = new Label
                 {
-                    Text = ProducFinder.Name + " " + ProducFinder.Price,
+                    Text = ProducFinder.Name + "\n" + ProducFinder.Price,
                     Font = new Font("Arial", 11, FontStyle.Regular),
                     TextAlign = ContentAlignment.TopCenter,
                     Dock = DockStyle.Fill,
                 };
-                PanelWithProducs.Controls.Add(picture);
+                Button buttonMore = new Button
+                {
+                    //Name = a.Id.ToString(),
+                    Dock = DockStyle.Right,
+                    Text = "+",
+                    Font = new Font("Arial", 14, FontStyle.Regular),
+                    FlatStyle = FlatStyle.Standard,
+                    ForeColor = Color.Black,
+                    BackColor = Color.White
+                };
+                Button buttonMinus = new Button
+                {
+                    //Name = a.Id.ToString(),
+                    Dock = DockStyle.Left,
+                    Text = "-",
+                    Font = new Font("Arial", 14, FontStyle.Regular),
+                    FlatStyle = FlatStyle.Standard,
+                    ForeColor = Color.Black,
+                    BackColor = Color.White
+                };
+                PanelWithProducs.Controls.Add(picture);  
+                PanelWithProducs.Controls.Add(buttonMore);
                 PanelWithProducs.Controls.Add(info);
+                PanelWithProducs.Controls.Add(buttonMinus);
             }
         }
     }
