@@ -32,16 +32,16 @@ namespace Projektarbete
             Height = 500;
             
            
-            LeftMenuPanel = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 2, BackColor = Color.Gray };
+            LeftMenuPanel = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 2, BackColor = Color.DimGray };
             VisualCartPanel = new TableLayoutPanel { Dock = DockStyle.Fill, AutoScroll=true };
-            LeftMenuPanelUp = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 1, BackColor = Color.Gray,  };
+            LeftMenuPanelUp = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 1, BackColor = Color.DimGray};
 
 
             LeftMenuPanelUp.Controls.Add(VisualCartPanel);
             LeftMenuPanelUp.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
             LeftMenuPanelDown = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, BackColor = Color.Gray };
-            LeftMenuPanelBtnDelete = new Button { Text = "delete", Dock = DockStyle.Fill, FlatStyle = FlatStyle.Flat, BackColor = Color.WhiteSmoke, Font = new Font("Arial", 12, FontStyle.Regular) };
-            BtnPurchase = new Button { Text = "COMPLETE PURCHASE", Dock = DockStyle.Fill, FlatStyle = FlatStyle.Flat, BackColor = Color.WhiteSmoke , Font = new Font("Arial",  12, FontStyle.Regular) };
+            LeftMenuPanelBtnDelete = new Button { Text = "Delete", Dock = DockStyle.Fill, FlatStyle = FlatStyle.Flat, BackColor = Color.LightGray, Font = new Font("Arial", 12, FontStyle.Regular) };
+            BtnPurchase = new Button { Text = "COMPLETE PURCHASE", Dock = DockStyle.Fill, FlatStyle = FlatStyle.Flat, BackColor = Color.AntiqueWhite, Font = new Font("Arial",  12, FontStyle.Regular) };
            
 
             LeftMenuPanelDown.Controls.Add(LeftMenuPanelBtnDelete);
