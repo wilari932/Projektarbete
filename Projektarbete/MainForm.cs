@@ -13,63 +13,36 @@ namespace Projektarbete
 {
     class MainForm : Form
     {
+        
         private TableLayoutPanel RootPanel { get; set; }
-        public FlowLayoutPanel CenterPanel { get; set; }
-        //Left Menu Objects
+        public FlowLayoutPanel RightMenuPanel { get; set; }
         private TableLayoutPanel LeftMenuPanel { get; set; }
         private Button LeftMenuPanelBtnDelete { get; set; }
         private Button LeftMenuPanelBtnPurchase { get; set; }
         private TableLayoutPanel LeftMenuPanelUp { get; set; }
         private TableLayoutPanel LeftMenuPanelDown { get; set; }
-       public TableLayoutPanel NewCart { get; set; }
-        private int NewCartRows { get; set; }
-        GetProducs G = new GetProducs();
+        public TableLayoutPanel VisualCartPanel { get; set; }
+        GetProducs GetProducsFromList = new GetProducs();
+
         public MainForm()
         {
+           
             Width = 1100;
-            Height = 675;
-            //Left Menu Objects
-            LeftMenuPanel = new TableLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-                RowCount = 2,
-                BackColor = Color.Gray
-            };
-            NewCart = new TableLayoutPanel
-            {
-                RowCount = NewCartRows,
-                AutoScroll = true,
-                Dock = DockStyle.Fill
-            };
-            LeftMenuPanelUp = new TableLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-                RowCount = 1,
-                BackColor = Color.Gray,
-                AutoScroll = true
-                
-            };
+            Height = 500;
+           
+            LeftMenuPanel = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 2, BackColor = Color.Gray };
+            VisualCartPanel = new TableLayoutPanel { Dock = DockStyle.Fill, AutoScroll=true };
+            LeftMenuPanelUp = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 1, BackColor = Color.Gray,  };
 
-            LeftMenuPanelUp.Controls.Add(NewCart);
+
+            LeftMenuPanelUp.Controls.Add(VisualCartPanel);
             LeftMenuPanelUp.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-            LeftMenuPanelDown = new TableLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-                ColumnCount = 2,
-                BackColor = Color.Gray
-            };
-            LeftMenuPanelBtnDelete = new Button
-            {
-                Text = "Remove",
-                Dock = DockStyle.Fill
-            };
+            LeftMenuPanelDown = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, BackColor = Color.Gray };
+            LeftMenuPanelBtnDelete = new Button { Text = "Remove", Dock = DockStyle.Fill };
 
-          
-            LeftMenuPanelBtnPurchase = new Button
-            {
-                Text = "COMPLETE PURCHASE",
-                Dock = DockStyle.Fill
-            };
+
+            LeftMenuPanelBtnPurchase = new Button { Text = "COMPLETE PURCHASE", Dock = DockStyle.Fill };
+           
 
             LeftMenuPanelDown.Controls.Add(LeftMenuPanelBtnDelete);
             LeftMenuPanelDown.Controls.Add(LeftMenuPanelBtnPurchase);
@@ -77,16 +50,11 @@ namespace Projektarbete
             LeftMenuPanel.Controls.Add(LeftMenuPanelDown);
             LeftMenuPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 90));
             LeftMenuPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
-            //CenterMenu Objects
-            CenterPanel = new FlowLayoutPanel
-            {
-                BackColor = Color.WhiteSmoke,
-                Dock = DockStyle.Fill,
-                AutoScroll = true,
-            };
 
-          
-            foreach (Product a in G.Products)
+            // RightMenuPanel Objekt
+            RightMenuPanel = new FlowLayoutPanel { BackColor = Color.WhiteSmoke, Dock = DockStyle.Fill, AutoScroll = true };
+
+            foreach (Product a in GetProducsFromList.Products)
             {
                 
                 PictureBox boc = new PictureBox
@@ -103,7 +71,8 @@ namespace Projektarbete
                     Font = new Font("Arial", 12, FontStyle.Bold),
                     Dock = DockStyle.Fill
                 };
-
+                
+                
                 Label labelPrice = new Label
                 {
                     Text = "$" + a.Price.ToString(),
@@ -122,67 +91,40 @@ namespace Projektarbete
                 
 
 
-
-
-                    TableLayoutPanel f = new TableLayoutPanel
+                    TableLayoutPanel productRangePanel = new TableLayoutPanel
                     {
                         RowCount = 4,
                         Width = 200,
                         Height = 200
                     };
-                    f.Controls.Add(boc);
-                    f.Controls.Add(labelName);
-                    f.Controls.Add(labelPrice);
-                    f.Controls.Add(buttons);
-                    f.RowStyles.Add(new RowStyle(SizeType.Percent, 60));
-                    f.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
-                    f.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
-                    f.RowStyles.Add(new RowStyle(SizeType.Percent, 20));
-                    CenterPanel.Controls.Add(f);
+                    productRangePanel.Controls.Add(boc);
+                    productRangePanel.Controls.Add(labelName);
+                    productRangePanel.Controls.Add(labelPrice);
+                    productRangePanel.Controls.Add(buttons);
+                    productRangePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 60));
+                    productRangePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
+                    productRangePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
+                    productRangePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 20));
+                    RightMenuPanel.Controls.Add(productRangePanel);
 
                 }
 
-            RootPanel = new TableLayoutPanel
-            {
-                ColumnCount = 2,
-                Dock = DockStyle.Fill
-            };
+            RootPanel = new TableLayoutPanel { ColumnCount = 2, Dock = DockStyle.Fill };
+          
             this.Controls.Add(RootPanel);
             RootPanel.Controls.Add(LeftMenuPanel);
-            RootPanel.Controls.Add(CenterPanel);
+            RootPanel.Controls.Add(RightMenuPanel);
             RootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40));
             RootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60));
         }
 
         private void Buttons_Click(object sender, EventArgs e)
         {
-
-            Button btn = (Button)sender;
-            MessageBox.Show(btn.Name);
-            G.CartProducts(int.Parse(btn.Name));
-            foreach (Product b in G.CartProductsList)
-            {
-                NewCartRows++;
-                TableLayoutPanel u = new TableLayoutPanel {
-
-                    Height = 100,
-                    Width =200
-
-
-                };
-                PictureBox picture = new PictureBox
-                {
-                    BackColor = Color.WhiteSmoke,
-                    Dock = DockStyle.Fill,
-                    SizeMode = PictureBoxSizeMode.StretchImage,
-                   
-                    Image = Image.FromFile(@"Resources\" + b.PictureName)
-                    
-                };
-                u.Controls.Add(picture);
-                NewCart.Controls.Add(u);
-            }
-
+            Button BtnGetProductID = (Button)sender;
+            GetProducsFromList.CartProducts(int.Parse(BtnGetProductID.Name));
+            Cart SelectedProducs = new Cart();
+            SelectedProducs.ProducsInCart(GetProducsFromList);
+            VisualCartPanel.Controls.Add(SelectedProducs.PanelWithProducs);
         }
     }
 }
