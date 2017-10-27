@@ -13,7 +13,7 @@ namespace Projektarbete
     {
         private string path = @"Resources\products.txt";
         public List<Product> Products = new List<Product>();
-        public List<Product> CartProductsList = new List<Product>();
+    
         public GetProducs()
         {
             try
@@ -35,9 +35,6 @@ namespace Projektarbete
                 MessageBox.Show("Text Filen Finns inte!");
             }
         }
-        public void CartProducts(int ID)
-        {
-            CartProductsList.Add(Products[ID]);
-        }
+     
     }
 }

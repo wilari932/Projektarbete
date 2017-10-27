@@ -10,27 +10,30 @@ namespace Projektarbete
 {
     class Cart
     {
+
+        public List<Product> CartProductsList = new List<Product>();
         public TableLayoutPanel PanelWithProducs { get; set; }
-        public void ProducsInCart(GetProducs GetProducsFromList)
+    
+        public void ProducsInCart(GetProducs GetProducsFromList, int ID)
         {
-            GetProducs G = GetProducsFromList;
-            foreach (Product ProducFinder in G.CartProductsList)
+            CartProductsList.Add(GetProducsFromList.Products[ID]);
+            
+              foreach (Product ProducFinder in CartProductsList)
             {
-                // NewCartRows++;
                 PanelWithProducs = new TableLayoutPanel
                 {
                     Height = 100,
-                    Width = 400,
+                    Width = 275,
                     ColumnCount = 5,
                     //RowCount = 1,
                     //CellBorderStyle = TableLayoutPanelCellBorderStyle.None,
                     BackColor = Color.White,
                     Dock = DockStyle.Top,
                 };
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25));
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25));
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10));
                 PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
                 PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10));
 
                 PictureBox picture = new PictureBox
@@ -76,16 +79,29 @@ namespace Projektarbete
                     Anchor = (AnchorStyles.None | AnchorStyles.None),
                     Font = new Font("Arial", 11, FontStyle.Regular),
                     ForeColor = Color.Black,
-                    BackColor = Color.White
+                    BackColor = Color.White,
+                    Enabled = false
                 };
 
 
-            PanelWithProducs.Controls.Add(picture);
-            PanelWithProducs.Controls.Add(info);
-            PanelWithProducs.Controls.Add(buttonLess);
-            PanelWithProducs.Controls.Add(quantity);
-            PanelWithProducs.Controls.Add(buttonMore);
+                PanelWithProducs.Controls.Add(picture);
+                PanelWithProducs.Controls.Add(info);
+                PanelWithProducs.Controls.Add(buttonLess);
+                PanelWithProducs.Controls.Add(quantity);
+                PanelWithProducs.Controls.Add(buttonMore);
+
+
+            }
+
+
+      
+
         }
+
+
+
     }
-}
-}
+
+
+    }
+
