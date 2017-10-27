@@ -137,8 +137,6 @@ namespace Projektarbete
             RootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60));
         }
 
-
-
         private void Buttons_Click(object sender, EventArgs e)
         {
             Button BtnGetProductID = (Button)sender;
