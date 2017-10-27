@@ -20,17 +20,17 @@ namespace Projektarbete
                 PanelWithProducs = new TableLayoutPanel
                 {
                     Height = 100,
-                    Width = 400,
+                    Width = 275,
                     ColumnCount = 5,
                     //RowCount = 1,
                     //CellBorderStyle = TableLayoutPanelCellBorderStyle.None,
                     BackColor = Color.White,
                     Dock = DockStyle.Top,
                 };
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25));
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25));
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10));
                 PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
                 PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10));
 
                 PictureBox picture = new PictureBox
