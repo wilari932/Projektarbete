@@ -21,8 +21,6 @@ namespace Projektarbete
         public TableLayoutPanel VisualCartPanel { get; set; }
         public List<Product> CartProductsList2 = new List<Product>();
 
-
-
         GetProducs GetProducsFromList = new GetProducs();
 
         public MainForm()
@@ -98,7 +96,6 @@ namespace Projektarbete
                     FlatStyle = FlatStyle.Standard,
                     ForeColor = Color.White,
                     BackColor = Color.SandyBrown
-
                 };
 
                 buttonAddToCart.Click += Buttons_Click;
@@ -143,31 +140,16 @@ namespace Projektarbete
 
             //  BtnGetProductID.Enabled = false;
             Cart SelectedProducs = new Cart();
-
-
             if (CartProductsList2.Exists(x => x.Id == int.Parse(BtnGetProductID.Name)))
             {
-
                 MessageBox.Show("Finns Redan i Cart");
-
             }
             else
             {
                 SelectedProducs.ProducsInCart(GetProducsFromList, int.Parse(BtnGetProductID.Name));
                 VisualCartPanel.Controls.Add(SelectedProducs.PanelWithProducs);
                 CartProductsList2.Add(GetProducsFromList.Products[int.Parse(BtnGetProductID.Name)]);
-
             }
-
-
-
-
-
-
-
-
         }
     }
-
 }
-
