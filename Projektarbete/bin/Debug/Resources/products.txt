@@ -1,11 +1,7 @@
-﻿0,Asus,laptop.png,1000
-1,Asus,laptop2.png,2000
-2,Asus,grafikcard.png,4000
-3,Gamepc,gmingpc.png,6000
-4,VR,vr.png,700
-5,Playstation 4,ps4.png,1200
-6,Xbox One,xboxone.png,1100
-7,Asus,laptop4.png,800
-8,Asus,laptop3.png,12000
-9,Gamepc,gmingpc1.png,20000
-10,i7,i7.png,3700
+﻿0,Lenovo - Ideapad 110s 11",laptop0.png,149
+1,Dell - Inspiron 15" Touch-Screen,laptop1.png,349
+2,HP - 15" Touch-Screen,laptop2.png,529
+3,Lenovo - 15",laptop3.png,279
+4,Lenovo - Yoga 710 2-in-1 15" Touch-Screen,laptop4.png,749
+5,Asus - VivoBook Max X541NA 15",laptop5.png,279
+6,HP - 17" Laptop - Intel Core i5,laptop6.png,499
