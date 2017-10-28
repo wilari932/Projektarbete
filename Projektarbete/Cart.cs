@@ -13,12 +13,12 @@ namespace Projektarbete
 
         public List<Product> CartProductsList = new List<Product>();
         public TableLayoutPanel PanelWithProducs { get; set; }
-
+    
         public void ProducsInCart(GetProducs GetProducsFromList, int ID)
         {
             CartProductsList.Add(GetProducsFromList.Products[ID]);
-
-            foreach (Product ProducFinder in CartProductsList)
+            
+              foreach (Product ProducFinder in CartProductsList)
             {
                 PanelWithProducs = new TableLayoutPanel
                 {
@@ -30,7 +30,6 @@ namespace Projektarbete
                     BackColor = Color.White,
                     Dock = DockStyle.Top,
                 };
-
                 PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30));
                 PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30));
                 PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10));
@@ -84,14 +83,25 @@ namespace Projektarbete
                     Enabled = false
                 };
 
+
                 PanelWithProducs.Controls.Add(picture);
                 PanelWithProducs.Controls.Add(info);
                 PanelWithProducs.Controls.Add(buttonLess);
                 PanelWithProducs.Controls.Add(quantity);
                 PanelWithProducs.Controls.Add(buttonMore);
 
+
             }
+
+
+      
+
         }
+
+
+
     }
-}
+
+
+    }
 

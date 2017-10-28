@@ -1,7 +1,7 @@
-﻿0,Lenovo - Ideapad 110s 11.6",laptop0.png,149.99
-1,Dell - Inspiron 15.6" Touch-Screen,laptop1.png,349.99
-2,HP - 15.6" Touch-Screen,laptop2.png,529.99
-3,Lenovo - 15.6",laptop3.png,279.99
-4,Lenovo - Yoga 710 2-in-1 15.6" Touch-Screen,laptop4.png,749.99
-5,Asus - VivoBook Max X541NA 15.6",laptop5.png,279.99
-6,HP - 17.3" Laptop - Intel Core i5,laptop6.png,499.99
+﻿0,Asus,laptop.png,3000
+1,Asus,laptop2.png,3000
+2,Asus,grafikcard.png,3000
+3,Gamepc,gmingpc.png,3000
+4,VR,vr.png,3000
+5,Playstation 4,ps4.png,1000
+6,Xbox One,xboxone.png,2000
