@@ -10,13 +10,15 @@ namespace Projektarbete
 {
     class Cart
     {
+
         public List<Product> CartProductsList = new List<Product>();
         public TableLayoutPanel PanelWithProducs { get; set; }
-
+    
         public void ProducsInCart(GetProducs GetProducsFromList, int ID)
         {
             CartProductsList.Add(GetProducsFromList.Products[ID]);
-            foreach (Product ProducFinder in CartProductsList)
+            
+              foreach (Product ProducFinder in CartProductsList)
             {
                 PanelWithProducs = new TableLayoutPanel
                 {
@@ -28,12 +30,11 @@ namespace Projektarbete
                     BackColor = Color.White,
                     Dock = DockStyle.Top,
                 };
-
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40));
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35));
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 7));
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 11));
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 7));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10));
 
                 PictureBox picture = new PictureBox
                 {
@@ -43,9 +44,9 @@ namespace Projektarbete
                 };
                 Label info = new Label
                 {
-                    Text = ProducFinder.Name + "\n" + "\n" + "$" + ProducFinder.Price,
-                    Font = new Font("Arial", 10, FontStyle.Regular),
-                    TextAlign = ContentAlignment.MiddleLeft,
+                    Text = ProducFinder.Name + "\n" + ProducFinder.Price,
+                    Font = new Font("Arial", 11, FontStyle.Regular),
+                    TextAlign = ContentAlignment.MiddleCenter,
                     Dock = DockStyle.Fill,
                 };
                 Button buttonMore = new Button
@@ -76,11 +77,12 @@ namespace Projektarbete
                     TextAlign = HorizontalAlignment.Center,
                     Text = "1",
                     Anchor = (AnchorStyles.None | AnchorStyles.None),
-                    Font = new Font("Arial", 9, FontStyle.Regular),
+                    Font = new Font("Arial", 11, FontStyle.Regular),
                     ForeColor = Color.Black,
                     BackColor = Color.White,
                     Enabled = false
                 };
+
 
                 PanelWithProducs.Controls.Add(picture);
                 PanelWithProducs.Controls.Add(info);
@@ -88,8 +90,18 @@ namespace Projektarbete
                 PanelWithProducs.Controls.Add(quantity);
                 PanelWithProducs.Controls.Add(buttonMore);
 
+
             }
+
+
+      
+
         }
+
+
+
     }
-}
+
+
+    }
 
