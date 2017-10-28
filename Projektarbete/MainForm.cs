@@ -69,7 +69,7 @@ namespace Projektarbete
             this.MinimizeBox = false;
             this.StartPosition = FormStartPosition.CenterScreen;
           
-            this.ControlBox = false;
+           this.ControlBox = false;
             this.WindowState = FormWindowState.Normal;
             
             this.Bounds = Screen.PrimaryScreen.Bounds;
