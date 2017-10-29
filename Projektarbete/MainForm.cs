@@ -34,14 +34,10 @@ namespace Projektarbete
                 RowCount = 2,
                 Dock = DockStyle.Fill,
                 BackColor = Color.Black,
-
-
-
-                ///  CellBorderStyle = TableLayoutPanelCellBorderStyle.InsetDouble        
-
+                //CellBorderStyle = TableLayoutPanelCellBorderStyle.InsetDouble        
             };
-            
-           a.RowStyles.Add(new RowStyle(SizeType.Percent, 5));
+
+            a.RowStyles.Add(new RowStyle(SizeType.Percent, 5));
             a.RowStyles.Add(new RowStyle(SizeType.Percent, 95));
 
             Width = 1000;
@@ -49,48 +45,36 @@ namespace Projektarbete
 
             Close1 = new Button
             {
-              Height = 30,
-              Width = 30,
+                Height = 30,
+                Width = 35,
                 Text = "X",
                 Font = new Font("Arial", 10, FontStyle.Bold),
-               TextAlign = ContentAlignment.MiddleCenter,
-                // Anchor = (AnchorStyles.None | AnchorStyles.Left),
-                Dock = DockStyle.Fill,
-                BackColor = Color.Orange,
-                 FlatStyle =  FlatStyle.Flat,
-                
-                
-                
+                TextAlign = ContentAlignment.MiddleCenter,
+                Anchor = (AnchorStyles.None | AnchorStyles.Right),
+                Dock = DockStyle.Right,
+                BackColor = Color.SandyBrown,
+                FlatStyle = FlatStyle.Flat,
             };
             Close1.Click += Close1_Click;
             this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
-           
+
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.StartPosition = FormStartPosition.CenterScreen;
-          
-           this.ControlBox = false;
+            this.ControlBox = false;
             this.WindowState = FormWindowState.Normal;
-            
             this.Bounds = Screen.PrimaryScreen.Bounds;
-
 
             Header = new TableLayoutPanel
             {
-                
-
                 Dock = DockStyle.Fill,
-                
                 ColumnCount = 2
-                
-
             };
-            Header.Controls.Add(Close1,2,0);
+            Header.Controls.Add(Close1, 2, 0);
             Header.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 90));
-           
-       
-            LeftMenuPanel = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 2 , };
-            VisualCartPanel = new TableLayoutPanel { Dock = DockStyle.Fill, AutoScroll = true };
+
+            LeftMenuPanel = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 2, };
+            VisualCartPanel = new TableLayoutPanel { Dock = DockStyle.Fill, AutoScroll = true};
             LeftMenuPanelUp = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 1, BackColor = Color.White, BorderStyle = BorderStyle.Fixed3D };
 
             LeftMenuPanelUp.Controls.Add(VisualCartPanel);
@@ -118,7 +102,6 @@ namespace Projektarbete
                     SizeMode = PictureBoxSizeMode.StretchImage,
                     Image = Image.FromFile(@"Resources\" + a.PictureName)
                 };
-
                 Label labelName = new Label
                 {
                     Text = a.Name,
@@ -127,7 +110,6 @@ namespace Projektarbete
                     Anchor = (AnchorStyles.None | AnchorStyles.Left),
                     Dock = DockStyle.Fill
                 };
-
                 Label labelPrice = new Label
                 {
                     Text = "$" + a.Price.ToString(),
@@ -147,7 +129,6 @@ namespace Projektarbete
                     ForeColor = Color.Black,
                     BackColor = Color.Transparent
                 };
-
                 Button buttonAddToCart = new Button
                 {
                     Name = a.Id.ToString(),
@@ -157,7 +138,6 @@ namespace Projektarbete
                     FlatStyle = FlatStyle.Standard,
                     ForeColor = Color.White,
                     BackColor = Color.SandyBrown
-
                 };
 
                 buttonAddToCart.Click += Buttons_Click;
@@ -167,9 +147,6 @@ namespace Projektarbete
                     RowCount = 4,
                     Width = 175,
                     Height = 250,
-                 
-                    
-                    
                 };
                 productRangePanel.Controls.Add(boc);
                 productRangePanel.Controls.Add(labelName);
@@ -184,46 +161,34 @@ namespace Projektarbete
 
                 RightMenuPanel.Controls.Add(productRangePanel);
             }
-
             RootPanel = new TableLayoutPanel
             {
                 RowCount = 1,
                 ColumnCount = 2,
-                
                 Dock = DockStyle.Fill
             };
-           
-          
             this.Controls.Add(a);
             a.Controls.Add(Header, 0, 0);
-            a.Controls.Add(RootPanel,0,1);
-            RootPanel.Controls.Add(RightMenuPanel,1,0);
-           
-
-
+            a.Controls.Add(RootPanel, 0, 1);
+            RootPanel.Controls.Add(RightMenuPanel, 1, 0);
         }
-
         private void Close1_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void Buttons_Click(object sender, EventArgs e)
         {
             Button BtnGetProductID = (Button)sender;
 
-            RootPanel.Controls.Add(LeftMenuPanel,0,0);
-            RootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40));
-            RootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60));
+            RootPanel.Controls.Add(LeftMenuPanel, 0, 0);
+            RootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 36));
+            RootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 64));
             //  BtnGetProductID.Enabled = false;
             Cart SelectedProducs = new Cart();
 
-
             if (CartProductsList2.Exists(x => x.Id == int.Parse(BtnGetProductID.Name)))
-            {
-
-                MessageBox.Show("Finns Redan i Cart");
-
+            {           
+                MessageBox.Show("This product is already in your cart");
             }
             else
             {
@@ -232,16 +197,6 @@ namespace Projektarbete
                 CartProductsList2.Add(GetProducsFromList.Products[int.Parse(BtnGetProductID.Name)]);
 
             }
-
-
-
-
-
-
-
-
         }
     }
-
 }
-

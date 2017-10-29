@@ -10,31 +10,31 @@ namespace Projektarbete
 {
     class Cart
     {
-
         public List<Product> CartProductsList = new List<Product>();
         public TableLayoutPanel PanelWithProducs { get; set; }
-    
+
         public void ProducsInCart(GetProducs GetProducsFromList, int ID)
         {
             CartProductsList.Add(GetProducsFromList.Products[ID]);
-            
-              foreach (Product ProducFinder in CartProductsList)
+
+            foreach (Product ProducFinder in CartProductsList)
             {
                 PanelWithProducs = new TableLayoutPanel
                 {
                     Height = 100,
                     Width = 275,
-                    ColumnCount = 5,
+                    ColumnCount = 6,
                     //RowCount = 1,
                     //CellBorderStyle = TableLayoutPanelCellBorderStyle.None,
                     BackColor = Color.White,
                     Dock = DockStyle.Top,
                 };
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30));
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30));
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10));
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 8));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 18));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 8));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 6));
 
                 PictureBox picture = new PictureBox
                 {
@@ -82,26 +82,13 @@ namespace Projektarbete
                     BackColor = Color.White,
                     Enabled = false
                 };
-
-
                 PanelWithProducs.Controls.Add(picture);
                 PanelWithProducs.Controls.Add(info);
                 PanelWithProducs.Controls.Add(buttonLess);
                 PanelWithProducs.Controls.Add(quantity);
                 PanelWithProducs.Controls.Add(buttonMore);
-
-
             }
-
-
-      
-
         }
-
-
-
     }
-
-
-    }
+}
 
