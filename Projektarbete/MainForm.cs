@@ -19,7 +19,7 @@ namespace Projektarbete
         private TableLayoutPanel LeftMenuPanelUp { get; set; }
         private TableLayoutPanel LeftMenuPanelDown { get; set; }
         public TableLayoutPanel VisualCartPanel { get; set; }
-        public List<Product> CartProductsList2 = new List<Product>();
+      //  public List<Product> CartProductsList2 = new List<Product>();
         private TableLayoutPanel Header { get; set; }
         private Button Close1 { get; set; }
         private Button Minimize1 { get; set; }
@@ -27,6 +27,7 @@ namespace Projektarbete
 
 
         GetProducs GetProducsFromList = new GetProducs();
+        Cart SavedItemsToBuy = new Cart();
 
         public MainForm()
         {
@@ -206,17 +207,17 @@ namespace Projektarbete
             RootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 36));
             RootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 64));
             //  BtnGetProductID.Enabled = false;
-            Cart SelectedProducs = new Cart();
+          
 
-            if (CartProductsList2.Exists(x => x.Id == int.Parse(BtnGetProductID.Name)))
+            if (SavedItemsToBuy.CartProductsList.Exists(x => x.Id == int.Parse(BtnGetProductID.Name)))
             {
                 MessageBox.Show("This product is already in your cart");
             }
             else
             {
-                SelectedProducs.ProducsInCart(GetProducsFromList, int.Parse(BtnGetProductID.Name));
-                VisualCartPanel.Controls.Add(SelectedProducs.PanelWithProducs);
-                CartProductsList2.Add(GetProducsFromList.Products[int.Parse(BtnGetProductID.Name)]);
+                SavedItemsToBuy.ProducsInCart(GetProducsFromList, int.Parse(BtnGetProductID.Name));
+                VisualCartPanel.Controls.Add(SavedItemsToBuy.PanelWithProducs);
+                SavedItemsToBuy.CartProductsList.Add(GetProducsFromList.Products[int.Parse(BtnGetProductID.Name)]);
             }
         }
     }
