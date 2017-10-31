@@ -53,16 +53,26 @@ namespace Projektarbete
                     Enabled = false,
                     
                 };
-                try {
+                try
+                {
 
                     picture.Image = Image.FromFile(@"Resources\" + ProducFinder.PictureName);
-                    
-                   }
+
+                }
                 catch
                 {
-                    picture.Image = Image.FromFile(@"Resources\Error\1.png");
-                }            
-               
+                    try
+                    {
+                        picture.Image = Image.FromFile(@"Resources\Error\1.png");
+                    }
+                    catch
+                    {
+                        picture.BackColor = Color.Black;
+
+                    }
+
+                }
+
                 Label info = new Label
                 {
                     Text = ProducFinder.Name + "\n" + ProducFinder.Price,

@@ -131,7 +131,15 @@ namespace Projektarbete
                 }
                 catch
                 {
-                    picture.Image = Image.FromFile(@"Resources\Error\1.png");
+                    try
+                    {
+                        picture.Image = Image.FromFile(@"Resources\Error\1.png");
+                     }
+                    catch
+                    {
+                        picture.BackColor = Color.Black;
+                        
+                    }
 
                 }
                    
