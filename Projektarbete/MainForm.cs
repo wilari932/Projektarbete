@@ -176,9 +176,11 @@ namespace Projektarbete
                     Dock = DockStyle.Fill,
                     Text = "Add to cart",
                     Font = new Font("Arial", 11, FontStyle.Bold),
-                    FlatStyle = FlatStyle.Standard,
+                    FlatStyle = FlatStyle.Flat,
                     ForeColor = Color.White,
-                    BackColor = Color.SandyBrown
+                    BackColor = Color.SandyBrown,
+                  
+                    
                 };
 
                 buttonAddToCart.Click += Buttons_Click;
@@ -218,7 +220,19 @@ namespace Projektarbete
 
         private void LeftMenuPanelBtnDelete_Click(object sender, EventArgs e)
         {
-           
+            for (int i = 0; i < SavedItemsToBuy.SelectedItems.Count; i++)
+            {
+                SavedItemsToBuy.CartProductsList.RemoveAt(SavedItemsToBuy.SelectedItems[i]);
+               
+               
+            }
+            LeftMenuPanelUp.Controls.Clear();
+            LeftMenuPanelUp.Controls.Add(VisualCartPanel);
+            VisualCartPanel.Controls.Add(SavedItemsToBuy.PanelWithProducs);
+            //VisualCartPanel.Controls.Clear();
+            //SavedItemsToBuy.ProducsInCart();
+            //
+            //MessageBox.Show(SavedItemsToBuy.CartProductsList.Count.ToString());
         }
 
         private void BtnPurchase_Click(object sender, EventArgs e)

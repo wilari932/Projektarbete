@@ -11,6 +11,7 @@ namespace Projektarbete
     class Cart
     {
         public List<Product> CartProductsList = new List<Product>();
+        public List<int> SelectedItems;
         public TableLayoutPanel PanelWithProducs { get; set; }
         public TableLayoutPanel PanelWithPersonData { get; set; }
         private double TotaltPrice { get; set; }
@@ -20,23 +21,23 @@ namespace Projektarbete
 
             foreach (Product ProducFinder in CartProductsList)
             {
-                int i = 0;
+                int i = CartProductsList.IndexOf(ProducFinder);
                 PanelWithProducs = new TableLayoutPanel
                 {
                     Height = 100,
                     Width = 275,
-                    ColumnCount = 6,
+                    ColumnCount = 5,
                     //RowCount = 1,
                     //CellBorderStyle = TableLayoutPanelCellBorderStyle.None,
                     BackColor = Color.White,
                     Dock = DockStyle.Top,
-                    Name = i.ToString()
+                    Name = i.ToString(),
                 };
-                i++;
+            
                 PanelWithProducs.Click += PanelWithProducs_Click;
-                PanelWithProducs.MouseEnter += PanelWithProducs_MouseEnter;
-                PanelWithProducs.MouseLeave += PanelWithProducs_MouseLeave;
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25));
+                //PanelWithProducs.MouseEnter += PanelWithProducs_MouseEnter;
+                //PanelWithProducs.MouseLeave += PanelWithProducs_MouseLeave;
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15));
                 PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35));
                 PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 8));
                 PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 18));
@@ -64,6 +65,7 @@ namespace Projektarbete
                     try
                     {
                         picture.Image = Image.FromFile(@"Resources\Error\1.png");
+                        
                     }
                     catch
                     {
@@ -124,30 +126,31 @@ namespace Projektarbete
         }
 
 
-        private void PanelWithProducs_MouseLeave(object sender, EventArgs e)
-        {
-            TableLayoutPanel S = (TableLayoutPanel)sender;
-            S.BackColor = Color.White;
+        //private void PanelWithProducs_MouseLeave(object sender, EventArgs e)
+        //{
+        //    TableLayoutPanel S = (TableLayoutPanel)sender;
+        //    S.BackColor = Color.White;
 
-        }
+        //}
 
-        private void PanelWithProducs_MouseEnter(object sender, EventArgs e)
-        {
-            TableLayoutPanel S = (TableLayoutPanel)sender;
+        //private void PanelWithProducs_MouseEnter(object sender, EventArgs e)
+        //{
+        //    TableLayoutPanel S = (TableLayoutPanel)sender;
 
-            S.BackColor = Color.AliceBlue;
-            S.Cursor = Cursors.Hand;
-        }
+        //    S.BackColor = Color.AliceBlue;
+        //    S.Cursor = Cursors.Hand;
+        //}
 
         public void PanelWithProducs_Click(object sender, EventArgs e)
         {
             TableLayoutPanel S = (TableLayoutPanel)sender;
-             
 
-            S.BackColor = Color.AliceBlue;
+            SelectedItems = new List<int>();
 
-            //CartProductsList.RemoveAt(int.Parse(S.Name));
-            //ProducsInCart();
+          SelectedItems.Add(int.Parse(S.Name));
+        S.BackColor = Color.AliceBlue;
+
+          
 
         }
 
@@ -280,7 +283,9 @@ namespace Projektarbete
             PanelWithPersonData.Controls.Add(J);
             //
         }
+
     }
+
 
 
 }
