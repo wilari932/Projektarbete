@@ -12,10 +12,12 @@ namespace Projektarbete
     {
         public List<Product> CartProductsList = new List<Product>();
         public TableLayoutPanel PanelWithProducs { get; set; }
+        public TableLayoutPanel PanelWithPersonData { get; set; }
+        private double TotaltPrice { get; set; }
 
-        public void ProducsInCart(GetProducs GetProducsFromList, int ID)
+        public void ProducsInCart()
         {
-            CartProductsList.Add(GetProducsFromList.Products[ID]);
+
 
             foreach (Product ProducFinder in CartProductsList)
             {
@@ -89,6 +91,64 @@ namespace Projektarbete
                 PanelWithProducs.Controls.Add(buttonMore);
             }
         }
+        public double Purchase()
+        {
+            foreach (Product count in CartProductsList)
+            {
+                TotaltPrice += count.Price;
+
+
+
+            }
+            return TotaltPrice;
+
+
+
+
+
+
+        }
+
+        public void PersonData()
+        {
+            PanelWithPersonData = new TableLayoutPanel
+            {
+
+            };
+           TableLayoutPanel J = new TableLayoutPanel {
+
+                RowCount = 3
+
+            };
+
+            TextBox nameBox = new TextBox
+            {
+                Height = 30,
+                Width = 50,
+
+            };
+
+            TextBox SecondNameBox = new TextBox
+            {
+                Height = 30,
+                Width = 50,
+
+            };
+
+            TextBox EmailBox = new TextBox
+            {
+                Height = 30,
+                Width = 50,
+            };
+            
+            J.Controls.Add(nameBox);
+            J.Controls.Add(SecondNameBox);
+            J.Controls.Add(EmailBox);
+            PanelWithPersonData.Controls.Add(J);
+
+        }
     }
+
+
 }
 
