@@ -14,13 +14,13 @@ namespace Projektarbete
         public TableLayoutPanel PanelWithProducs { get; set; }
         public TableLayoutPanel PanelWithPersonData { get; set; }
         private double TotaltPrice { get; set; }
-
         public void ProducsInCart()
         {
 
 
             foreach (Product ProducFinder in CartProductsList)
             {
+                int i = 0;
                 PanelWithProducs = new TableLayoutPanel
                 {
                     Height = 100,
@@ -30,7 +30,9 @@ namespace Projektarbete
                     //CellBorderStyle = TableLayoutPanelCellBorderStyle.None,
                     BackColor = Color.White,
                     Dock = DockStyle.Top,
+                    Name = i.ToString()
                 };
+                i++;
                 PanelWithProducs.Click += PanelWithProducs_Click;
                 PanelWithProducs.MouseEnter += PanelWithProducs_MouseEnter;
                 PanelWithProducs.MouseLeave += PanelWithProducs_MouseLeave;
@@ -130,10 +132,12 @@ namespace Projektarbete
         public void PanelWithProducs_Click(object sender, EventArgs e)
         {
             TableLayoutPanel S = (TableLayoutPanel)sender;
-           
+             
 
             S.BackColor = Color.AliceBlue;
-           
+
+            //CartProductsList.RemoveAt(int.Parse(S.Name));
+            //ProducsInCart();
 
         }
 

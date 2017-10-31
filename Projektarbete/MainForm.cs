@@ -25,7 +25,7 @@ namespace Projektarbete
         private Button Minimize1 { get; set; }
         private TableLayoutPanel a { get; set; }
         private  TableLayoutPanel productRangePanel { get; set; }
-
+        
 
         GetProducs GetProducsFromList = new GetProducs();
         Cart SavedItemsToBuy = new Cart();
@@ -210,7 +210,7 @@ namespace Projektarbete
 
         private void LeftMenuPanelBtnDelete_Click(object sender, EventArgs e)
         {
-           //no pasa nada
+           
         }
 
         private void BtnPurchase_Click(object sender, EventArgs e)
@@ -222,11 +222,6 @@ namespace Projektarbete
             RightMenuPanel.Controls.Clear();
             RightMenuPanel.Controls.Add(SavedItemsToBuy.PanelWithPersonData);
 
-            // RootPanel.Controls.Remove()
-
-
-
-           
            
         }
 
