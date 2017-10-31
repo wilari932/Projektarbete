@@ -206,7 +206,7 @@ namespace Projektarbete
             RootPanel.Controls.Add(LeftMenuPanel, 0, 0);
             RootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 36));
             RootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 64));
-            //  BtnGetProductID.Enabled = false;
+            ///  BtnGetProductID.Enabled = false;
           
 
             if (SavedItemsToBuy.CartProductsList.Exists(x => x.Id == int.Parse(BtnGetProductID.Name)))
