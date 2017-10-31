@@ -11,6 +11,7 @@ namespace Projektarbete
 {
     class MainForm : Form
     {
+
         private TableLayoutPanel RootPanel { get; set; }
         public FlowLayoutPanel RightMenuPanel { get; set; }
         private TableLayoutPanel LeftMenuPanel { get; set; }
