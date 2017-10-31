@@ -60,7 +60,21 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\Error\1.png" />
+    <Content Include="Resources\gmingpc.png" />
+    <Content Include="Resources\gmingpc1.png" />
+    <Content Include="Resources\grafikcard.png" />
+    <Content Include="Resources\i7.png" />
+    <Content Include="Resources\laptop.png" />
+    <Content Include="Resources\laptop2.png" />
+    <Content Include="Resources\laptop3.png" />
+    <Content Include="Resources\laptop4.png" />
+    <Content Include="Resources\products.txt" />
+    <Content Include="Resources\ps4.png" />
+    <Content Include="Resources\vr.png" />
+    <Content Include="Resources\xboxone.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
