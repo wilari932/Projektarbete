@@ -9,3 +9,4 @@
 8,Asus,laptop3.png,12000
 9,Gamepc,gmingpc1.png,20000
 10,i7,i7.png,3700
+10,i7,i72.png,3700

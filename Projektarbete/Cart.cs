@@ -31,6 +31,9 @@ namespace Projektarbete
                     BackColor = Color.White,
                     Dock = DockStyle.Top,
                 };
+                PanelWithProducs.Click += PanelWithProducs_Click;
+                PanelWithProducs.MouseEnter += PanelWithProducs_MouseEnter;
+                PanelWithProducs.MouseLeave += PanelWithProducs_MouseLeave;
                 PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25));
                 PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35));
                 PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 8));
@@ -42,14 +45,29 @@ namespace Projektarbete
                 {
                     Dock = DockStyle.Fill,
                     SizeMode = PictureBoxSizeMode.StretchImage,
-                    Image = Image.FromFile(@"Resources\" + ProducFinder.PictureName)
+              
+
+                  
+                    Enabled = false,
+                    
                 };
+                try {
+
+                    picture.Image = Image.FromFile(@"Resources\" + ProducFinder.PictureName);
+                    
+                   }
+                catch
+                {
+                    picture.Image = Image.FromFile(@"Resources\Error\1.png");
+                }            
+               
                 Label info = new Label
                 {
                     Text = ProducFinder.Name + "\n" + ProducFinder.Price,
                     Font = new Font("Arial", 11, FontStyle.Regular),
                     TextAlign = ContentAlignment.MiddleCenter,
                     Dock = DockStyle.Fill,
+                    Enabled = false,
                 };
                 Button buttonMore = new Button
                 {
@@ -83,6 +101,7 @@ namespace Projektarbete
                     ForeColor = Color.Black,
                     BackColor = Color.White,
                     Enabled = false
+                       
                 };
                 PanelWithProducs.Controls.Add(picture);
                 PanelWithProducs.Controls.Add(info);
@@ -91,6 +110,33 @@ namespace Projektarbete
                 PanelWithProducs.Controls.Add(buttonMore);
             }
         }
+
+
+        private void PanelWithProducs_MouseLeave(object sender, EventArgs e)
+        {
+            TableLayoutPanel S = (TableLayoutPanel)sender;
+            S.BackColor = Color.White;
+
+        }
+
+        private void PanelWithProducs_MouseEnter(object sender, EventArgs e)
+        {
+            TableLayoutPanel S = (TableLayoutPanel)sender;
+
+            S.BackColor = Color.AliceBlue;
+            S.Cursor = Cursors.Hand;
+        }
+
+        public void PanelWithProducs_Click(object sender, EventArgs e)
+        {
+            TableLayoutPanel S = (TableLayoutPanel)sender;
+           
+
+            S.BackColor = Color.AliceBlue;
+           
+
+        }
+
         public double Purchase()
         {
             foreach (Product count in CartProductsList)

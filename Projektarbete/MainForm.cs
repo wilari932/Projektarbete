@@ -32,6 +32,7 @@ namespace Projektarbete
 
         public MainForm()
         {
+
             a = new TableLayoutPanel
             {
                 RowCount = 2,
@@ -100,6 +101,7 @@ namespace Projektarbete
             LeftMenuPanelUp.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
             LeftMenuPanelDown = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, BackColor = Color.White, BorderStyle = BorderStyle.Fixed3D };
             LeftMenuPanelBtnDelete = new Button { Text = "Delete", Dock = DockStyle.Fill, FlatStyle = FlatStyle.System, BackColor = Color.WhiteSmoke, Font = new Font("Arial", 10, FontStyle.Regular) };
+            LeftMenuPanelBtnDelete.Click += LeftMenuPanelBtnDelete_Click;
             BtnPurchase = new Button { Text = "COMPLETE PURCHASE", Dock = DockStyle.Fill, FlatStyle = FlatStyle.System, BackColor = Color.WhiteSmoke, Font = new Font("Arial", 11, FontStyle.Regular) };
             BtnPurchase.Click += BtnPurchase_Click;
             LeftMenuPanelDown.Controls.Add(LeftMenuPanelBtnDelete);
@@ -114,14 +116,26 @@ namespace Projektarbete
 
             foreach (Product a in GetProducsFromList.Products)
             {
-                PictureBox boc = new PictureBox
+                PictureBox picture = new PictureBox
                 {
                     BackColor = Color.White,
                     Dock = DockStyle.Fill,
                     SizeMode = PictureBoxSizeMode.StretchImage,
-                    Image = Image.FromFile(@"Resources\" + a.PictureName)
+                   
                 };
-                Label labelName = new Label
+                try
+                {
+
+                    picture.Image = Image.FromFile(@"Resources\" + a.PictureName);
+
+                }
+                catch
+                {
+                    picture.Image = Image.FromFile(@"Resources\Error\1.png");
+
+                }
+                   
+                    Label labelName = new Label
                 {
                     Text = a.Name,
                     Font = new Font("Arial", 11, FontStyle.Regular),
@@ -167,7 +181,7 @@ namespace Projektarbete
                     Width = 175,
                     Height = 250,
                 };
-                productRangePanel.Controls.Add(boc);
+                productRangePanel.Controls.Add(picture);
                 productRangePanel.Controls.Add(labelName);
                 productRangePanel.Controls.Add(labelPrice);
                 productRangePanel.Controls.Add(buttonInfo);
@@ -190,6 +204,13 @@ namespace Projektarbete
             a.Controls.Add(Header, 0, 0);
             a.Controls.Add(RootPanel, 0, 1);
             RootPanel.Controls.Add(RightMenuPanel, 1, 0);
+        }
+
+     
+
+        private void LeftMenuPanelBtnDelete_Click(object sender, EventArgs e)
+        {
+           //no pasa nada
         }
 
         private void BtnPurchase_Click(object sender, EventArgs e)
@@ -240,5 +261,10 @@ namespace Projektarbete
                
             }
         }
+
+
+      
+
+
     }
 }
