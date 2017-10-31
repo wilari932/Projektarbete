@@ -198,12 +198,13 @@ namespace Projektarbete
             SavedItemsToBuy.PersonData();
            
             RightMenuPanel.Controls.Clear();
-            // RootPanel.Controls.Remove()
-            RootPanel.Controls.Remove(LeftMenuPanel);
-            RootPanel.ColumnCount = 1;
-
-          
             RightMenuPanel.Controls.Add(SavedItemsToBuy.PanelWithPersonData);
+
+            // RootPanel.Controls.Remove()
+
+
+
+           
            
         }
 
