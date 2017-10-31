@@ -22,6 +22,7 @@ namespace Projektarbete
         public List<Product> CartProductsList2 = new List<Product>();
         private TableLayoutPanel Header { get; set; }
         private Button Close1 { get; set; }
+        private Button Minimize1 { get; set; }
         private TableLayoutPanel a { get; set; }
 
 
@@ -43,6 +44,20 @@ namespace Projektarbete
             Width = 1000;
             Height = 575;
 
+            Minimize1 = new Button
+            {
+                Height = 30,
+                Width = 35,
+                Text = "-",
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                TextAlign = ContentAlignment.MiddleCenter,
+                Anchor = (AnchorStyles.None | AnchorStyles.Right),
+                Dock = DockStyle.Fill,
+                BackColor = Color.SandyBrown,
+                FlatStyle = FlatStyle.Flat,
+            };
+            Minimize1.Click += Minimize1_Click;
+
             Close1 = new Button
             {
                 Height = 30,
@@ -51,11 +66,12 @@ namespace Projektarbete
                 Font = new Font("Arial", 10, FontStyle.Bold),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Anchor = (AnchorStyles.None | AnchorStyles.Right),
-                Dock = DockStyle.Right,
+                Dock = DockStyle.Fill,
                 BackColor = Color.SandyBrown,
                 FlatStyle = FlatStyle.Flat,
             };
             Close1.Click += Close1_Click;
+
             this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
 
             this.MaximizeBox = false;
@@ -68,13 +84,14 @@ namespace Projektarbete
             Header = new TableLayoutPanel
             {
                 Dock = DockStyle.Fill,
-                ColumnCount = 2
+                ColumnCount = 3
             };
             Header.Controls.Add(Close1, 2, 0);
-            Header.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 90));
+            Header.Controls.Add(Minimize1, 1, 0);
+            Header.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
 
             LeftMenuPanel = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 2, };
-            VisualCartPanel = new TableLayoutPanel { Dock = DockStyle.Fill, AutoScroll = true};
+            VisualCartPanel = new TableLayoutPanel { Dock = DockStyle.Fill, AutoScroll = true };
             LeftMenuPanelUp = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 1, BackColor = Color.White, BorderStyle = BorderStyle.Fixed3D };
 
             LeftMenuPanelUp.Controls.Add(VisualCartPanel);
@@ -172,6 +189,11 @@ namespace Projektarbete
             a.Controls.Add(RootPanel, 0, 1);
             RootPanel.Controls.Add(RightMenuPanel, 1, 0);
         }
+        private void Minimize1_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
         private void Close1_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -187,7 +209,7 @@ namespace Projektarbete
             Cart SelectedProducs = new Cart();
 
             if (CartProductsList2.Exists(x => x.Id == int.Parse(BtnGetProductID.Name)))
-            {           
+            {
                 MessageBox.Show("This product is already in your cart");
             }
             else
@@ -195,7 +217,6 @@ namespace Projektarbete
                 SelectedProducs.ProducsInCart(GetProducsFromList, int.Parse(BtnGetProductID.Name));
                 VisualCartPanel.Controls.Add(SelectedProducs.PanelWithProducs);
                 CartProductsList2.Add(GetProducsFromList.Products[int.Parse(BtnGetProductID.Name)]);
-
             }
         }
     }
