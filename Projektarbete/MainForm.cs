@@ -220,19 +220,14 @@ namespace Projektarbete
 
         private void LeftMenuPanelBtnDelete_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < SavedItemsToBuy.SelectedItems.Count; i++)
-            {
-                SavedItemsToBuy.CartProductsList.RemoveAt(SavedItemsToBuy.SelectedItems[i]);
-               
-               
-            }
+
+
+            VisualCartPanel.Controls.Clear();
             LeftMenuPanelUp.Controls.Clear();
             LeftMenuPanelUp.Controls.Add(VisualCartPanel);
+            //SavedItemsToBuy.DeleteObjecs();
             VisualCartPanel.Controls.Add(SavedItemsToBuy.PanelWithProducs);
-            //VisualCartPanel.Controls.Clear();
-            //SavedItemsToBuy.ProducsInCart();
-            //
-            //MessageBox.Show(SavedItemsToBuy.CartProductsList.Count.ToString());
+           
         }
 
         private void BtnPurchase_Click(object sender, EventArgs e)

@@ -11,7 +11,7 @@ namespace Projektarbete
     class Cart
     {
         public List<Product> CartProductsList = new List<Product>();
-        public List<int> SelectedItems;
+        public List<Product> RemoveCartProductsList = new List<Product>();
         public TableLayoutPanel PanelWithProducs { get; set; }
         public TableLayoutPanel PanelWithPersonData { get; set; }
         private double TotaltPrice { get; set; }
@@ -19,10 +19,12 @@ namespace Projektarbete
         {
 
 
-            foreach (Product ProducFinder in CartProductsList)
+            for (int i = 0; i< CartProductsList.Count;i++)
             {
-                int i = CartProductsList.IndexOf(ProducFinder);
-                PanelWithProducs = new TableLayoutPanel
+             
+                
+              
+               PanelWithProducs = new TableLayoutPanel
                 {
                     Height = 100,
                     Width = 275,
@@ -31,7 +33,8 @@ namespace Projektarbete
                     //CellBorderStyle = TableLayoutPanelCellBorderStyle.None,
                     BackColor = Color.White,
                     Dock = DockStyle.Top,
-                    Name = i.ToString(),
+                    Cursor = Cursors.Hand,
+                    Name = i.ToString()
                 };
             
                 PanelWithProducs.Click += PanelWithProducs_Click;
@@ -57,7 +60,7 @@ namespace Projektarbete
                 try
                 {
 
-                    picture.Image = Image.FromFile(@"Resources\" + ProducFinder.PictureName);
+                    picture.Image = Image.FromFile(@"Resources\" + CartProductsList[i].PictureName);
 
                 }
                 catch
@@ -77,7 +80,7 @@ namespace Projektarbete
 
                 Label info = new Label
                 {
-                    Text = ProducFinder.Name + "\n" + ProducFinder.Price,
+                    Text = CartProductsList[i].Name + "\n" + CartProductsList[i].Price,
                     Font = new Font("Arial", 11, FontStyle.Regular),
                     TextAlign = ContentAlignment.MiddleCenter,
                     Dock = DockStyle.Fill,
@@ -145,12 +148,21 @@ namespace Projektarbete
         {
             TableLayoutPanel S = (TableLayoutPanel)sender;
 
-            SelectedItems = new List<int>();
+         
+         
+            if (S.BackColor == Color.AliceBlue)
+            {
+                S.BackColor = Color.White;
+                RemoveCartProductsList.Remove(CartProductsList[int.Parse(S.Name)]);
+            }
+            else if(S.BackColor == Color.White)
+            {
+                S.BackColor = Color.AliceBlue;
+                RemoveCartProductsList.Add(CartProductsList[int.Parse(S.Name)]);
 
-          SelectedItems.Add(int.Parse(S.Name));
-        S.BackColor = Color.AliceBlue;
+            }
 
-          
+            
 
         }
 
@@ -170,6 +182,12 @@ namespace Projektarbete
 
 
 
+        }
+        public void DeleteObjecs() {
+
+            
+          //  CartProductsList.Remove
+              
         }
 
         public void PersonData()
