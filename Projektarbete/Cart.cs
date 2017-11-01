@@ -15,6 +15,7 @@ namespace Projektarbete
         public TableLayoutPanel PanelWithProducs { get; set; }
         public TableLayoutPanel PanelWithPersonData { get; set; }
         private double TotaltPrice { get; set; }
+
         public void ProducsInCart()
         {
 
@@ -32,7 +33,7 @@ namespace Projektarbete
                         Width = 275,
                         ColumnCount = 5,
                         //RowCount = 1,
-                        CellBorderStyle = TableLayoutPanelCellBorderStyle.None,
+                        CellBorderStyle = TableLayoutPanelCellBorderStyle.Single,
                         BackColor = Color.White,
                         Dock = DockStyle.Top,
                         Cursor = Cursors.Hand,

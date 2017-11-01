@@ -231,10 +231,15 @@ namespace Projektarbete
             {
 
                 VisualCartPanel.Controls.Clear();
-                SavedItemsToBuy.DeleteObjecs();
+              
                 if (SavedItemsToBuy.CartProductsList.Count >= 1)
                 {
-                    VisualCartPanel.Controls.Add(SavedItemsToBuy.PanelWithProducs);
+                    VisualCartPanel.Controls.Clear();
+                    SavedItemsToBuy.DeleteObjecs();
+                    for (int i = 0; i < SavedItemsToBuy.CartProductsList.Count; i++)
+                    {
+                        VisualCartPanel.Controls.Add(SavedItemsToBuy.PanelWithProducs);
+                    }
                 }
                 
             }
