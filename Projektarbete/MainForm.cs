@@ -222,12 +222,22 @@ namespace Projektarbete
         {
 
 
-            VisualCartPanel.Controls.Clear();
-            LeftMenuPanelUp.Controls.Clear();
-            LeftMenuPanelUp.Controls.Add(VisualCartPanel);
-            //SavedItemsToBuy.DeleteObjecs();
-            VisualCartPanel.Controls.Add(SavedItemsToBuy.PanelWithProducs);
            
+            if (SavedItemsToBuy.CartProductsList.Count == 0)
+            {
+                MessageBox.Show("test");
+            }
+            else if (SavedItemsToBuy.CartProductsList.Count >= 1)
+            {
+
+                VisualCartPanel.Controls.Clear();
+                SavedItemsToBuy.DeleteObjecs();
+                if (SavedItemsToBuy.CartProductsList.Count >= 1)
+                {
+                    VisualCartPanel.Controls.Add(SavedItemsToBuy.PanelWithProducs);
+                }
+                
+            }
         }
 
         private void BtnPurchase_Click(object sender, EventArgs e)
@@ -258,7 +268,7 @@ namespace Projektarbete
             RootPanel.Controls.Add(LeftMenuPanel, 0, 0);
             RootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 36));
             RootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 64));
-           
+
           
 
             if (SavedItemsToBuy.CartProductsList.Exists(x => x.Id == int.Parse(BtnGetProductID.Name)))
@@ -270,7 +280,8 @@ namespace Projektarbete
                 SavedItemsToBuy.CartProductsList.Add(GetProducsFromList.Products[int.Parse(BtnGetProductID.Name)]);
                 SavedItemsToBuy.ProducsInCart();
                 VisualCartPanel.Controls.Add(SavedItemsToBuy.PanelWithProducs);
-               
+                MessageBox.Show(SavedItemsToBuy.CartProductsList.Count.ToString());
+
             }
         }
 
