@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using System.IO;
 
 namespace Projektarbete
 {
@@ -26,9 +27,9 @@ namespace Projektarbete
                     {
                         Height = 100,
                         Width = 275,
-                        ColumnCount = 5,
+                        ColumnCount = 7,
                         //RowCount = 1,
-                        CellBorderStyle = TableLayoutPanelCellBorderStyle.Single,
+                        CellBorderStyle = TableLayoutPanelCellBorderStyle.None,
                         BackColor = Color.White,
                         Dock = DockStyle.Top,
                         Cursor = Cursors.Hand,
@@ -38,12 +39,13 @@ namespace Projektarbete
                     PanelWithProducs.Click += PanelWithProducs_Click;
                     //PanelWithProducs.MouseEnter += PanelWithProducs_MouseEnter;
                     //PanelWithProducs.MouseLeave += PanelWithProducs_MouseLeave;
+                    PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25));
+                    PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30));
+                    PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 9));
+                    PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12));
+                    PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 9));
                     PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15));
-                    PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35));
-                    PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 8));
-                    PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 18));
-                    PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 8));
-                    PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 6));
+                    PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 0));
 
                     PictureBox picture = new PictureBox
                     {
@@ -107,14 +109,42 @@ namespace Projektarbete
                         BackColor = Color.White,
                         Enabled = false
                     };
+                        
+                    PictureBox buttonRemove = new PictureBox
+                    {
+                        Image = Image.FromFile(@"Resources\removeClose.png"),
+                        BackColor = Color.White,
+                        //Dock = DockStyle.Bottom,
+                        SizeMode = PictureBoxSizeMode.StretchImage,
+                        Anchor = (AnchorStyles.None | AnchorStyles.None),
+                        Width = 25,
+                        Height = 25          
+                    };
+                    buttonRemove.MouseEnter += ButtonRemove_MouseEnter;
+                    buttonRemove.MouseLeave += ButtonRemove_MouseLeave;
+
                     PanelWithProducs.Controls.Add(picture);
                     PanelWithProducs.Controls.Add(info);
                     PanelWithProducs.Controls.Add(buttonLess);
                     PanelWithProducs.Controls.Add(quantity);
                     PanelWithProducs.Controls.Add(buttonMore);
+                    PanelWithProducs.Controls.Add(buttonRemove);
                 }
             }
         }
+
+        private void ButtonRemove_MouseLeave(object sender, EventArgs e)
+        {
+            PictureBox r = (PictureBox)sender;
+            r.Image = Image.FromFile(@"Resources\removeClose.png");
+        }
+
+        private void ButtonRemove_MouseEnter(object sender, EventArgs e)
+        {
+            PictureBox r = (PictureBox)sender;
+            r.Image = Image.FromFile(@"Resources\removeOpen.png");
+        }
+
         //private void PanelWithProducs_MouseLeave(object sender, EventArgs e)
         //{
         //    TableLayoutPanel S = (TableLayoutPanel)sender;
@@ -163,10 +193,6 @@ namespace Projektarbete
             RemoveCartProductsList.Clear();
             PanelWithProducs.Controls.Clear();
             ProducsInCart();
-        }
-        public void PersonData()
-        {
-            
         }
     }
 }

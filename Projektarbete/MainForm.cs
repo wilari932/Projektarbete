@@ -14,7 +14,7 @@ namespace Projektarbete
         private TableLayoutPanel RootPanel { get; set; }
         public FlowLayoutPanel RightMenuPanel { get; set; }
         private TableLayoutPanel LeftMenuPanel { get; set; }
-        private Button LeftMenuPanelBtnDelete { get; set; }
+        //private Button LeftMenuPanelBtnDelete { get; set; }
         private Button BtnPurchase { get; set; }
         private TableLayoutPanel LeftMenuPanelUp { get; set; }
         private TableLayoutPanel LeftMenuPanelDown { get; set; }
@@ -92,12 +92,12 @@ namespace Projektarbete
 
             LeftMenuPanelUp.Controls.Add(VisualCartPanel);
             LeftMenuPanelUp.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-            LeftMenuPanelDown = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, BackColor = Color.White, BorderStyle = BorderStyle.Fixed3D };
-            LeftMenuPanelBtnDelete = new Button { Text = "Delete", Dock = DockStyle.Fill, FlatStyle = FlatStyle.System, BackColor = Color.WhiteSmoke, Font = new Font("Arial", 10, FontStyle.Regular) };
-            LeftMenuPanelBtnDelete.Click += LeftMenuPanelBtnDelete_Click;
+            LeftMenuPanelDown = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 1, BackColor = Color.White, BorderStyle = BorderStyle.Fixed3D };
+            //LeftMenuPanelBtnDelete = new Button { Text = "Delete", Dock = DockStyle.Fill, FlatStyle = FlatStyle.System, BackColor = Color.WhiteSmoke, Font = new Font("Arial", 10, FontStyle.Regular) };
+            //LeftMenuPanelBtnDelete.Click += LeftMenuPanelBtnDelete_Click;
             BtnPurchase = new Button { Text = "COMPLETE PURCHASE", Dock = DockStyle.Fill, FlatStyle = FlatStyle.System, BackColor = Color.WhiteSmoke, Font = new Font("Arial", 11, FontStyle.Regular) };
             BtnPurchase.Click += BtnPurchase_Click;
-            LeftMenuPanelDown.Controls.Add(LeftMenuPanelBtnDelete);
+            //LeftMenuPanelDown.Controls.Add(LeftMenuPanelBtnDelete);
             LeftMenuPanelDown.Controls.Add(BtnPurchase);
             LeftMenuPanel.Controls.Add(LeftMenuPanelUp);
             LeftMenuPanel.Controls.Add(LeftMenuPanelDown);
@@ -199,26 +199,26 @@ namespace Projektarbete
             a.Controls.Add(RootPanel, 0, 1);
             RootPanel.Controls.Add(RightMenuPanel, 1, 0);
         }
-        private void LeftMenuPanelBtnDelete_Click(object sender, EventArgs e)
-        {
-            if (SavedItemsToBuy.CartProductsList.Count == 0)
-            {
-                MessageBox.Show("test");
-            }
-            else if (SavedItemsToBuy.CartProductsList.Count >= 1)
-            {
-                VisualCartPanel.Controls.Clear();
-                if (SavedItemsToBuy.CartProductsList.Count >= 1)
-                {
-                    VisualCartPanel.Controls.Clear();
-                    SavedItemsToBuy.DeleteObjecs();
-                    for (int i = 0; i < SavedItemsToBuy.CartProductsList.Count; i++)
-                    {
-                        VisualCartPanel.Controls.Add(SavedItemsToBuy.PanelWithProducs);
-                    }
-                }
-            }
-        }
+        //private void LeftMenuPanelBtnDelete_Click(object sender, EventArgs e)
+        //{
+        //    if (SavedItemsToBuy.CartProductsList.Count == 0)
+        //    {
+        //        MessageBox.Show("test");
+        //    }
+        //    else if (SavedItemsToBuy.CartProductsList.Count >= 1)
+        //    {
+        //        VisualCartPanel.Controls.Clear();
+        //        if (SavedItemsToBuy.CartProductsList.Count >= 1)
+        //        {
+        //            VisualCartPanel.Controls.Clear();
+        //            SavedItemsToBuy.DeleteObjecs();
+        //            for (int i = 0; i < SavedItemsToBuy.CartProductsList.Count; i++)
+        //            {
+        //                VisualCartPanel.Controls.Add(SavedItemsToBuy.PanelWithProducs);
+        //            }
+        //        }
+        //    }
+        //}
         private void BtnPurchase_Click(object sender, EventArgs e)
         {
             RightMenuPanel.Controls.Clear();
@@ -246,16 +246,14 @@ namespace Projektarbete
             if (SavedItemsToBuy.CartProductsList.Exists(x => x.Id == int.Parse(BtnGetProductID.Name)))
             {
                 MessageBox.Show("This product is already in your cart");
-                MessageBox.Show("This product is already in your cart");
             }
             else
             {
                 SavedItemsToBuy.CartProductsList.Add(GetProducsFromList.Products[int.Parse(BtnGetProductID.Name)]);
                 SavedItemsToBuy.ProducsInCart();
                 VisualCartPanel.Controls.Add(SavedItemsToBuy.PanelWithProducs);
-                MessageBox.Show(SavedItemsToBuy.CartProductsList.Count.ToString());
+                //MessageBox.Show(SavedItemsToBuy.CartProductsList.Count.ToString());
             }
         }
     }
 }
-//

@@ -54,7 +54,6 @@ namespace Projektarbete
                 Height = 30,
                 Width = 50,
             };
-            MessageBox.Show("This product is already in your cart");
             TextBox CleringNumberBox = new TextBox
             {
                 Height = 30,
