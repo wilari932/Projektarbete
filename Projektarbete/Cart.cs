@@ -199,6 +199,7 @@ namespace Projektarbete
                 }
 
             }
+            RemoveCartProductsList.Clear();
            PanelWithProducs.Controls.Clear();
             ProducsInCart();
               
