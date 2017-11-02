@@ -18,15 +18,10 @@ namespace Projektarbete
 
         public void ProducsInCart()
         {
-
             if (CartProductsList.Count >= 1)
             {
-
                 for (int i = 0; i < CartProductsList.Count; i++)
                 {
-
-
-
                     PanelWithProducs = new TableLayoutPanel
                     {
                         Height = 100,
@@ -54,33 +49,23 @@ namespace Projektarbete
                     {
                         Dock = DockStyle.Fill,
                         SizeMode = PictureBoxSizeMode.StretchImage,
-
-
-
                         Enabled = false,
-
                     };
                     try
                     {
-
                         picture.Image = Image.FromFile(@"Resources\" + CartProductsList[i].PictureName);
-
                     }
                     catch
                     {
                         try
                         {
                             picture.Image = Image.FromFile(@"Resources\Error\1.png");
-
                         }
                         catch
                         {
                             picture.BackColor = Color.Black;
-
                         }
-
                     }
-
                     Label info = new Label
                     {
                         Text = CartProductsList[i].Name + "\n" + CartProductsList[i].Price,
@@ -121,7 +106,6 @@ namespace Projektarbete
                         ForeColor = Color.Black,
                         BackColor = Color.White,
                         Enabled = false
-
                     };
                     PanelWithProducs.Controls.Add(picture);
                     PanelWithProducs.Controls.Add(info);
@@ -131,8 +115,6 @@ namespace Projektarbete
                 }
             }
         }
-
-
         //private void PanelWithProducs_MouseLeave(object sender, EventArgs e)
         //{
         //    TableLayoutPanel S = (TableLayoutPanel)sender;
@@ -147,82 +129,53 @@ namespace Projektarbete
         //    S.BackColor = Color.AliceBlue;
         //    S.Cursor = Cursors.Hand;
         //}
-
         public void PanelWithProducs_Click(object sender, EventArgs e)
         {
             TableLayoutPanel S = (TableLayoutPanel)sender;
-
-         
-         
             if (S.BackColor == Color.AliceBlue)
             {
                 S.BackColor = Color.White;
                 RemoveCartProductsList.Remove(CartProductsList[int.Parse(S.Name)]);
             }
-            else if(S.BackColor == Color.White)
+            else if (S.BackColor == Color.White)
             {
                 S.BackColor = Color.AliceBlue;
                 RemoveCartProductsList.Add(CartProductsList[int.Parse(S.Name)]);
-
             }
-
-            
-
         }
-
         public double Purchase()
         {
             foreach (Product count in CartProductsList)
             {
                 TotaltPrice += count.Price;
-
-
-
             }
             return TotaltPrice;
-
-
-
-
-
-
         }
-        public void DeleteObjecs() {
-
-        
-            foreach(Product a in RemoveCartProductsList)
+        public void DeleteObjecs()
+        {
+            foreach (Product a in RemoveCartProductsList)
             {
                 if (CartProductsList.Exists(x => x == a))
                 {
                     CartProductsList.Remove(a);
-
                 }
-
             }
             RemoveCartProductsList.Clear();
-           PanelWithProducs.Controls.Clear();
+            PanelWithProducs.Controls.Clear();
             ProducsInCart();
-              
         }
-
         public void PersonData()
         {
             PanelWithPersonData = new TableLayoutPanel
             {
-               Height = 400,
-               Width = 400
-               
-               
+                Height = 400,
+                Width = 400
             };
-           TableLayoutPanel J = new TableLayoutPanel {
-
+            TableLayoutPanel J = new TableLayoutPanel
+            {
                 RowCount = 7,
                 Dock = DockStyle.Fill
-                
-
             };
-          
-
             Label PlainTextName = new Label
             {
                 Text = "Name",
@@ -233,23 +186,16 @@ namespace Projektarbete
                 Height = 30,
                 Width = 250,
                 BorderStyle = BorderStyle.Fixed3D,
-               
-                
-
-
             };
-
             Label PlainTexSecondtName = new Label
             {
                 Text = "Second Name",
                 Font = new Font("Arial", 11, FontStyle.Regular),
             };
-
             TextBox SecondNameBox = new TextBox
             {
                 Height = 30,
                 Width = 50,
-
             };
             Label PlainTextEmail = new Label
             {
@@ -271,42 +217,30 @@ namespace Projektarbete
                 Height = 30,
                 Width = 50,
             };
-
             PictureBox SelectpictureCart = new PictureBox
             {
                 Width = 20,
                 Height = 20,
-
             };
-
             PictureBox SelectpictureCart2 = new PictureBox
             {
                 Width = 20,
                 Height = 20,
-
             };
-            
             TableLayoutPanel CardTable = new TableLayoutPanel
             {
 
                 RowCount = 3,
                 ColumnCount = 2,
                 Dock = DockStyle.Fill
-
-
             };
-
             CardTable.Controls.Add(CleringNumberBox);
             CardTable.Controls.Add(CredicCardNumberBox);
             CardTable.Controls.Add(SelectpictureCart);
             CardTable.Controls.Add(SelectpictureCart);
             CardTable.Controls.Add(CleringNumberBox);
-
-
-
-       
             J.Controls.Add(PlainTextName);
-          J.Controls.Add(nameBox);
+            J.Controls.Add(nameBox);
             J.Controls.Add(PlainTexSecondtName);
             J.Controls.Add(SecondNameBox);
             J.Controls.Add(PlainTextEmail);
@@ -314,12 +248,6 @@ namespace Projektarbete
             J.Controls.Add(CardTable);
             J.Controls.Add(CardTable);
             PanelWithPersonData.Controls.Add(J);
-            //
         }
-
     }
-
-
-
 }
-

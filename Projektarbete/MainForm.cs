@@ -11,7 +11,6 @@ namespace Projektarbete
 {
     class MainForm : Form
     {
-
         private TableLayoutPanel RootPanel { get; set; }
         public FlowLayoutPanel RightMenuPanel { get; set; }
         private TableLayoutPanel LeftMenuPanel { get; set; }
@@ -24,15 +23,13 @@ namespace Projektarbete
         private Button Close1 { get; set; }
         private Button Minimize1 { get; set; }
         private TableLayoutPanel a { get; set; }
-        private  TableLayoutPanel productRangePanel { get; set; }
-        
+        private TableLayoutPanel productRangePanel { get; set; }
 
         GetProducs GetProducsFromList = new GetProducs();
         Cart SavedItemsToBuy = new Cart();
 
         public MainForm()
         {
-
             a = new TableLayoutPanel
             {
                 RowCount = 2,
@@ -40,13 +37,10 @@ namespace Projektarbete
                 BackColor = Color.Black,
                 //CellBorderStyle = TableLayoutPanelCellBorderStyle.InsetDouble        
             };
-
             a.RowStyles.Add(new RowStyle(SizeType.Percent, 5));
             a.RowStyles.Add(new RowStyle(SizeType.Percent, 95));
-
             Width = 1000;
             Height = 575;
-
             Minimize1 = new Button
             {
                 Height = 30,
@@ -76,7 +70,6 @@ namespace Projektarbete
             Close1.Click += Close1_Click;
 
             this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
-
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -121,29 +114,23 @@ namespace Projektarbete
                     BackColor = Color.White,
                     Dock = DockStyle.Fill,
                     SizeMode = PictureBoxSizeMode.StretchImage,
-                   
                 };
                 try
                 {
-
                     picture.Image = Image.FromFile(@"Resources\" + a.PictureName);
-
                 }
                 catch
                 {
                     try
                     {
                         picture.Image = Image.FromFile(@"Resources\Error\1.png");
-                     }
+                    }
                     catch
                     {
                         picture.BackColor = Color.Black;
-                        
                     }
-
                 }
-                   
-                    Label labelName = new Label
+                Label labelName = new Label
                 {
                     Text = a.Name,
                     Font = new Font("Arial", 11, FontStyle.Regular),
@@ -179,10 +166,7 @@ namespace Projektarbete
                     FlatStyle = FlatStyle.Flat,
                     ForeColor = Color.White,
                     BackColor = Color.SandyBrown,
-                  
-                    
                 };
-
                 buttonAddToCart.Click += Buttons_Click;
 
                 productRangePanel = new TableLayoutPanel
@@ -215,23 +199,15 @@ namespace Projektarbete
             a.Controls.Add(RootPanel, 0, 1);
             RootPanel.Controls.Add(RightMenuPanel, 1, 0);
         }
-
-     
-
         private void LeftMenuPanelBtnDelete_Click(object sender, EventArgs e)
         {
-
-
-           
             if (SavedItemsToBuy.CartProductsList.Count == 0)
             {
                 MessageBox.Show("test");
             }
             else if (SavedItemsToBuy.CartProductsList.Count >= 1)
             {
-
                 VisualCartPanel.Controls.Clear();
-              
                 if (SavedItemsToBuy.CartProductsList.Count >= 1)
                 {
                     VisualCartPanel.Controls.Clear();
@@ -241,27 +217,19 @@ namespace Projektarbete
                         VisualCartPanel.Controls.Add(SavedItemsToBuy.PanelWithProducs);
                     }
                 }
-                
             }
         }
-
         private void BtnPurchase_Click(object sender, EventArgs e)
         {
-            
-             SavedItemsToBuy.Purchase();
+            SavedItemsToBuy.Purchase();
             SavedItemsToBuy.PersonData();
-           
             RightMenuPanel.Controls.Clear();
             RightMenuPanel.Controls.Add(SavedItemsToBuy.PanelWithPersonData);
-
-           
         }
-
         private void Minimize1_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
         private void Close1_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -269,13 +237,9 @@ namespace Projektarbete
         private void Buttons_Click(object sender, EventArgs e)
         {
             Button BtnGetProductID = (Button)sender;
-
             RootPanel.Controls.Add(LeftMenuPanel, 0, 0);
             RootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 36));
             RootPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 64));
-
-          
-
             if (SavedItemsToBuy.CartProductsList.Exists(x => x.Id == int.Parse(BtnGetProductID.Name)))
             {
                 MessageBox.Show("This product is already in your cart");
@@ -286,13 +250,7 @@ namespace Projektarbete
                 SavedItemsToBuy.ProducsInCart();
                 VisualCartPanel.Controls.Add(SavedItemsToBuy.PanelWithProducs);
                 MessageBox.Show(SavedItemsToBuy.CartProductsList.Count.ToString());
-
             }
         }
-
-
-      
-
-
     }
 }
