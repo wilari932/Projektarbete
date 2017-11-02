@@ -221,10 +221,13 @@ namespace Projektarbete
         }
         private void BtnPurchase_Click(object sender, EventArgs e)
         {
-            SavedItemsToBuy.Purchase();
-            SavedItemsToBuy.PersonData();
             RightMenuPanel.Controls.Clear();
-            RightMenuPanel.Controls.Add(SavedItemsToBuy.PanelWithPersonData);
+            Customer c = new Customer();    
+            RightMenuPanel.Controls.Add(c.PanelWithPersonData);
+            //SavedItemsToBuy.Purchase();
+            //SavedItemsToBuy.PersonData();
+            //RightMenuPanel.Controls.Clear();
+            //RightMenuPanel.Controls.Add(SavedItemsToBuy.PanelWithPersonData);
         }
         private void Minimize1_Click(object sender, EventArgs e)
         {
