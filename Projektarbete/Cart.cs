@@ -5,194 +5,215 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
-using System.IO;
 
 namespace Projektarbete
 {
+
     class Cart
     {
-        public List<Product> CartProductsList = new List<Product>();
-        public List<Product> RemoveCartProductsList = new List<Product>();
-        public TableLayoutPanel PanelWithProducs { get; set; }
-        public TableLayoutPanel PanelWithPersonData { get; set; }
-        private double TotaltPrice { get; set; }
-
-        public void ProducsInCart()
+        public TableLayoutPanel CartLayoutPanel;
+        private TableLayoutPanel PanelWithProducs;
+        private Label LabelName;
+        private PictureBox Picture;
+        private Button ButtonMore;
+        private Button ButtonLess;
+        private TextBox Quantity;
+        private PictureBox ButtonRemove;
+        public List<Product> ItemsInTheCart = new List<Product>();
+        public Cart()
         {
-            if (CartProductsList.Count >= 1)
-            {
-                for (int i = 0; i < CartProductsList.Count; i++)
+            CartLayoutPanel = new TableLayoutPanel { Dock = DockStyle.Fill, AutoScroll = true };
+        }
+
+       private void CreateCartTable( int i)
+        {
+            
+                PanelWithProducs = new TableLayoutPanel
                 {
-                    PanelWithProducs = new TableLayoutPanel
-                    {
-                        Height = 100,
-                        Width = 275,
-                        ColumnCount = 7,
-                        //RowCount = 1,
-                        CellBorderStyle = TableLayoutPanelCellBorderStyle.None,
-                        BackColor = Color.White,
-                        Dock = DockStyle.Top,
-                        Cursor = Cursors.Hand,
-                        Name = i.ToString()
-                    };
+                    Height = 100,
+                    Width = 275,
+                    ColumnCount = 7,
 
-                    PanelWithProducs.Click += PanelWithProducs_Click;
-                    //PanelWithProducs.MouseEnter += PanelWithProducs_MouseEnter;
-                    //PanelWithProducs.MouseLeave += PanelWithProducs_MouseLeave;
-                    PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25));
-                    PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30));
-                    PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 9));
-                    PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12));
-                    PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 9));
-                    PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15));
-                    PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 0));
+                    CellBorderStyle = TableLayoutPanelCellBorderStyle.None,
+                    BackColor = Color.White,
+                    Dock = DockStyle.Top,
+                    Cursor = Cursors.Hand,
 
-                    PictureBox picture = new PictureBox
-                    {
-                        Dock = DockStyle.Fill,
-                        SizeMode = PictureBoxSizeMode.StretchImage,
-                        Enabled = false,
-                    };
-                    try
-                    {
-                        picture.Image = Image.FromFile(@"Resources\" + CartProductsList[i].PictureName);
-                    }
-                    catch
-                    {
-                        try
-                        {
-                            picture.Image = Image.FromFile(@"Resources\Error\1.png");
-                        }
-                        catch
-                        {
-                            picture.BackColor = Color.Black;
-                        }
-                    }
-                    Label info = new Label
-                    {
-                        Text = CartProductsList[i].Name + "\n" + CartProductsList[i].Price,
-                        Font = new Font("Arial", 11, FontStyle.Regular),
-                        TextAlign = ContentAlignment.MiddleCenter,
-                        Dock = DockStyle.Fill,
-                        Enabled = false,
-                    };
-                    Button buttonMore = new Button
-                    {
-                        Dock = DockStyle.Left,
-                        Text = "+",
-                        Font = new Font("Arial", 10, FontStyle.Regular),
-                        FlatStyle = FlatStyle.System,
-                        TextAlign = ContentAlignment.MiddleCenter,
-                        Anchor = (AnchorStyles.None | AnchorStyles.None),
-                        ForeColor = Color.Black,
-                        BackColor = Color.White
-                    };
-                    Button buttonLess = new Button
-                    {
-                        Dock = DockStyle.Right,
-                        Text = "-",
-                        Font = new Font("Arial", 10, FontStyle.Regular),
-                        FlatStyle = FlatStyle.System,
-                        TextAlign = ContentAlignment.MiddleCenter,
-                        Anchor = (AnchorStyles.None | AnchorStyles.None),
-                        ForeColor = Color.Black,
-                        BackColor = Color.White
-                    };
-                    TextBox quantity = new TextBox
-                    {
-                        //Dock = DockStyle.Fill,
-                        TextAlign = HorizontalAlignment.Center,
-                        Text = "1",
-                        Anchor = (AnchorStyles.None | AnchorStyles.None),
-                        Font = new Font("Arial", 11, FontStyle.Regular),
-                        ForeColor = Color.Black,
-                        BackColor = Color.White,
-                        Enabled = false
-                    };
-                        
-                    PictureBox buttonRemove = new PictureBox
-                    {
-                        Image = Image.FromFile(@"Resources\removeClose.png"),
-                        BackColor = Color.White,
-                        //Dock = DockStyle.Bottom,
-                        SizeMode = PictureBoxSizeMode.StretchImage,
-                        Anchor = (AnchorStyles.None | AnchorStyles.None),
-                        Width = 25,
-                        Height = 25          
-                    };
-                    buttonRemove.MouseEnter += ButtonRemove_MouseEnter;
-                    buttonRemove.MouseLeave += ButtonRemove_MouseLeave;
+                };
 
-                    PanelWithProducs.Controls.Add(picture);
-                    PanelWithProducs.Controls.Add(info);
-                    PanelWithProducs.Controls.Add(buttonLess);
-                    PanelWithProducs.Controls.Add(quantity);
-                    PanelWithProducs.Controls.Add(buttonMore);
-                    PanelWithProducs.Controls.Add(buttonRemove);
-                }
-            }
-        }
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 9));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 9));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15));
+                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 0));
 
-        private void ButtonRemove_MouseLeave(object sender, EventArgs e)
-        {
-            PictureBox r = (PictureBox)sender;
-            r.Image = Image.FromFile(@"Resources\removeClose.png");
-        }
-
-        private void ButtonRemove_MouseEnter(object sender, EventArgs e)
-        {
-            PictureBox r = (PictureBox)sender;
-            r.Image = Image.FromFile(@"Resources\removeOpen.png");
-        }
-
-        //private void PanelWithProducs_MouseLeave(object sender, EventArgs e)
-        //{
-        //    TableLayoutPanel S = (TableLayoutPanel)sender;
-        //    S.BackColor = Color.White;
-
-        //}
-
-        //private void PanelWithProducs_MouseEnter(object sender, EventArgs e)
-        //{
-        //    TableLayoutPanel S = (TableLayoutPanel)sender;
-
-        //    S.BackColor = Color.AliceBlue;
-        //    S.Cursor = Cursors.Hand;
-        //}
-        public void PanelWithProducs_Click(object sender, EventArgs e)
-        {
-            TableLayoutPanel S = (TableLayoutPanel)sender;
-            if (S.BackColor == Color.AliceBlue)
-            {
-                S.BackColor = Color.White;
-                RemoveCartProductsList.Remove(CartProductsList[int.Parse(S.Name)]);
-            }
-            else if (S.BackColor == Color.White)
-            {
-                S.BackColor = Color.AliceBlue;
-                RemoveCartProductsList.Add(CartProductsList[int.Parse(S.Name)]);
-            }
-        }
-        public double Purchase()
-        {
-            foreach (Product count in CartProductsList)
-            {
-                TotaltPrice += count.Price;
-            }
-            return TotaltPrice;
-        }
-        public void DeleteObjecs()
-        {
-            foreach (Product a in RemoveCartProductsList)
-            {
-                if (CartProductsList.Exists(x => x == a))
+                Picture = new PictureBox
                 {
-                    CartProductsList.Remove(a);
+                    Dock = DockStyle.Fill,
+                    SizeMode = PictureBoxSizeMode.StretchImage,
+                    Enabled = false,
+                };
+
+                LabelName = new Label
+                {
+                    Text = ItemsInTheCart[i].Name + "\n" + ItemsInTheCart[i].Price,
+                    Font = new Font("Arial", 11, FontStyle.Regular),
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Dock = DockStyle.Fill,
+                    Enabled = false,
+                };
+                ButtonMore = new Button
+                {
+                    Dock = DockStyle.Left,
+                    Text = "+",
+                    Font = new Font("Arial", 10, FontStyle.Regular),
+                    FlatStyle = FlatStyle.System,
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Anchor = (AnchorStyles.None | AnchorStyles.None),
+                    ForeColor = Color.Black,
+                    BackColor = Color.White
+                };
+                ButtonLess = new Button
+                {
+                    Dock = DockStyle.Right,
+                    Text = "-",
+                    Font = new Font("Arial", 10, FontStyle.Regular),
+                    FlatStyle = FlatStyle.System,
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Anchor = (AnchorStyles.None | AnchorStyles.None),
+                    ForeColor = Color.Black,
+                    BackColor = Color.White
+                };
+                Quantity = new TextBox
+                {
+
+                    TextAlign = HorizontalAlignment.Center,
+                    Text = "1",
+                    Anchor = (AnchorStyles.None | AnchorStyles.None),
+                    Font = new Font("Arial", 11, FontStyle.Regular),
+                    ForeColor = Color.Black,
+                    BackColor = Color.White,
+                    Enabled = false
+                };
+
+                ButtonRemove = new PictureBox
+                {
+                    Image = Image.FromFile(@"Resources\removeClose.png"),
+                    BackColor = Color.White,
+
+                    SizeMode = PictureBoxSizeMode.StretchImage,
+                    Anchor = (AnchorStyles.None | AnchorStyles.None),
+                    Width = 25,
+                    Height = 25,
+
+                    
+                };
+
+
+                {
+
+                    ButtonRemove.Tag = i;
                 }
+                ButtonRemove.Click += ButtonRemove_Click;
+            
             }
-            RemoveCartProductsList.Clear();
-            PanelWithProducs.Controls.Clear();
-            ProducsInCart();
+
+        public void AddToCart()
+        {
+            
+            for (int i = 0; i < ItemsInTheCart.Count; i++)
+            {
+                
+                CreateCartTable(i);
+                
+                GetErrorFromPicturebox(i);
+                PanelWithProducs.Controls.Add(Picture);
+                PanelWithProducs.Controls.Add(LabelName);
+                PanelWithProducs.Controls.Add(ButtonLess);
+                PanelWithProducs.Controls.Add(Quantity);
+                PanelWithProducs.Controls.Add(ButtonMore);
+                PanelWithProducs.Controls.Add(ButtonRemove);
+               
+
+            }
+            AddControlsToCartLayoutPanle(PanelWithProducs);
+
+
+
         }
+        private void AddControlsToCartLayoutPanle( Control control)
+        {
+            CartLayoutPanel.Controls.Add(control);
+        }
+
+        private void RefreshCart()
+        {
+
+                for (int i = 0; i < ItemsInTheCart.Count; i++)
+                {
+                
+                    CreateCartTable(i);
+                    GetErrorFromPicturebox(i);
+                    PanelWithProducs.Controls.Add(Picture);
+                    PanelWithProducs.Controls.Add(LabelName);
+                    PanelWithProducs.Controls.Add(ButtonLess);
+                    PanelWithProducs.Controls.Add(Quantity);
+                    PanelWithProducs.Controls.Add(ButtonMore);
+                    PanelWithProducs.Controls.Add(ButtonRemove);
+
+                AddControlsToCartLayoutPanle(PanelWithProducs);
+
+            }
+               
+
+
+            }
+
+        
+
+        private void GetErrorFromPicturebox(int i)
+        {
+            try
+            {
+                Picture.Image = Image.FromFile(@"Resources\" + ItemsInTheCart[i].PictureName);
+            }
+            catch
+            {
+                try
+                {
+                    Picture.Image = Image.FromFile(@"Resources\Error\1.png");
+                }
+                catch
+                {
+                    Picture.BackColor = Color.Black;
+                }
+
+            }
+
+
+
+        }
+
+
+        private void ButtonRemove_Click(object sender, EventArgs e)
+        {
+            PictureBox a = (PictureBox)sender;
+           
+            CartLayoutPanel.Controls.RemoveAt(Convert.ToInt32(a.Tag));
+            CartLayoutPanel.Controls.Clear();
+            ItemsInTheCart.Remove(ItemsInTheCart[Convert.ToInt32(a.Tag)]);
+            RefreshCart();
+           
+
+        }
+
+
+
     }
 }
+
+
+
+
