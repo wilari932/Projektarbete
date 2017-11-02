@@ -246,6 +246,7 @@ namespace Projektarbete
             if (SavedItemsToBuy.CartProductsList.Exists(x => x.Id == int.Parse(BtnGetProductID.Name)))
             {
                 MessageBox.Show("This product is already in your cart");
+                MessageBox.Show("This product is already in your cart");
             }
             else
             {
@@ -257,3 +258,4 @@ namespace Projektarbete
         }
     }
 }
+//
