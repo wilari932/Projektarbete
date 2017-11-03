@@ -26,16 +26,32 @@ namespace Projektarbete
         }
         private void InitialComponents()
         {
+            
+            FormStyles();
+           
+
             Root.Dock = DockStyle.Fill;
             Root.ColumnCount = 2;
+            Root.BackColor = Color.DarkGray;
             
             Root.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 36));
             Root.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 64));
 
-            this.Controls.Add(Root);
+          
             Root.Controls.Add( DisplayProducs.LeftMenuPanel);
             Root.Controls.Add( DisplayProducs.ShowProducs);
 
+        }
+        //MainForm Changes
+        private void FormStyles()
+        {
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.WindowState = FormWindowState.Maximized;
+            this.Controls.Add(Root);
+            this.Width = 1500;
+            this.Height = 700;
+         
+        
         }
        
      

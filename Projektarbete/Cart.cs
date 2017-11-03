@@ -105,8 +105,8 @@ namespace Projektarbete
 
                     SizeMode = PictureBoxSizeMode.StretchImage,
                     Anchor = (AnchorStyles.None | AnchorStyles.None),
-                    Width = 25,
-                    Height = 25,
+                    Width = 50,
+                    Height = 50,
 
                     
                 };
@@ -117,8 +117,26 @@ namespace Projektarbete
                     ButtonRemove.Tag = i;
                 }
                 ButtonRemove.Click += ButtonRemove_Click;
+            ButtonRemove.MouseEnter += ButtonRemove_MouseEnter;
+            ButtonRemove.MouseLeave += ButtonRemove_MouseLeave;
             
             }
+
+        private void ButtonRemove_MouseLeave(object sender, EventArgs e)
+        {
+            PictureBox a = (PictureBox)sender;
+                   a.Image = Image.FromFile(@"Resources\removeClose.png");
+                   a.Width = 50;
+                   a.Height = 50;
+        }
+
+        private void ButtonRemove_MouseEnter(object sender, EventArgs e)
+        {
+            PictureBox a = (PictureBox)sender;
+            a.Image = Image.FromFile(@"Resources\removeOpen.png");
+            a.Width = 55;
+            a.Height = 55;
+        }
 
         public void AddToCart()
         {
