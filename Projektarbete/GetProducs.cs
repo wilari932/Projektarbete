@@ -18,6 +18,7 @@ namespace Projektarbete
         public FlowLayoutPanel ShowProducs;
         private Button ButtonAddToCart;
         public TableLayoutPanel LeftMenuPanel;
+        TableLayoutPanel LeftMenuPanelDown;
         private Cart SetCart = new Cart();
         public List<Product> ProducsFromList = new List<Product>();
        
@@ -84,11 +85,15 @@ namespace Projektarbete
 
 
             };
-            //  LeftMenuPanelUp.Controls.Add(SetCart.CartLayoutPanel);
-
-
             LeftMenuPanelUp.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-            TableLayoutPanel LeftMenuPanelDown = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 1, BackColor = Color.White, BorderStyle = BorderStyle.Fixed3D };
+
+            LeftMenuPanelDown = new TableLayoutPanel
+            {
+                Dock = DockStyle.Fill,
+                ColumnCount = 1,
+                BackColor = Color.White,
+                BorderStyle = BorderStyle.Fixed3D
+            };
 
             LeftMenuPanel.Controls.Add(LeftMenuPanelUp);
             LeftMenuPanel.Controls.Add(LeftMenuPanelDown);
