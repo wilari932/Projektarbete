@@ -208,7 +208,7 @@ namespace Projektarbete
                
                 LeftMenuPanelUp.Controls.Add(SetCart.CartLayoutPanel);
                 SetCart.ItemsInTheCart.Add(ProducsFromList[Convert.ToInt32(a.Tag)]);
-                SetCart.AddToCart();
+                SetCart.AddToCart(false);
             }
           
         }

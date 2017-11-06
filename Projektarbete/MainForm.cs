@@ -11,10 +11,8 @@ namespace Projektarbete
 {
     class MainForm : Form
     {
-
-
+        
         private TableLayoutPanel Root = new TableLayoutPanel();
-
         GetProducs DisplayProducs = new GetProducs();
 
        

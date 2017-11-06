@@ -138,35 +138,21 @@ namespace Projektarbete
             a.Height = 55;
         }
 
-        public void AddToCart()
+        public void AddToCart( bool IsRefresh)
         {
-            
-            for (int i = 0; i < ItemsInTheCart.Count; i++)
+            RefreshCart(IsRefresh);
+            if (IsRefresh == false)
             {
-                
-                CreateCartTable(i);
-                
-                GetErrorFromPicturebox(i);
-                PanelWithProducs.Controls.Add(Picture);
-                PanelWithProducs.Controls.Add(LabelName);
-                PanelWithProducs.Controls.Add(ButtonLess);
-                PanelWithProducs.Controls.Add(Quantity);
-                PanelWithProducs.Controls.Add(ButtonMore);
-                PanelWithProducs.Controls.Add(ButtonRemove);
-               
-
+                 AddControlsToCartLayoutPanle(PanelWithProducs);
             }
-            AddControlsToCartLayoutPanle(PanelWithProducs);
-
-
-
+            
         }
         private void AddControlsToCartLayoutPanle( Control control)
         {
             CartLayoutPanel.Controls.Add(control);
         }
 
-        private void RefreshCart()
+        private void RefreshCart(bool IsRefresh)
         {
 
                 for (int i = 0; i < ItemsInTheCart.Count; i++)
@@ -181,7 +167,11 @@ namespace Projektarbete
                     PanelWithProducs.Controls.Add(ButtonMore);
                     PanelWithProducs.Controls.Add(ButtonRemove);
 
-                AddControlsToCartLayoutPanle(PanelWithProducs);
+                if (IsRefresh)
+                {
+                    AddControlsToCartLayoutPanle(PanelWithProducs);
+                }
+                
 
             }
                
@@ -222,7 +212,7 @@ namespace Projektarbete
             CartLayoutPanel.Controls.RemoveAt(Convert.ToInt32(a.Tag));
             CartLayoutPanel.Controls.Clear();
             ItemsInTheCart.Remove(ItemsInTheCart[Convert.ToInt32(a.Tag)]);
-            RefreshCart();
+            AddToCart(true);
            
 
         }
