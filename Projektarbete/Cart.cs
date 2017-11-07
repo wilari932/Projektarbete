@@ -11,6 +11,7 @@ namespace Projektarbete
 
     class Cart
     {
+        private double Price { get; set; }
         public TableLayoutPanel CartLayoutPanel;
         private TableLayoutPanel PanelWithProducs;
         private Label LabelName;
@@ -19,15 +20,55 @@ namespace Projektarbete
         private Button ButtonLess;
         private TextBox Quantity;
         private PictureBox ButtonRemove;
+        public Button CheckOutButton;
+        public Label ShowPriceLabel;
         public List<Product> ItemsInTheCart = new List<Product>();
         public Cart()
         {
-            CartLayoutPanel = new TableLayoutPanel { Dock = DockStyle.Fill, AutoScroll = true };
+            InicialComponents();
+
+
+        }
+   
+        private void InicialComponents()
+        {
+            CartLayoutPanel = new TableLayoutPanel
+            {
+             Dock = DockStyle.Fill,
+              AutoScroll = true
+            };
+
+            CheckOutButton = new Button
+            {
+                Text = "Next",
+                Enabled = false,
+                Dock = DockStyle.Fill,
+              FlatStyle = FlatStyle.Flat,
+                Font = new Font("Arial", 20, FontStyle.Italic),
+                TextAlign = ContentAlignment.MiddleCenter,
+
+
+
+            };
+
+            ShowPriceLabel = new Label
+            {
+                Dock = DockStyle.Fill,
+                Font = new Font("Arial", 20, FontStyle.Regular),
+                TextAlign = ContentAlignment.TopLeft,
+                ForeColor = Color.Green,
+                Text =  "Total Price: "
+            };
+
+
+
         }
 
        private void CreateCartTable( int i)
         {
-            
+           
+
+
                 PanelWithProducs = new TableLayoutPanel
                 {
                     Height = 100,
@@ -64,7 +105,22 @@ namespace Projektarbete
                     Dock = DockStyle.Fill,
                     Enabled = false,
                 };
-                ButtonMore = new Button
+
+            Quantity = new TextBox
+            {
+
+                TextAlign = HorizontalAlignment.Center,
+                Text = ItemsInTheCart[i].Quantity.ToString(),
+                Anchor = (AnchorStyles.None | AnchorStyles.None),
+                Font = new Font("Arial", 11, FontStyle.Regular),
+                ForeColor = Color.Black,
+                BackColor = Color.White,
+                Enabled = false,
+                Tag = i.ToString(),
+            };
+          
+
+            ButtonMore = new Button
                 {
                     Dock = DockStyle.Left,
                     Text = "+",
@@ -73,8 +129,11 @@ namespace Projektarbete
                     TextAlign = ContentAlignment.MiddleCenter,
                     Anchor = (AnchorStyles.None | AnchorStyles.None),
                     ForeColor = Color.Black,
-                    BackColor = Color.White
+                    BackColor = Color.White,
+                    Tag = Quantity
+                    
                 };
+            ButtonMore.Click += ButtonMore_Click;
                 ButtonLess = new Button
                 {
                     Dock = DockStyle.Right,
@@ -86,17 +145,7 @@ namespace Projektarbete
                     ForeColor = Color.Black,
                     BackColor = Color.White
                 };
-                Quantity = new TextBox
-                {
-
-                    TextAlign = HorizontalAlignment.Center,
-                    Text = "1",
-                    Anchor = (AnchorStyles.None | AnchorStyles.None),
-                    Font = new Font("Arial", 11, FontStyle.Regular),
-                    ForeColor = Color.Black,
-                    BackColor = Color.White,
-                    Enabled = false
-                };
+              
 
                 ButtonRemove = new PictureBox
                 {
@@ -121,6 +170,23 @@ namespace Projektarbete
             ButtonRemove.MouseLeave += ButtonRemove_MouseLeave;
             
             }
+
+        private void ButtonMore_Click(object sender, EventArgs e)
+        {
+          
+            Button s = (Button)sender;
+            TextBox t = (TextBox)s.Tag;
+            int f = 1 + Convert.ToInt32(t.Text);
+            t.Text = f.ToString();
+            int i = Convert.ToInt32(t.Tag);
+            ItemsInTheCart[i].Quantity = Convert.ToInt32(t.Text);
+            PriceCount();
+
+
+
+
+
+        }
 
         private void ButtonRemove_MouseLeave(object sender, EventArgs e)
         {
@@ -171,15 +237,27 @@ namespace Projektarbete
                 {
                     AddControlsToCartLayoutPanle(PanelWithProducs);
                 }
-                
-
+           
             }
                
 
 
             }
+        public void PriceCount()
+        {
+            Price = 0;
+            foreach (Product a in ItemsInTheCart)
+            {
 
-        
+                Price += a.Price * a.Quantity;
+
+            }
+            ShowPriceLabel.Text = "Total Price: " + Price.ToString();
+        }
+
+
+      
+
 
         private void GetErrorFromPicturebox(int i)
         {
@@ -211,10 +289,11 @@ namespace Projektarbete
 
             //  CartLayoutPanel.Controls.RemoveAt(Convert.ToInt32(a.Tag));
             CartLayoutPanel.Controls.Clear();
+            ItemsInTheCart[Convert.ToInt32(a.Tag)].Quantity = 1;
             ItemsInTheCart.Remove(ItemsInTheCart[Convert.ToInt32(a.Tag)]);
-
+            
             AddToCart(true);
-           
+            PriceCount();
 
         }
 

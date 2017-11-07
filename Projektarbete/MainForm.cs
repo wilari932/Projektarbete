@@ -11,99 +11,155 @@ namespace Projektarbete
 {
     class MainForm : Form
     {
-        private TableLayoutPanel Root1 = new TableLayoutPanel();
         private TableLayoutPanel Root = new TableLayoutPanel();
-        GetProducs DisplayProducs = new GetProducs();
+        private TableLayoutPanel RootContainer = new TableLayoutPanel();
+        private TableLayoutPanel Banner;
+        private int timer = 1;
+        private TableLayoutPanel Bannercontent1;
+        private TableLayoutPanel Bannerconten2;
+        private PictureBox BannerPicture;
+        private Label CompanyText;
+     GetProducs DisplayProducs = new GetProducs();
 
 
 
         public MainForm()
         {
+            FormStyles();
             InitialComponents();
 
         }
         private void InitialComponents()
         {
-
-            FormStyles();
-
-
-            Root1.RowCount = 2;
-            Root1.Dock = DockStyle.Fill;
-            Root1.RowStyles.Add(new RowStyle(SizeType.Percent, 14));
-            Root1.RowStyles.Add(new RowStyle(SizeType.Percent, 86));
-            TableLayoutPanel Panel = new TableLayoutPanel
-            {
-
-                Dock = DockStyle.Fill,
-                //BackColor = Color.FromArgb(44, 45, 48),
-
-
-                ColumnCount = 3,
-                BackColor = Color.FromArgb(170, 166, 171),
-
-
-
-
-            };
-
-            TableLayoutPanel Panel3 = new TableLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-                BackColor = Color.FromArgb(44, 45, 48),
-                Margin = new Padding(0)
-            };
-            TableLayoutPanel Panel4 = new TableLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-
-                BackColor = Color.FromArgb(170, 166, 171),
-                Margin = new Padding(0)
-
-            };
-
-            Panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33));
-            Panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33));
-            Panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33));
-            PictureBox CompanyBanner = new PictureBox
-            {
-                Image = Image.FromFile(@"Resources\header.png"),
-                Dock = DockStyle.Fill,
-                SizeMode = PictureBoxSizeMode.StretchImage,                
-                Margin = new Padding(0)
-            };
-
-            Panel.Controls.Add(Panel3);
-
-
-            Panel.Controls.Add(CompanyBanner);
-            Panel.Controls.Add(Panel4);
-
-
-            Root1.Controls.Add(Panel);
-            Root1.Controls.Add(Root);
-
-
+            BannerMaker(@"Resources/header.png");
 
             // root
+            RootContainer.Dock = DockStyle.Fill;
+            RootContainer.ColumnCount = 2;
+            RootContainer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 36));
+            RootContainer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 64));
+            RootContainer.Controls.Add(DisplayProducs.LeftMenuPanel);
+            RootContainer.Controls.Add(DisplayProducs.ShowProducs);
+
+            //root
+            Root.Controls.Add(Banner);
+            Root.Controls.Add(RootContainer);
+            Root.RowCount = 2;
             Root.Dock = DockStyle.Fill;
-            Root.ColumnCount = 2;
-
-
-            Root.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 36));
-            Root.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 64));
-
-
-            Root.Controls.Add(DisplayProducs.LeftMenuPanel);
-            Root.Controls.Add(DisplayProducs.ShowProducs);
+            Root.RowStyles.Add(new RowStyle(SizeType.Percent, 14));
+            Root.RowStyles.Add(new RowStyle(SizeType.Percent, 86));
 
         }
+        private  void BannerMaker(string PicturePath) {
+            // Banner 
+            Banner = new TableLayoutPanel
+            {
+
+                Dock = DockStyle.Fill,
+
+                ColumnCount = 3,
+                BackColor = Color.FromArgb(38, 38, 32),
+
+
+            };
+            Banner.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33));
+            Banner.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33));
+            Banner.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33));
+           
+
+
+
+            Bannercontent1 = new TableLayoutPanel
+            {
+                Dock = DockStyle.Fill,
+                BackColor = Color.FromArgb(38, 38, 32),
+                Margin = new Padding(0)
+            };
+            CompanyText = new Label
+            {
+                Dock = DockStyle.Fill,
+                Font = new Font("Arial", 20, FontStyle.Italic),
+                TextAlign = ContentAlignment.MiddleCenter,
+                Text = "Welcome To Nordic Data Store",
+                ForeColor = Color.White
+                
+
+            };
+            Bannerconten2 = new TableLayoutPanel
+            {
+                Dock = DockStyle.Fill,
+
+                BackColor = Color.FromArgb(38, 38, 32),
+                Margin = new Padding(0)
+
+            };
+
+           
+                 BannerPicture = new PictureBox
+                {
+                   
+                    Dock = DockStyle.Fill,
+                    SizeMode = PictureBoxSizeMode.StretchImage,
+                    Margin = new Padding(0)
+                };
+            try
+            {
+                BannerPicture.Image = Image.FromFile(PicturePath);
+            }
+            catch
+            {
+               BannerPicture.BackColor = Color.Blue;
+            }
+          
+
+            Timer Tick = new Timer
+            {
+                Interval = 1500
+            };
+            Tick.Tick += Tick_Tick;
+            Tick.Start();
+        }
+
+        private void Tick_Tick(object sender, EventArgs e)
+        {
+            switch (timer)
+            {
+                case 1: 
+                  
+                    Banner.Controls.Add(BannerPicture);
+                    Banner.Controls.Add(Bannercontent1);
+                    Bannercontent1.Controls.Add(CompanyText);
+                    Banner.Controls.Add(Bannerconten2);
+                    timer = 2;
+                    break;
+                case 2:
+                
+            
+                    Banner.Controls.Add(Bannerconten2);
+                    Banner.Controls.Add(Bannercontent1);
+                    Bannercontent1.Controls.Add(CompanyText);
+                    Banner.Controls.Add(BannerPicture);
+                   
+                  
+                    
+                    timer = 1;
+                    break;
+               
+
+            }
+            
+           
+        }
+
         //MainForm Changes
         private void FormStyles()
         {
+          
+
+            //This Form
             this.StartPosition = FormStartPosition.CenterScreen;
             this.WindowState = FormWindowState.Maximized;
-            this.Controls.Add(Root1);
+            this.Controls.Add(Root);
             this.Width = 1500;
             this.Height = 700;
 

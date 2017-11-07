@@ -18,7 +18,7 @@ namespace Projektarbete
         public FlowLayoutPanel ShowProducs;
         private Button ButtonAddToCart;
         public TableLayoutPanel LeftMenuPanel;
-        TableLayoutPanel LeftMenuPanelDown;
+        private  TableLayoutPanel LeftMenuPanelDown;
         private Cart SetCart = new Cart();
         public List<Product> ProducsFromList = new List<Product>();
        
@@ -63,8 +63,14 @@ namespace Projektarbete
             }
             ShowTables();
             ShowProducsInGui();
+            ShowLeftMenuPanelDownControls();
 
-
+        }
+        private void ShowLeftMenuPanelDownControls()
+        {
+            LeftMenuPanelDown.Controls.Add(SetCart.ShowPriceLabel);
+            LeftMenuPanelDown.Controls.Add(SetCart.CheckOutButton);
+           
         }
         private void ShowTables() {
             LeftMenuPanel = new TableLayoutPanel
@@ -91,14 +97,17 @@ namespace Projektarbete
             {
                 Dock = DockStyle.Fill,
                 ColumnCount = 1,
+                RowCount = 2,
                 BackColor = Color.White,
-                BorderStyle = BorderStyle.Fixed3D
+                CellBorderStyle = TableLayoutPanelCellBorderStyle.InsetDouble
             };
+            LeftMenuPanelDown.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
+            LeftMenuPanelDown.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
 
             LeftMenuPanel.Controls.Add(LeftMenuPanelUp);
             LeftMenuPanel.Controls.Add(LeftMenuPanelDown);
-            LeftMenuPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 90));
-            LeftMenuPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
+            LeftMenuPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 85));
+            LeftMenuPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 15));
 
             
         }
@@ -209,6 +218,7 @@ namespace Projektarbete
                 LeftMenuPanelUp.Controls.Add(SetCart.CartLayoutPanel);
                 SetCart.ItemsInTheCart.Add(ProducsFromList[Convert.ToInt32(a.Tag)]);
                 SetCart.AddToCart(false);
+                 SetCart.PriceCount();
             }
           
         }

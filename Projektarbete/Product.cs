@@ -15,5 +15,7 @@ namespace Projektarbete
         public double Price { get; set; }
         public string PictureName{ get; set; }
         public int Id { get; set; }
+        public int Quantity = 1;
+        
     }
 }
