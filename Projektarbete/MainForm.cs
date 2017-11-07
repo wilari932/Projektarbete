@@ -162,10 +162,17 @@ namespace Projektarbete
             this.Controls.Add(Root);
             this.Width = 1500;
             this.Height = 700;
-
+            this.FormClosing += MainForm_FormClosing;
 
         }
 
-
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+           if(DisplayProducs.SetCart.CartIsNotEmpty())
+            {
+                DialogResult dialogResult = MessageBox.Show("There is some stuff in your cart!", "Are you sure, you want to leave?", MessageBoxButtons.YesNo);
+                e.Cancel = (dialogResult == DialogResult.No);
+            }
+        }
     }
 }

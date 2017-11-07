@@ -19,7 +19,7 @@ namespace Projektarbete
         private Button ButtonAddToCart;
         public TableLayoutPanel LeftMenuPanel;
         private  TableLayoutPanel LeftMenuPanelDown;
-        private Cart SetCart = new Cart();
+        public Cart SetCart = new Cart();
         public List<Product> ProducsFromList = new List<Product>();
        
         public GetProducs()

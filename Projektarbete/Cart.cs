@@ -41,7 +41,7 @@ namespace Projektarbete
             CheckOutButton = new Button
             {
                 Text = "Next",
-                Enabled = false,
+                
                 Dock = DockStyle.Fill,
               FlatStyle = FlatStyle.Flat,
                 Font = new Font("Arial", 20, FontStyle.Italic),
@@ -50,21 +50,29 @@ namespace Projektarbete
 
 
             };
-
+            CheckOutButton.Click += CheckOutButton_Click;
             ShowPriceLabel = new Label
             {
                 Dock = DockStyle.Fill,
                 Font = new Font("Arial", 20, FontStyle.Regular),
                 TextAlign = ContentAlignment.TopLeft,
                 ForeColor = Color.Green,
-                Text =  "Total Price: "
+                Text =  "Total Price: 0"
             };
 
 
 
         }
 
-       private void CreateCartTable( int i)
+        private void CheckOutButton_Click(object sender, EventArgs e)
+        {
+            if(Price == 0)
+            {
+                MessageBox.Show("Your cart is empty");
+            }
+        }
+
+        private void CreateCartTable( int i)
         {
            
 
@@ -143,9 +151,10 @@ namespace Projektarbete
                     TextAlign = ContentAlignment.MiddleCenter,
                     Anchor = (AnchorStyles.None | AnchorStyles.None),
                     ForeColor = Color.Black,
-                    BackColor = Color.White
+                    BackColor = Color.White,
+                    Tag = Quantity
                 };
-              
+            ButtonLess.Click += ButtonLess_Click;
 
                 ButtonRemove = new PictureBox
                 {
@@ -170,6 +179,25 @@ namespace Projektarbete
             ButtonRemove.MouseLeave += ButtonRemove_MouseLeave;
             
             }
+
+        private void ButtonLess_Click(object sender, EventArgs e)
+        {
+            Button s = (Button)sender;
+            TextBox t = (TextBox)s.Tag;
+
+            if (t.Text != "1")
+            {
+                int f =  Convert.ToInt32(t.Text) - 1;
+
+                t.Text = f.ToString();
+                int i = Convert.ToInt32(t.Tag);
+                ItemsInTheCart[i].Quantity = Convert.ToInt32(t.Text);
+                PriceCount();
+            }
+
+
+
+        }
 
         private void ButtonMore_Click(object sender, EventArgs e)
         {
@@ -245,7 +273,7 @@ namespace Projektarbete
             }
         public void PriceCount()
         {
-            Price = 0;
+           Price = 0;
             foreach (Product a in ItemsInTheCart)
             {
 
@@ -282,6 +310,19 @@ namespace Projektarbete
 
         }
 
+        public bool CartIsNotEmpty()
+        {
+           if( ItemsInTheCart.Count<Product>() >= 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+
+            }
+           
+        }
 
         private void ButtonRemove_Click(object sender, EventArgs e)
         {
