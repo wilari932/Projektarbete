@@ -208,10 +208,11 @@ namespace Projektarbete
         private void ButtonRemove_Click(object sender, EventArgs e)
         {
             PictureBox a = (PictureBox)sender;
-           
-            CartLayoutPanel.Controls.RemoveAt(Convert.ToInt32(a.Tag));
+
+            //  CartLayoutPanel.Controls.RemoveAt(Convert.ToInt32(a.Tag));
             CartLayoutPanel.Controls.Clear();
             ItemsInTheCart.Remove(ItemsInTheCart[Convert.ToInt32(a.Tag)]);
+
             AddToCart(true);
            
 
