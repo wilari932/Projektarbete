@@ -158,7 +158,7 @@ namespace Projektarbete
 
                 ButtonRemove = new PictureBox
                 {
-                    Image = Image.FromFile(@"Resources\removeClose.png"),
+                    Image = Image.FromFile(@"Resources\ProgramFIles\removeClose.png"),
                     BackColor = Color.White,
 
                     SizeMode = PictureBoxSizeMode.StretchImage,
@@ -219,7 +219,7 @@ namespace Projektarbete
         private void ButtonRemove_MouseLeave(object sender, EventArgs e)
         {
             PictureBox a = (PictureBox)sender;
-                   a.Image = Image.FromFile(@"Resources\removeClose.png");
+                   a.Image = Image.FromFile(@"Resources\ProgramFIles\removeClose.png");
                    a.Width = 50;
                    a.Height = 50;
         }
@@ -227,7 +227,7 @@ namespace Projektarbete
         private void ButtonRemove_MouseEnter(object sender, EventArgs e)
         {
             PictureBox a = (PictureBox)sender;
-            a.Image = Image.FromFile(@"Resources\removeOpen.png");
+            a.Image = Image.FromFile(@"Resources\ProgramFIles\removeOpen.png");
             a.Width = 55;
             a.Height = 55;
         }
@@ -291,13 +291,13 @@ namespace Projektarbete
         {
             try
             {
-                Picture.Image = Image.FromFile(@"Resources\" + ItemsInTheCart[i].PictureName);
+                Picture.Image = Image.FromFile(@"Resources\ProductImages\" + ItemsInTheCart[i].PictureName);
             }
             catch
             {
                 try
                 {
-                    Picture.Image = Image.FromFile(@"Resources\Error\1.png");
+                    Picture.Image = Image.FromFile(@"Resources\ProgramFIles\Error\1.png");
                 }
                 catch
                 {

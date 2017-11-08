@@ -31,7 +31,7 @@ namespace Projektarbete
         }
         private void InitialComponents()
         {
-            BannerMaker(@"Resources/header.png");
+            BannerMaker(@"Resources/YourBanner/header.png");
 
             // root
             RootContainer.Dock = DockStyle.Fill;

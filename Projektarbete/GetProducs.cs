@@ -33,7 +33,7 @@ namespace Projektarbete
         // Get the Data From Text File
         private void GetProducsFromList()
         {
-            string path = @"Resources\products.txt";
+            string path = @"Resources\ProductImages\Database.txt";
 
         List<string> ReadLines = File.ReadAllLines(path).ToList();
             foreach (string lines in ReadLines)
@@ -136,13 +136,13 @@ namespace Projektarbete
                 };
                 try
                 {
-                    picture.Image = Image.FromFile(@"Resources\" + a.PictureName);
+                    picture.Image = Image.FromFile(@"Resources\ProductImages\" + a.PictureName);
                 }
                 catch
                 {
                     try
                     {
-                        picture.Image = Image.FromFile(@"Resources\Error\1.png");
+                        picture.Image = Image.FromFile(@"Resources\ProgramFIles\Error\1.png");
                     }
                     catch
                     {
