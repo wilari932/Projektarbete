@@ -75,6 +75,7 @@ namespace Projektarbete
             {
                 Customer A = new Customer();
                 A.ShowDialog();
+                //
             }
         }
 
