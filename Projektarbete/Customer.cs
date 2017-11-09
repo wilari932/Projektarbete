@@ -10,6 +10,7 @@ namespace Projektarbete
 {
     class Customer : Form
     {
+        private double price;
         public TableLayoutPanel CustomerLayoutPanel;
         private Label Title;
         private Label CName;
@@ -32,11 +33,14 @@ namespace Projektarbete
         private TextBox CreditCardNumberBox;
         private Label CleringNumber;
         private TextBox CleringNumberBox;
-        private Label TotalPrice;
+        private Label LabelTotalPrice;
         private Button CompletePurchase;
+        private Checkout SetCheckout = new Checkout();
+        private List<Product> ItemsTocheckouT = new List<Product>();
 
-        public Customer()
+        public Customer(double pris, List<Product> Items)
         {
+            GetPrice(pris , Items);
             InitialComponents();
         }
 
@@ -227,7 +231,7 @@ namespace Projektarbete
                 ForeColor = Color.DimGray,
                 BackColor = Color.White
             };
-
+            DiscountBox.TextChanged += DiscountBox_TextChanged;
             CreditCardNumber = new Label
             {
                 Dock = DockStyle.Fill,
@@ -298,11 +302,11 @@ namespace Projektarbete
             };
             CleringNumberBox.TextChanged += CleringNumberBox_TextChanged;
 
-            TotalPrice = new Label
+            LabelTotalPrice = new Label
             {
                 Dock = DockStyle.Fill,
                 //vas a borrar el Text 
-                Text = "Total Price : $356",
+                Text = "Total Price : " + price.ToString(),
                 Font = new Font("Arial", 14, FontStyle.Regular),
                 Margin = new Padding(115, 5, 115, 3),
                 ForeColor = Color.DimGray,
@@ -319,7 +323,7 @@ namespace Projektarbete
                 ForeColor = Color.White,
                 BackColor = Color.SandyBrown,
             };
-
+            CompletePurchase.Click += CompletePurchase_Click;
             CustomerLayoutPanel.Controls.Add(Title);
             CustomerLayoutPanel.Controls.Add(CName);
             CustomerLayoutPanel.Controls.Add(NameBox);
@@ -333,16 +337,64 @@ namespace Projektarbete
             CustomerLayoutPanel.Controls.Add(CityBox);
             CustomerLayoutPanel.Controls.Add(Address);
             CustomerLayoutPanel.Controls.Add(AddressBox);
-            CustomerLayoutPanel.Controls.Add(DiscountLabel);
-            CustomerLayoutPanel.Controls.Add(DiscountBox);
+            if (!SetCheckout.SendError)
+            {
+                CustomerLayoutPanel.Controls.Add(DiscountLabel);
+                CustomerLayoutPanel.Controls.Add(DiscountBox);
+            }
             CustomerLayoutPanel.Controls.Add(CreditCardNumber);
             CustomerLayoutPanel.Controls.Add(CMaster);
             CustomerLayoutPanel.Controls.Add(CVisa);
             CustomerLayoutPanel.Controls.Add(CreditCardNumberBox);
             CustomerLayoutPanel.Controls.Add(CleringNumber);
             CustomerLayoutPanel.Controls.Add(CleringNumberBox);
-            CustomerLayoutPanel.Controls.Add(TotalPrice);
+            CustomerLayoutPanel.Controls.Add(LabelTotalPrice);
             CustomerLayoutPanel.Controls.Add(CompletePurchase);
+
+        }
+
+        private void DiscountBox_TextChanged(object sender, EventArgs e)
+        {
+          
+            if(DiscountBox.TextLength > 0)
+            {
+               
+                price =  SetCheckout.Discount(DiscountBox.Text, price);
+                LabelTotalPrice.Text = price.ToString();
+                if (SetCheckout.Send)
+                {
+                    DiscountBox.BackColor = Color.Aquamarine;
+                    MessageBox.Show("You have discount is set!");
+                    DiscountBox.Enabled = false;
+                }
+               
+                else 
+                {
+                    DiscountBox.BackColor = Color.Red;
+                }
+            }
+            else
+            {
+                DiscountBox.BackColor = Color.White;
+            }
+        }
+
+        public void GetPrice(double getPrice, List<Product> Items)
+        {
+            foreach(Product a in Items)
+            {
+                ItemsTocheckouT.Add(a);
+            }
+            price = getPrice;
+        }
+
+
+        private void CompletePurchase_Click(object sender, EventArgs e)
+        {
+            SendMail s = new SendMail();
+            s.CustomerMail = EmailBox.Text;
+
+
 
         }
 

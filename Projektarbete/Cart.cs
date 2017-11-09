@@ -10,7 +10,8 @@ namespace Projektarbete
 {
     class Cart
     {
-        private double Price { get; set; }
+        private  static double Price { get; set; }
+    
         public TableLayoutPanel CartLayoutPanel;
         private TableLayoutPanel PanelWithProducs;
         private Label LabelName;
@@ -67,8 +68,10 @@ namespace Projektarbete
             }
             else
             {
-                Customer A = new Customer();
-                A.ShowDialog();
+                Customer a = new Customer(Price, ItemsInTheCart);
+              
+                a.ShowDialog();
+              
             }
         }
 
