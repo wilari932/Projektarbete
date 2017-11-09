@@ -40,7 +40,7 @@ namespace Projektarbete
 
             CheckOutButton = new Button
             {
-                Text = "Next",
+                Text = "CH",
                 
                 Dock = DockStyle.Fill,
               FlatStyle = FlatStyle.Flat,
@@ -50,6 +50,7 @@ namespace Projektarbete
 
 
             };
+            
             CheckOutButton.Click += CheckOutButton_Click;
             ShowPriceLabel = new Label
             {
@@ -69,6 +70,11 @@ namespace Projektarbete
             if(Price == 0)
             {
                 MessageBox.Show("Your cart is empty");
+            }
+            else
+            {
+                Customer A = new Customer();
+                A.ShowDialog();
             }
         }
 
