@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 
-
 namespace Projektarbete
 {
     class Customer : Form
@@ -25,6 +24,8 @@ namespace Projektarbete
         private TextBox CityBox;
         private Label Address;
         private TextBox AddressBox;
+        private Label DiscountLabel;
+        private TextBox DiscountBox;
         private Label CreditCardNumber;
         private RadioButton CMaster;
         private RadioButton CVisa;
@@ -205,6 +206,28 @@ namespace Projektarbete
                 BackColor = Color.White
             };
 
+            DiscountLabel = new Label
+            {
+                Dock = DockStyle.Fill,
+                Text = "Have you a discount code?",
+                Font = new Font("Arial", 12, FontStyle.Regular),
+                Margin = new Padding(25, 10, 25, 2),
+                ForeColor = Color.Gray,
+                TextAlign = ContentAlignment.BottomCenter
+            };
+
+            DiscountBox = new TextBox
+            {
+                Cursor = Cursors.Default,
+                Width = 210,
+                Height = 25,
+                Font = new Font("Arial", 11, FontStyle.Regular),
+                TextAlign = HorizontalAlignment.Center,
+                Margin = new Padding(110, 2, 20, 5),
+                ForeColor = Color.DimGray,
+                BackColor = Color.White
+            };
+
             CreditCardNumber = new Label
             {
                 Dock = DockStyle.Fill,
@@ -243,7 +266,7 @@ namespace Projektarbete
                 MaxLength = 19,
                 Font = new Font("Arial", 11, FontStyle.Regular),
                 TextAlign = HorizontalAlignment.Center,
-                Margin = new Padding(110, 2, 20, 5),
+                Margin = new Padding(110, 2, 20, 0),
                 ForeColor = Color.DimGray,
                 BackColor = Color.White
             };
@@ -256,7 +279,7 @@ namespace Projektarbete
                 Dock = DockStyle.Fill,
                 Text = "Clering Number",
                 Font = new Font("Arial", 12, FontStyle.Regular),
-                Margin = new Padding(25, 10, 25, 2),
+                Margin = new Padding(25, 2, 25, 0),
                 ForeColor = Color.Gray,
                 TextAlign = ContentAlignment.BottomCenter
             };
@@ -269,7 +292,7 @@ namespace Projektarbete
                 MaxLength = 3,
                 Font = new Font("Arial", 11, FontStyle.Regular),
                 TextAlign = HorizontalAlignment.Center,
-                Margin = new Padding(161, 2, 100, 5),
+                Margin = new Padding(161, 0, 100, 0),
                 ForeColor = Color.DimGray,
                 BackColor = Color.White
             };
@@ -281,7 +304,7 @@ namespace Projektarbete
                 //vas a borrar el Text 
                 Text = "Total Price : $356",
                 Font = new Font("Arial", 14, FontStyle.Regular),
-                Margin = new Padding(115, 15, 115, 5),
+                Margin = new Padding(115, 5, 115, 3),
                 ForeColor = Color.DimGray,
                 TextAlign = ContentAlignment.MiddleCenter
             };
@@ -289,12 +312,12 @@ namespace Projektarbete
             CompletePurchase = new Button
             {
                 Dock = DockStyle.Fill,
+                FlatStyle = FlatStyle.Flat,
                 Text = "Complete Purchase",
                 Font = new Font("Arial", 16, FontStyle.Regular),
                 Margin = new Padding(100, 10, 100, 25),
                 ForeColor = Color.White,
                 BackColor = Color.SandyBrown,
-
             };
 
             CustomerLayoutPanel.Controls.Add(Title);
@@ -310,6 +333,8 @@ namespace Projektarbete
             CustomerLayoutPanel.Controls.Add(CityBox);
             CustomerLayoutPanel.Controls.Add(Address);
             CustomerLayoutPanel.Controls.Add(AddressBox);
+            CustomerLayoutPanel.Controls.Add(DiscountLabel);
+            CustomerLayoutPanel.Controls.Add(DiscountBox);
             CustomerLayoutPanel.Controls.Add(CreditCardNumber);
             CustomerLayoutPanel.Controls.Add(CMaster);
             CustomerLayoutPanel.Controls.Add(CVisa);
@@ -422,8 +447,8 @@ namespace Projektarbete
         private void FormStyles()
         {
             this.Controls.Add(CustomerLayoutPanel);
-            Text = "Nordic Big Data";
-            Size = new Size(450, 800);
+            Text = "Nordic Data Store";
+            Size = new Size(450, 830);
             StartPosition = FormStartPosition.CenterScreen;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MinimizeBox = false;

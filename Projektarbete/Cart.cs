@@ -8,7 +8,6 @@ using System.Drawing;
 
 namespace Projektarbete
 {
-
     class Cart
     {
         private double Price { get; set; }
@@ -26,48 +25,43 @@ namespace Projektarbete
         public Cart()
         {
             InicialComponents();
-
-
         }
-   
+
         private void InicialComponents()
         {
             CartLayoutPanel = new TableLayoutPanel
             {
-             Dock = DockStyle.Fill,
-              AutoScroll = true
+                Dock = DockStyle.Fill,
+                AutoScroll = true,
+                CellBorderStyle = TableLayoutPanelCellBorderStyle.None
             };
 
             CheckOutButton = new Button
             {
-                Text = "CH",
-                
+                Text = "Checkout",
                 Dock = DockStyle.Fill,
-              FlatStyle = FlatStyle.Flat,
-                Font = new Font("Arial", 20, FontStyle.Italic),
+                FlatStyle = FlatStyle.Standard,
+                BackColor = Color.SandyBrown,
+                ForeColor = Color.White,
+                Font = new Font("Arial", 16, FontStyle.Regular),
                 TextAlign = ContentAlignment.MiddleCenter,
-
-
-
             };
-            
+
             CheckOutButton.Click += CheckOutButton_Click;
             ShowPriceLabel = new Label
             {
                 Dock = DockStyle.Fill,
-                Font = new Font("Arial", 20, FontStyle.Regular),
-                TextAlign = ContentAlignment.TopLeft,
-                ForeColor = Color.Green,
-                Text =  "Total Price: 0"
+                Font = new Font("Arial", 15, FontStyle.Regular),
+                TextAlign = ContentAlignment.MiddleCenter,
+                ForeColor = Color.DimGray,
+                BackColor = Color.White,
+                Text = "Total Price: $0"
             };
-
-
-
         }
 
         private void CheckOutButton_Click(object sender, EventArgs e)
         {
-            if(Price == 0)
+            if (Price == 0)
             {
                 MessageBox.Show("Your cart is empty");
             }
@@ -75,55 +69,48 @@ namespace Projektarbete
             {
                 Customer A = new Customer();
                 A.ShowDialog();
-                //
             }
         }
 
-        private void CreateCartTable( int i)
+        private void CreateCartTable(int i)
         {
-           
+            PanelWithProducs = new TableLayoutPanel
+            {
+                Height = 100,
+                Width = 275,
+                ColumnCount = 7,
+                CellBorderStyle = TableLayoutPanelCellBorderStyle.None,
+                BackColor = Color.White,
+                Dock = DockStyle.Top,
+                Cursor = Cursors.Hand,
+            };
 
+            PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25));
+            PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30));
+            PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 9));
+            PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12));
+            PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 9));
+            PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15));
+            PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 0));
 
-                PanelWithProducs = new TableLayoutPanel
-                {
-                    Height = 100,
-                    Width = 275,
-                    ColumnCount = 7,
+            Picture = new PictureBox
+            {
+                Dock = DockStyle.Fill,
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                Enabled = false,
+            };
 
-                    CellBorderStyle = TableLayoutPanelCellBorderStyle.None,
-                    BackColor = Color.White,
-                    Dock = DockStyle.Top,
-                    Cursor = Cursors.Hand,
-
-                };
-
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25));
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30));
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 9));
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12));
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 9));
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15));
-                PanelWithProducs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 0));
-
-                Picture = new PictureBox
-                {
-                    Dock = DockStyle.Fill,
-                    SizeMode = PictureBoxSizeMode.StretchImage,
-                    Enabled = false,
-                };
-
-                LabelName = new Label
-                {
-                    Text = ItemsInTheCart[i].Name + "\n" + ItemsInTheCart[i].Price,
-                    Font = new Font("Arial", 11, FontStyle.Regular),
-                    TextAlign = ContentAlignment.MiddleCenter,
-                    Dock = DockStyle.Fill,
-                    Enabled = false,
-                };
+            LabelName = new Label
+            {
+                Text = ItemsInTheCart[i].Name + "\n" + "$" + ItemsInTheCart[i].Price,
+                Font = new Font("Arial", 11, FontStyle.Regular),
+                TextAlign = ContentAlignment.MiddleCenter,
+                Dock = DockStyle.Fill,
+                ForeColor = Color.DimGray,
+            };
 
             Quantity = new TextBox
             {
-
                 TextAlign = HorizontalAlignment.Center,
                 Text = ItemsInTheCart[i].Quantity.ToString(),
                 Anchor = (AnchorStyles.None | AnchorStyles.None),
@@ -133,59 +120,52 @@ namespace Projektarbete
                 Enabled = false,
                 Tag = i.ToString(),
             };
-          
 
             ButtonMore = new Button
-                {
-                    Dock = DockStyle.Left,
-                    Text = "+",
-                    Font = new Font("Arial", 10, FontStyle.Regular),
-                    FlatStyle = FlatStyle.System,
-                    TextAlign = ContentAlignment.MiddleCenter,
-                    Anchor = (AnchorStyles.None | AnchorStyles.None),
-                    ForeColor = Color.Black,
-                    BackColor = Color.White,
-                    Tag = Quantity
-                    
-                };
+            {
+                Dock = DockStyle.Left,
+                Text = "+",
+                Font = new Font("Arial", 10, FontStyle.Regular),
+                FlatStyle = FlatStyle.System,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Anchor = (AnchorStyles.None | AnchorStyles.None),
+                ForeColor = Color.Black,
+                BackColor = Color.White,
+                Tag = Quantity
+            };
             ButtonMore.Click += ButtonMore_Click;
-                ButtonLess = new Button
-                {
-                    Dock = DockStyle.Right,
-                    Text = "-",
-                    Font = new Font("Arial", 10, FontStyle.Regular),
-                    FlatStyle = FlatStyle.System,
-                    TextAlign = ContentAlignment.MiddleCenter,
-                    Anchor = (AnchorStyles.None | AnchorStyles.None),
-                    ForeColor = Color.Black,
-                    BackColor = Color.White,
-                    Tag = Quantity
-                };
+
+            ButtonLess = new Button
+            {
+                Dock = DockStyle.Right,
+                Text = "-",
+                Font = new Font("Arial", 10, FontStyle.Regular),
+                FlatStyle = FlatStyle.System,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Anchor = (AnchorStyles.None | AnchorStyles.None),
+                ForeColor = Color.Black,
+                BackColor = Color.White,
+                Tag = Quantity
+            };
             ButtonLess.Click += ButtonLess_Click;
 
-                ButtonRemove = new PictureBox
-                {
-                    Image = Image.FromFile(@"Resources\ProgramFIles\removeClose.png"),
-                    BackColor = Color.White,
+            ButtonRemove = new PictureBox
+            {
+                Image = Image.FromFile(@"Resources\ProgramFIles\removeClose.png"),
+                BackColor = Color.White,
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                Anchor = (AnchorStyles.None | AnchorStyles.None),
+                Width = 50,
+                Height = 50,
+            };
 
-                    SizeMode = PictureBoxSizeMode.StretchImage,
-                    Anchor = (AnchorStyles.None | AnchorStyles.None),
-                    Width = 50,
-                    Height = 50,
-
-                    
-                };
-
-
-                {
-
-                    ButtonRemove.Tag = i;
-                }
-                ButtonRemove.Click += ButtonRemove_Click;
+            {
+                ButtonRemove.Tag = i;
+            }
+            ButtonRemove.Click += ButtonRemove_Click;
             ButtonRemove.MouseEnter += ButtonRemove_MouseEnter;
             ButtonRemove.MouseLeave += ButtonRemove_MouseLeave;
-            
-            }
+        }
 
         private void ButtonLess_Click(object sender, EventArgs e)
         {
@@ -194,21 +174,18 @@ namespace Projektarbete
 
             if (t.Text != "1")
             {
-                int f =  Convert.ToInt32(t.Text) - 1;
+                int f = Convert.ToInt32(t.Text) - 1;
 
                 t.Text = f.ToString();
                 int i = Convert.ToInt32(t.Tag);
                 ItemsInTheCart[i].Quantity = Convert.ToInt32(t.Text);
                 PriceCount();
             }
-
-
-
         }
 
         private void ButtonMore_Click(object sender, EventArgs e)
         {
-          
+
             Button s = (Button)sender;
             TextBox t = (TextBox)s.Tag;
             int f = 1 + Convert.ToInt32(t.Text);
@@ -216,39 +193,34 @@ namespace Projektarbete
             int i = Convert.ToInt32(t.Tag);
             ItemsInTheCart[i].Quantity = Convert.ToInt32(t.Text);
             PriceCount();
-
-
-
-
-
         }
 
         private void ButtonRemove_MouseLeave(object sender, EventArgs e)
         {
             PictureBox a = (PictureBox)sender;
-                   a.Image = Image.FromFile(@"Resources\ProgramFIles\removeClose.png");
-                   a.Width = 50;
-                   a.Height = 50;
+            a.Image = Image.FromFile(@"Resources\ProgramFIles\removeClose.png");
+            a.Width = 50;
+            a.Height = 50;
         }
 
         private void ButtonRemove_MouseEnter(object sender, EventArgs e)
         {
             PictureBox a = (PictureBox)sender;
             a.Image = Image.FromFile(@"Resources\ProgramFIles\removeOpen.png");
-            a.Width = 55;
-            a.Height = 55;
+            a.Width = 50;
+            a.Height = 50;
         }
 
-        public void AddToCart( bool IsRefresh)
+        public void AddToCart(bool IsRefresh)
         {
             RefreshCart(IsRefresh);
             if (IsRefresh == false)
             {
-                 AddControlsToCartLayoutPanle(PanelWithProducs);
+                AddControlsToCartLayoutPanle(PanelWithProducs);
             }
-            
+
         }
-        private void AddControlsToCartLayoutPanle( Control control)
+        private void AddControlsToCartLayoutPanle(Control control)
         {
             CartLayoutPanel.Controls.Add(control);
         }
@@ -256,44 +228,34 @@ namespace Projektarbete
         private void RefreshCart(bool IsRefresh)
         {
 
-                for (int i = 0; i < ItemsInTheCart.Count; i++)
-                {
-                
-                    CreateCartTable(i);
-                    GetErrorFromPicturebox(i);
-                    PanelWithProducs.Controls.Add(Picture);
-                    PanelWithProducs.Controls.Add(LabelName);
-                    PanelWithProducs.Controls.Add(ButtonLess);
-                    PanelWithProducs.Controls.Add(Quantity);
-                    PanelWithProducs.Controls.Add(ButtonMore);
-                    PanelWithProducs.Controls.Add(ButtonRemove);
+            for (int i = 0; i < ItemsInTheCart.Count; i++)
+            {
+
+                CreateCartTable(i);
+                GetErrorFromPicturebox(i);
+                PanelWithProducs.Controls.Add(Picture);
+                PanelWithProducs.Controls.Add(LabelName);
+                PanelWithProducs.Controls.Add(ButtonLess);
+                PanelWithProducs.Controls.Add(Quantity);
+                PanelWithProducs.Controls.Add(ButtonMore);
+                PanelWithProducs.Controls.Add(ButtonRemove);
 
                 if (IsRefresh)
                 {
                     AddControlsToCartLayoutPanle(PanelWithProducs);
                 }
-           
-            }
-               
-
 
             }
+        }
         public void PriceCount()
         {
-           Price = 0;
+            Price = 0;
             foreach (Product a in ItemsInTheCart)
             {
-
                 Price += a.Price * a.Quantity;
-
             }
-            ShowPriceLabel.Text = "Total Price: " + Price.ToString();
+            ShowPriceLabel.Text = "Total Price: $" + Price.ToString();
         }
-
-
-      
-
-
         private void GetErrorFromPicturebox(int i)
         {
             try
@@ -310,25 +272,19 @@ namespace Projektarbete
                 {
                     Picture.BackColor = Color.Black;
                 }
-
             }
-
-
-
         }
 
         public bool CartIsNotEmpty()
         {
-           if( ItemsInTheCart.Count<Product>() >= 1)
+            if (ItemsInTheCart.Count<Product>() >= 1)
             {
                 return true;
             }
             else
             {
                 return false;
-
             }
-           
         }
 
         private void ButtonRemove_Click(object sender, EventArgs e)
@@ -339,17 +295,9 @@ namespace Projektarbete
             CartLayoutPanel.Controls.Clear();
             ItemsInTheCart[Convert.ToInt32(a.Tag)].Quantity = 1;
             ItemsInTheCart.Remove(ItemsInTheCart[Convert.ToInt32(a.Tag)]);
-            
+
             AddToCart(true);
             PriceCount();
-
         }
-
-
-
     }
 }
-
-
-
-
