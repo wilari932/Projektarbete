@@ -10,24 +10,20 @@ namespace Projektarbete
 {
     class SendMail
     {
-       
         private string CompanyMail;
         private string CompanyPassword;
-        private string MailBody;       
-
+        private string MailBody;
 
         private void GetMailBody(string Order)
         {
-             string path = @"Resources/Order/"+Order;
-             string ReadMailBody = File.ReadAllText(path);
+            string path = @"Resources/Order/" + Order;
+            string ReadMailBody = File.ReadAllText(path);
             MailBody = ReadMailBody;
- 
-    }
-    public string CustomerMail;
-       
-        
 
-        public void SendMailNow( string Order)
+        }
+        public string CustomerMail;
+
+        public void SendMailNow(string Order)
         {
             if (Order != null)
             {
@@ -45,32 +41,26 @@ namespace Projektarbete
                     client.UseDefaultCredentials = false;
                     client.Credentials = new System.Net.NetworkCredential(CompanyMail, CompanyPassword);
 
-                    MailMessage mm = new MailMessage(CustomerMail, CustomerMail, "Items you Buy", MailBody);
+                    MailMessage mm = new MailMessage(CustomerMail, CustomerMail, "Items you buy", MailBody);
                     mm.BodyEncoding = UTF8Encoding.UTF8;
 
                     mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
 
                     client.Send(mm);
-                    MessageBox.Show("your order is complete, wait for you email.");
+                    MessageBox.Show("Your order is complete, wait for you email.");
                 }
                 catch
                 {
-                    MessageBox.Show("There is a Error with Email-sender and we cannot send you a email.But the order is completed!");
+                    MessageBox.Show("There is a Error with Email-sender and we cannot send you a email. But the order is completed!");
                 }
             }
             else
             {
-                MessageBox.Show("The was a error with your order. The order Could not be Created!");
+                MessageBox.Show("The was a error with your order. The order could not be Created!");
             }
-           
         }
-      
 
-
-
-
-
-    private void GetMailFiles()
+        private void GetMailFiles()
         {
             try
             {
@@ -83,28 +73,12 @@ namespace Projektarbete
 
                     CompanyMail = separator[0];
                     CompanyPassword = separator[1];
-                  
-
                 }
-
-
             }
             catch
             {
                 MessageBox.Show("Your order was completed, but we cant not send mail right now.");
-
             }
-
-            
         }
-
-
-
-
     }
-
-
-
-        }
-
-
+}

@@ -53,7 +53,6 @@ namespace Projektarbete
             }
             catch
             {
-
             }
             ShowTables();
             ShowProducsInGui();

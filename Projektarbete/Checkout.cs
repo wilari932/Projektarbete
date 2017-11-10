@@ -14,7 +14,7 @@ namespace Projektarbete
         {
             get
             {
-              return  SomethingisWrong;
+                return SomethingisWrong;
             }
 
         }
@@ -22,12 +22,10 @@ namespace Projektarbete
         private bool DiscuntCodeIsInvaluable;
         public bool Send
         {
-          get
+            get
             {
-              return  DiscuntCodeIsInvaluable;
+                return DiscuntCodeIsInvaluable;
             }
-            
-
         }
 
         public double Discount(string DiscontCode, double TotaltPrice)
@@ -47,54 +45,18 @@ namespace Projektarbete
                         Fix = Fix * TotaltPrice;
                         TotaltPrice = TotaltPrice - Fix;
                         DiscuntCodeIsInvaluable = true;
-
                     }
                     else
                     {
                         DiscuntCodeIsInvaluable = false;
-
                     }
-
                 }
-
-
             }
             catch
             {
                 SomethingisWrong = true;
-
             }
-
             return TotaltPrice;
         }
     }
 }
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

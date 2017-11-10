@@ -1,7 +1,28 @@
 ﻿0,Lenovo - Ideapad 110s 11.6",laptop0.png,149
-1,Dell - Inspiron 15.6" Touch-Screen,laptop1.png,349
-2,HP - 15.6" Touch-Screen,laptop2.png,529
-3,Lenovo - 15.6",laptop3.png,279
-4,Lenovo - Yoga 710 2-in-1 15.6" Touch-Screen,laptop4.png,749
-5,Asus - VivoBook Max X541NA 15.6",laptop5.png,279
-6,HP - 17.3" Laptop - Intel Core i5,laptop6.png,499
+1,Nintendo Switch,nintendo0.png,399
+2,Corsair Carbide Clear 400C Midi Tower,crosair0.png,94
+3,Corsair Vengeance LPX DDR4 3000MHz 16GB,crosair1.png,210
+4,HP - 15.6" Touch-Screen,laptop2.png,529
+5,Apple iPhone 6 32GB Grå,iphone0.png,369
+6,Apple iPhone X 64GB Grå,iphone1.png,1150
+7,Apple AirPods,iphone2.png,130
+8,Dell - Inspiron 15.6" Touch-Screen,laptop1.png,349
+9,Nikon Coolpix W100 Gul,nikon0.png,139
+10,Harman Onyx Studio 3,harman0.png,399
+11,Nintendo Mini Nes,nintendo1.png,129
+12,Sony 55" UHD LED Smart TV,sony0.png,1499
+13,Lenovo - Yoga 710 2-in-1 15.6" Touch-Screen,laptop4.png,749
+14,Samsung 55" Curved QLED Smart TV,samsung0.png,2199
+15,LG 65" UHD LED Smart TV,lg0.png,1199
+16,Xbox One X Black,xbox0.png,499
+17,Samsung 32" LED Smart TV,samsung1.png,429
+18,Polaroid SNAP Blå,polaroid0.png,149
+19,Playstation 4,play0.png,299
+20,Lenovo - 15.6",laptop3.png,279
+21,Olympus TG-5 Svart,olympus0.png,459
+22,HP - 17.3" Laptop - Intel Core i5,laptop6.png,499
+23,Polaroid SNAP Röd,polaroid1.png,129
+24,Asus - VivoBook Max X541NA 15.6",laptop5.png,279
+
+
+

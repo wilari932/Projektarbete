@@ -10,8 +10,8 @@ namespace Projektarbete
 {
     class Cart
     {
-        private  static double Price { get; set; }
-    
+        private static double Price { get; set; }
+
         public TableLayoutPanel CartLayoutPanel;
         private TableLayoutPanel PanelWithProducs;
         private Label LabelName;
@@ -69,9 +69,7 @@ namespace Projektarbete
             else
             {
                 Customer a = new Customer(Price, ItemsInTheCart, this);
-    
                 a.ShowDialog();
-              
             }
         }
 
@@ -230,7 +228,6 @@ namespace Projektarbete
 
         private void RefreshCart(bool IsRefresh)
         {
-
             for (int i = 0; i < ItemsInTheCart.Count; i++)
             {
 
@@ -247,7 +244,6 @@ namespace Projektarbete
                 {
                     AddControlsToCartLayoutPanle(PanelWithProducs);
                 }
-
             }
         }
         public void PriceCount()
