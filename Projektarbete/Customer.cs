@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using System.IO;
 
 namespace Projektarbete
 {
@@ -37,11 +38,24 @@ namespace Projektarbete
         private Button CompletePurchase;
         private Checkout SetCheckout = new Checkout();
         private List<Product> ItemsTocheckouT = new List<Product>();
+        public Cart cat = new Cart();
+      
 
-        public Customer(double pris, List<Product> Items)
+
+        public Customer(double pris, List<Product> Items , Cart C )
         {
-            GetPrice(pris , Items);
+            cat = C;
+            GetPrice(pris, Items);
             InitialComponents();
+            this.FormClosing += Customer_FormClosing;
+        }
+
+        private void Customer_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            cat.CartLayoutPanel.Controls.Clear();
+            cat.ItemsInTheCart.Clear();
+            cat.PriceCount();
+
         }
 
         private void InitialComponents()
@@ -156,15 +170,13 @@ namespace Projektarbete
                 Cursor = Cursors.Default,
                 Width = 210,
                 Height = 25,
-
-                Text = Environment.NewLine + "@" + Environment.NewLine,
                 Font = new Font("Arial", 11, FontStyle.Regular),
                 TextAlign = HorizontalAlignment.Center,
                 Margin = new Padding(110, 2, 20, 5),
                 ForeColor = Color.DimGray,
                 BackColor = Color.White
             };
-            EmailBox.TextChanged += EmailBox_TextChanged;
+
 
             City = new Label
             {
@@ -352,14 +364,29 @@ namespace Projektarbete
             CustomerLayoutPanel.Controls.Add(CompletePurchase);
 
         }
+        private bool TexBoxesCheck()
+        {
+
+            if (NameBox.TextLength == 0 || !System.Text.RegularExpressions.Regex.IsMatch(NameBox.Text, "[A-z]" ) || System.Text.RegularExpressions.Regex.IsMatch(NameBox.Text, "[0-9]")) { NameBox.BackColor = Color.Red; return false; }
+            else if ( !EmailBox.Text.Contains("@") || EmailBox.TextLength == 0) { EmailBox.BackColor = Color.Red; return false; }
+            else if (LastNameBox.TextLength == 0) { LastNameBox.BackColor = Color.Red; return false; }
+            else if (CreditCardNumberBox.TextLength == 0 || CreditCardNumberBox.TextLength < 13) { CreditCardNumberBox.BackColor = Color.Red; return false; }
+            else if (CleringNumberBox.TextLength == 0 || CleringNumberBox.TextLength < 3) { CleringNumberBox.BackColor = Color.Red; return false; }
+            else if (PhoneBox.TextLength == 0) { PhoneBox.BackColor = Color.Red; return false; }
+            else if ( AddressBox.TextLength == 0) { AddressBox.BackColor = Color.Red;  return false; }
+            else
+            {
+                return true;
+            }
+        }
 
         private void DiscountBox_TextChanged(object sender, EventArgs e)
         {
-          
-            if(DiscountBox.TextLength > 0)
+
+            if (DiscountBox.TextLength > 0)
             {
-               
-                price =  SetCheckout.Discount(DiscountBox.Text, price);
+
+                price = SetCheckout.Discount(DiscountBox.Text, price);
                 LabelTotalPrice.Text = price.ToString();
                 if (SetCheckout.Send)
                 {
@@ -367,8 +394,8 @@ namespace Projektarbete
                     MessageBox.Show("You have discount is set!");
                     DiscountBox.Enabled = false;
                 }
-               
-                else 
+
+                else
                 {
                     DiscountBox.BackColor = Color.Red;
                 }
@@ -381,7 +408,8 @@ namespace Projektarbete
 
         public void GetPrice(double getPrice, List<Product> Items)
         {
-            foreach(Product a in Items)
+
+            foreach (Product a in Items)
             {
                 ItemsTocheckouT.Add(a);
             }
@@ -389,11 +417,105 @@ namespace Projektarbete
         }
 
 
+
+        private string Order()
+        {
+            try
+            {
+
+
+                Random radomPathNumber = new Random();
+                int[] a = new int[] { };
+                string[] b = new string[7] { "", "", "", "", "", "", "", };
+                string c = null;
+
+
+
+
+                for (int i = 0; i < 7; i++)
+                {
+
+                    b[i] = radomPathNumber.Next(0, 10).ToString();
+
+
+                    c += b[i];
+                }
+                string path = @"Resources/Order/" + c + ".txt";
+
+                if (File.Exists(path))
+                {
+                    c += "0";
+                    path = @"Resources/Order/" + c + ".txt";
+                    var Myfile = File.CreateText(path);
+                    Myfile.Close();
+                }
+                else
+                {
+                    var Myfile = File.CreateText(path);
+                    Myfile.Close();
+                }
+
+                DateTime s = DateTime.Now;
+
+                string content = "Your order Was Created " + s.ToString() + System.Environment.NewLine +
+                  "Your order number is : " + c + System.Environment.NewLine 
+                  + "Dear " + NameBox.Text + " " + LastNameBox.Text + ". Thanks for your order! "
+                 + System.Environment.NewLine +
+                 "**********************" + System.Environment.NewLine + "# Shipping Information #"+ System.Environment.NewLine +
+                 "# telephone number: " +PhoneBox.Text+ " #" + System.Environment.NewLine +
+                 "#" + "Adreess: "+ AddressBox.Text +" #"+ System.Environment.NewLine + 
+                 "# City: " + CityBox.Text+ "#" + System.Environment.NewLine+
+                 "You have ordered following items:" + System.Environment.NewLine ;
+
+
+                foreach (Product p in ItemsTocheckouT)
+                {
+                    content += System.Environment.NewLine + "**************************************************************************" + System.Environment.NewLine;
+                    content += p.Name + " You have ordered " + p.Quantity.ToString() + " pieces of these. " + "The price per unit is $" + p.Price.ToString() + " Dollars " + System.Environment.NewLine;
+                    
+
+
+
+                }
+                content += " The toltal Price Was $" + price.ToString() + " Dollars";
+
+
+                File.WriteAllText(path, content);
+                return c + ".txt";
+            }
+
+            catch
+            {
+
+                MessageBox.Show("We are so sorry The order could not be completed");
+
+            }
+
+            return null;
+
+
+        }
+
+
         private void CompletePurchase_Click(object sender, EventArgs e)
         {
-            SendMail s = new SendMail();
-            s.CustomerMail = EmailBox.Text;
+            bool check = TexBoxesCheck();
+            if (check)
+            {
+                SendMail sendMail = new SendMail();
 
+                sendMail.CustomerMail = EmailBox.Text;
+                sendMail.SendMailNow(Order());
+                cat.CartLayoutPanel.Controls.Clear();
+                cat.ItemsInTheCart.Clear();
+                cat.PriceCount();
+               
+                
+               
+                this.Close();
+               
+               
+            }
 
 
         }
@@ -406,22 +528,22 @@ namespace Projektarbete
             }
         }
 
-        private void EmailBox_TextChanged(object sender, EventArgs e)
-        {
-            List<string> num = new List<string> { "@" };
-            foreach (string s in num)
-            {
-                if (EmailBox.Text.Contains(s))
-                {
+        //private void EmailBox_TextChanged(object sender, EventArgs e)
+        //{
+        //    List<string> num = new List<string> { "@" };
+        //    foreach (string s in num)
+        //    {
+        //        if (EmailBox.Text.Contains(s))
+        //        {
 
-                }
-                else
-                {
-                    EmailBox.Text = "@";
-                    break;
-                }
-            }
-        }
+        //        }
+        //        else
+        //        {
+        //            EmailBox.Text = "@";
+        //            break;
+        //        }
+        //    }
+        //}
 
         private void NameBox_TextChanged(object sender, EventArgs e)
         {
@@ -452,10 +574,21 @@ namespace Projektarbete
         private void CreditCardNumberBox_TextChanged(object sender, EventArgs e)
         {
 
-            if (System.Text.RegularExpressions.Regex.IsMatch(CreditCardNumberBox.Text, "[a-z]"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(CreditCardNumberBox.Text, "[A-z]"))
             {
                 CreditCardNumberBox.Text = CreditCardNumberBox.Text.Remove(CreditCardNumberBox.Text.Length - 1);
                 CreditCardNumberBox.Select(CreditCardNumberBox.Text.Length, 0);
+            }
+            else
+            {
+                if(CreditCardNumberBox.Text.StartsWith("4"))
+                {
+                    CVisa.Checked = true;
+                }
+               else if(CreditCardNumberBox.Text.StartsWith("5"))
+                {
+                    CMaster.Checked = true;
+                }
             }
         }
 

@@ -68,8 +68,8 @@ namespace Projektarbete
             }
             else
             {
-                Customer a = new Customer(Price, ItemsInTheCart);
-              
+                Customer a = new Customer(Price, ItemsInTheCart, this);
+    
                 a.ShowDialog();
               
             }
