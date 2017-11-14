@@ -309,6 +309,7 @@ namespace Projektarbete
             a.Image = Image.FromFile(@"Resources\ProgramFIles\removeOpen.png");
             a.Width = 50;
             a.Height = 50;
+
         }
     }
 }
