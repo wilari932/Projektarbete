@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Projektarbete
 {
-    class Checkout
+    class DiscountController
     {
         private bool SomethingisWrong;
         public bool SendError

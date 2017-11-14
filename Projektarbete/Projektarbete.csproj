@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cart.cs" />
-    <Compile Include="Checkout.cs" />
+    <Compile Include="DiscountController.cs" />
     <Compile Include="ShippingGui.cs">
       <SubType>Form</SubType>
     </Compile>

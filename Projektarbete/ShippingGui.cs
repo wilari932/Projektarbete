@@ -36,7 +36,7 @@ namespace Projektarbete
         private TextBox CleringNumberBox;
         private Label LabelTotalPrice;
         private Button ButtonCompletePurchase;
-        private Checkout SetCheckout = new Checkout();
+        private DiscountController SetCheckout = new DiscountController();
         private List<Product> ItemsTocheckouT = new List<Product>();
         public Cart GetCarData = new Cart();
         private SendMail sendMail = new SendMail();

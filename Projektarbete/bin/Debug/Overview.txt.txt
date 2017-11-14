@@ -1,26 +1,46 @@
+Vi har valt att dela upp vårt program på 11 olika klasser, målet med detta vart att jobba objektorienterad . Vi har lyckas att få ett fungerande program som visar upp bilder på produkter  Med , Namn , Pris  samt knappar, som ska tala om vilken vara man önskar att köpa. Vi har även skapat en kundvagn  som beräknar priset åt oss, beroende på vilken vara det är och mängden. När vi har valt önska produkt , kan vi checka ut och slutföra ett köp, Genom att mata in våra personliga uppgifter.
+Beställningen sparas i en mapp som heter Order och generar en textfil, samtidigt skickar vi ut ett Email till kunden och talar om vilka varor har köps och totala priset. 
 
-Nordic Big Data	
+Kunden har möjligheten att mata in ett rabattkod och få rabatt beroende på de inställningar som man har agnet i textfilen ”DiscontCodes” . Inställningen sker på följande sätt : (DADXS,20% ).Första raden innan kommatecknet är koden och siffran är procent rabatt man önska ge till kunden.
 
+Produkterna visas i programmet tack vare en fil som heter Database som ligger i mappen ”ProductImages”. för att kunna visa upp sin produkt måste man ange datan på följande sätt :
+(ID,Nam, Bild.Format, Pris) Det är viktig att separera datan med kommatecknet.'
+alla bilder måste ligga inne i mappen ”ProductImages” för att programmet ska fungera korrekt.
+Om du önskar skicka beställningen via mail så har vi skapat en klass som tar hand om detta men du behöver ange Ditt mail och lösenord i filen ”Yourmail” på följande format (Email@gmail.com,Lösenord). Glöm inte Kommatecknet för att separera datan. 
+Tyvärr är klassen inställd på Gmail och kan endast skicka ut beställningar ifrån ett Gmail konto för tillfället.
 
+Du har även möjligheten att sätta ut en bild som visas som reklam  på programmet det gör du i mappen ”YourBanner”. Det är viktig att sätta in bild som har formatet ”PNG” , Bilden måste också heta ”header” Exempel bild finns i mappen.
 
-Vi har valt att bygga ett program som anpassar sig till att skapa en förställningsmiljö där både kunden och användaren kan integrerar med varandra. Tack vore vår gränssnitt kan kunden köpa sina varor på ett effektiv sätt. Våra huvud funktioner är att visa vad kunder har köpt och spara informationen någonstans i datorn sedan mejla informationen vidare till kunden. Största utmaningen för oss var att skapa en häftig GUI där vi kan erbjuda ett trygghet för användaren
-	
-Applikationen består av 8 olika klasser som är följande:
+Här kommer jag att beskriva lite kortfattat va de olika klasser gör.
+ 
+MainForm  
 
-MainForm
-Klasen innehåller en root panel som visar upp GUI ifrån klassen GetProducts och Cart. Vi har även skapat en reklam banner högst upp där användaren kan visa upp en bild av sitt företag för kunden.
-
+Innehåller RootPanel som visar all Grafisk som sker i programmet.
+Vi har även en funktion som skapar ett blinkade bild på toppen av programmet.
 Product
-Product används för att skapa en produkt,
+Är en klass som innehåller  5 egenskaper : Namn , Pris , Id, kvantitet, Bildnamn.
 
-GetProducts
-Läser in en fil och spara de värden i en lista av typen produkt och skapar en GUI som visar alla produkter som finns i tillgängliga på höger sidan och vårt program även kollar att alla viktiga filer i programmet existerar och försöker återskapar dem. Huvuduppgiften är skicka vidare informationen till klassen Cart. 
+GetProducs
+
+Hämtar Data ifrån textfilen ”Database”  och översätter detta till en Objekt av typen Produkt som sparas in en lista av typen Produkt.
+Denna klass ser  också till att skapa ett GUI som representerar produkterna.
+Här finns även en fuktion som kontrollerar alla kärnfiler och återskapar de om dessa har tagits bort.
+
+DiscountController
+Kontrollerar Rabattsträngen som kunden har matat in och skickar Sant eller falsk om inmatningen stämmer överens.
+ 
+
+ShippingGui
+Skapar GUI som visas  när kunden ska mata in sina Uppgifter.
+
+SendMail
+Skickar ett mejl till kunden när med beställningen.
+ Här Verifierar vi också kundens mejl och kontrollerar att det finns ett företags mejl .
+
+FilesExist
+Används för att kontrollera Kärn-filerna finns och återskapar valfri mapp eller textfil om de inte finns. 
 
 Cart
-Läser in alla produkter som finns sparade i en lokallista av typen produkt som har fått sina värden ifrån GetProduct klassen. När kunden är nöjd med sina valda varor kommer Cartklassen skicka vidare informationen till 
+Utför beräkningar på produkter som ska köpas och skapar ett GUI för användaren.
 
-ShippingGUI
-Gör en kontrollräkning på de varorna som finns sparade samtidigt görs en kontroll på vilken data som kunden har lagt in. 
 
-CheckOut 
-Klassen anropas för att  kontrollera om rabattsträng som har skrivits in, och ger ut  envis rabatt beroende på vad användaren har lagt in i text filen .    
