@@ -52,6 +52,7 @@
     <Compile Include="Cart.cs" />
     <Compile Include="Checkout.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="FilesExist.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -21,8 +21,26 @@ namespace Projektarbete
 
         public GetProducs()
         {
-
+            FilesCheck();
             InitialComponents();
+            
+        }
+        // Kontrollerar att filerna finns i mappen och om de inte finns återskapar vi de
+        private void FilesCheck()
+        {
+            FilesExist ss = new FilesExist();
+            ss.FilesExistt("Resources", FilesExist.Filetype.Folder);
+            ss.FilesExistt("Resources/ProgramFIles", FilesExist.Filetype.Folder);
+            ss.FilesExistt("Resources/ProgramFIles/Error", FilesExist.Filetype.Folder);
+            ss.FilesExistt("Resources/YourBanner", FilesExist.Filetype.Folder);
+            ss.FilesExistt("Resources/ProductImages", FilesExist.Filetype.Folder);
+            ss.FilesExistt("Resources/Order",FilesExist.Filetype.Folder);
+            ss.FilesExistt("Resources/ProductImages/Database.txt", FilesExist.Filetype.Txt);
+            ss.FilesExistt("Resources/ProgramFIles/DiscontCodes.txt", FilesExist.Filetype.Txt);
+            ss.FilesExistt("Resources/ProgramFIles/Yourmail.txt", FilesExist.Filetype.Txt);
+            ss.FilesExistt("Resources/ProgramFIles/removeClose.png", FilesExist.Filetype.Picture);
+            ss.FilesExistt("Resources/ProgramFIles/removeOpen.png", FilesExist.Filetype.Picture);
+        
         }
 
         // Get the Data From Text File
@@ -187,6 +205,7 @@ namespace Projektarbete
             }
         }
 
+        // lägger till produkter i kassan 
         private void ButtonAddToCart_Click(object sender, EventArgs e)
         {
             Button a = (Button)sender;

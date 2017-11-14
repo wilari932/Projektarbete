@@ -152,6 +152,8 @@ namespace Projektarbete
 
             ButtonRemove = new PictureBox
             {
+               
+            
                 Image = Image.FromFile(@"Resources\ProgramFIles\removeClose.png"),
                 BackColor = Color.White,
                 SizeMode = PictureBoxSizeMode.StretchImage,

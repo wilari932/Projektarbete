@@ -144,6 +144,7 @@ namespace Projektarbete
             this.Width = 1500;
             this.Height = 700;
             this.FormClosing += MainForm_FormClosing;
+            
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

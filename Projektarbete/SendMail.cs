@@ -14,7 +14,9 @@ namespace Projektarbete
         private string CompanyMail;
         private string CompanyPassword;
         private string MailBody;
+        public string CustomerMail;
 
+        // Hämtar en sträng i från en text fil och skickar det till Mailbody
         private void GetMailBody(string Order)
         {
             string path = @"Resources/Order/" + Order;
@@ -22,8 +24,8 @@ namespace Projektarbete
             MailBody = ReadMailBody;
 
         }
-        public string CustomerMail;
-
+       
+        // skickar mail till kunden eller visar fel om mailen inte har skickas.
         public void SendMailNow(string Order)
         {
             if (Order != null)
@@ -42,7 +44,7 @@ namespace Projektarbete
                     client.UseDefaultCredentials = false;
                     client.Credentials = new System.Net.NetworkCredential(CompanyMail, CompanyPassword);
 
-                    MailMessage message = new MailMessage(CustomerMail, CustomerMail, "Items you buy", MailBody);
+                    MailMessage message = new MailMessage(CompanyMail, CustomerMail, "Items you buy", MailBody);
                     message.BodyEncoding = UTF8Encoding.UTF8;
 
                     message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
@@ -61,17 +63,24 @@ namespace Projektarbete
             }
         }
 
+        // skickar false  om indatan är ogiltilig (Email)
         public  bool MailIsValid(string Email)
         {
           var Checkmail = new EmailAddressAttribute();
             return Checkmail.IsValid(Email);
         }
+        // Hämatar FöretagsMailen i från en txtFil och sparar värden i CompanyMail
+
+       
 
         private void GetMailFiles()
         {
             try
             {
-                string path = @"Resources/ProgramFIles/Yourmail.txt";
+              
+
+
+                string path = @"Resources /ProgramFIles/Yourmail.txt";
                 List<string> ReadMailfiles = new List<string>();
                 ReadMailfiles = File.ReadLines(path).ToList();
                 foreach (string s in ReadMailfiles)
@@ -84,6 +93,7 @@ namespace Projektarbete
             }
             catch
             {
+               
                 MessageBox.Show("Your order was completed, but we cant not send mail right now.");
             }
         }
