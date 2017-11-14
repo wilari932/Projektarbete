@@ -72,7 +72,7 @@ namespace Projektarbete
             }
             else
             {
-                Customer a = new Customer(Price, ItemsInTheCart, this);
+                ShippingGui a = new ShippingGui(Price, ItemsInTheCart, this);
                 a.ShowDialog();
             }
         }

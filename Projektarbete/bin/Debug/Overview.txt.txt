@@ -1,0 +1,26 @@
+
+Nordic Big Data	
+
+
+
+Vi har valt att bygga ett program som anpassar sig till att skapa en förställningsmiljö där både kunden och användaren kan integrerar med varandra. Tack vore vår gränssnitt kan kunden köpa sina varor på ett effektiv sätt. Våra huvud funktioner är att visa vad kunder har köpt och spara informationen någonstans i datorn sedan mejla informationen vidare till kunden. Största utmaningen för oss var att skapa en häftig GUI där vi kan erbjuda ett trygghet för användaren
+	
+Applikationen består av 8 olika klasser som är följande:
+
+MainForm
+Klasen innehåller en root panel som visar upp GUI ifrån klassen GetProducts och Cart. Vi har även skapat en reklam banner högst upp där användaren kan visa upp en bild av sitt företag för kunden.
+
+Product
+Product används för att skapa en produkt,
+
+GetProducts
+Läser in en fil och spara de värden i en lista av typen produkt och skapar en GUI som visar alla produkter som finns i tillgängliga på höger sidan och vårt program även kollar att alla viktiga filer i programmet existerar och försöker återskapar dem. Huvuduppgiften är skicka vidare informationen till klassen Cart. 
+
+Cart
+Läser in alla produkter som finns sparade i en lokallista av typen produkt som har fått sina värden ifrån GetProduct klassen. När kunden är nöjd med sina valda varor kommer Cartklassen skicka vidare informationen till 
+
+ShippingGUI
+Gör en kontrollräkning på de varorna som finns sparade samtidigt görs en kontroll på vilken data som kunden har lagt in. 
+
+CheckOut 
+Klassen anropas för att  kontrollera om rabattsträng som har skrivits in, och ger ut  envis rabatt beroende på vad användaren har lagt in i text filen .    

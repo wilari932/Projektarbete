@@ -9,7 +9,7 @@ using System.IO;
 
 namespace Projektarbete
 {
-    class Customer : Form
+    class ShippingGui : Form
     {
         private double price;
         public TableLayoutPanel CustomerLayoutPanel;
@@ -66,7 +66,7 @@ namespace Projektarbete
         }
 
         // Vårt Konstruktör
-        public Customer(double pris, List<Product> Items, Cart C)
+        public ShippingGui(double pris, List<Product> Items, Cart C)
         {
             GetCarData = C;
             GetPrice(pris, Items);

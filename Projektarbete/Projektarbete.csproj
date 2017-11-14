@@ -51,7 +51,9 @@
   <ItemGroup>
     <Compile Include="Cart.cs" />
     <Compile Include="Checkout.cs" />
-    <Compile Include="Customer.cs" />
+    <Compile Include="ShippingGui.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FilesExist.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
