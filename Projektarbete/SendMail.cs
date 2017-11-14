@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Windows.Forms;
 using System.IO;
+using System.ComponentModel.DataAnnotations;
 namespace Projektarbete
 {
     class SendMail
@@ -41,12 +42,12 @@ namespace Projektarbete
                     client.UseDefaultCredentials = false;
                     client.Credentials = new System.Net.NetworkCredential(CompanyMail, CompanyPassword);
 
-                    MailMessage mm = new MailMessage(CustomerMail, CustomerMail, "Items you buy", MailBody);
-                    mm.BodyEncoding = UTF8Encoding.UTF8;
+                    MailMessage message = new MailMessage(CustomerMail, CustomerMail, "Items you buy", MailBody);
+                    message.BodyEncoding = UTF8Encoding.UTF8;
 
-                    mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                    message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
 
-                    client.Send(mm);
+                    client.Send(message);
                     MessageBox.Show("Your order is complete, wait for you email.");
                 }
                 catch
@@ -58,6 +59,12 @@ namespace Projektarbete
             {
                 MessageBox.Show("The was a error with your order. The order could not be Created!");
             }
+        }
+
+        public  bool MailIsValid(string Email)
+        {
+          var Checkmail = new EmailAddressAttribute();
+            return Checkmail.IsValid(Email);
         }
 
         private void GetMailFiles()

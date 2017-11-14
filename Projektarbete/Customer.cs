@@ -35,31 +35,73 @@ namespace Projektarbete
         private Label CleringNumber;
         private TextBox CleringNumberBox;
         private Label LabelTotalPrice;
-        private Button CompletePurchase;
+        private Button ButtonCompletePurchase;
         private Checkout SetCheckout = new Checkout();
         private List<Product> ItemsTocheckouT = new List<Product>();
-        public Cart cat = new Cart();
+        public Cart GetCarData = new Cart();
+        private SendMail sendMail = new SendMail();
 
+
+        // Skickar True eller False , beroande på vilkoret. Huvudsiftet är att kontrellera om det finns bara siffror eller Bokstäver i en string.
+        private bool TextboxTexChangedControll(string textBoxString, bool numbersOnly, bool LettersOnly)
+        {
+            if (numbersOnly)
+            {
+                return System.Text.RegularExpressions.Regex.IsMatch(textBoxString, "[^0-9 ]");
+
+            }
+            else if (LettersOnly)
+            {
+                return System.Text.RegularExpressions.Regex.IsMatch(textBoxString, "[^a-zA-Z ]");
+            }
+            else if(numbersOnly && LettersOnly)
+            {
+                return System.Text.RegularExpressions.Regex.IsMatch(textBoxString, "[^0-9a-zA-Z ]");
+            }
+
+            else
+            {
+                return false;
+            }
+        }
+
+        // Vårt Konstruktör
         public Customer(double pris, List<Product> Items, Cart C)
         {
-            cat = C;
+            GetCarData = C;
             GetPrice(pris, Items);
             InitialComponents();
             this.FormClosing += Customer_FormClosing;
         }
 
+        // När vårt Form stängs , Kommer vi att rensa det som finns i Cart
         private void Customer_FormClosing(object sender, FormClosingEventArgs e)
         {
-            cat.CartLayoutPanel.Controls.Clear();
-            cat.ItemsInTheCart.Clear();
-            cat.PriceCount();
+            GetCarData.CartLayoutPanel.Controls.Clear();
+            GetCarData.ItemsInTheCart.Clear();
+            GetCarData.PriceCount();
         }
 
+        // Här är alla start metoder för GUI som kommer att köras först.
         private void InitialComponents()
         {
             CustomerGUI();
             FormStyles();
         }
+
+        //Kod för vårt Form
+        private void FormStyles()
+        {
+            this.Controls.Add(CustomerLayoutPanel);
+            Text = "Nordic Data Store";
+            Size = new Size(450, 850);
+            StartPosition = FormStartPosition.CenterScreen;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MinimizeBox = false;
+            MaximizeBox = false;
+        }
+        
+        // Här skapar vi vårt GUI
         private void CustomerGUI()
         {
             CustomerLayoutPanel = new TableLayoutPanel
@@ -313,7 +355,6 @@ namespace Projektarbete
             LabelTotalPrice = new Label
             {
                 Dock = DockStyle.Fill,
-                //vas a borrar el Text 
                 Text = "Total Price: $" + price.ToString(),
                 Font = new Font("Arial", 14, FontStyle.Regular),
                 Margin = new Padding(115, 5, 115, 3),
@@ -321,7 +362,7 @@ namespace Projektarbete
                 TextAlign = ContentAlignment.MiddleCenter
             };
 
-            CompletePurchase = new Button
+            ButtonCompletePurchase = new Button
             {
                 Dock = DockStyle.Fill,
                 FlatStyle = FlatStyle.Flat,
@@ -332,7 +373,7 @@ namespace Projektarbete
                 BackColor = Color.SandyBrown,
             };
 
-            CompletePurchase.Click += CompletePurchase_Click;
+            ButtonCompletePurchase.Click += CompletePurchase_Click;
             CustomerLayoutPanel.Controls.Add(Title);
             CustomerLayoutPanel.Controls.Add(CName);
             CustomerLayoutPanel.Controls.Add(NameBox);
@@ -358,14 +399,17 @@ namespace Projektarbete
             CustomerLayoutPanel.Controls.Add(CleringNumber);
             CustomerLayoutPanel.Controls.Add(CleringNumberBox);
             CustomerLayoutPanel.Controls.Add(LabelTotalPrice);
-            CustomerLayoutPanel.Controls.Add(CompletePurchase);
+            CustomerLayoutPanel.Controls.Add(ButtonCompletePurchase);
 
         }
+
+
+        // En metod som används endast av Button Complete Purchase för att kontrollera alla Textbox innan vi skapar Ordern.
         private bool TexBoxesCheck()
         {
 
-            if (NameBox.TextLength == 0 || !System.Text.RegularExpressions.Regex.IsMatch(NameBox.Text, "[A-z]") || System.Text.RegularExpressions.Regex.IsMatch(NameBox.Text, "[0-9]")) { NameBox.BackColor = Color.Red; return false; }
-            else if (!EmailBox.Text.Contains("@") || EmailBox.TextLength == 0) { EmailBox.BackColor = Color.Red; return false; }
+            if (NameBox.TextLength == 0 ) { NameBox.BackColor = Color.Red; return false; }
+            else if (!sendMail.MailIsValid(EmailBox.Text) || EmailBox.TextLength == 0) { EmailBox.BackColor = Color.Red; return false; }
             else if (LastNameBox.TextLength == 0) { LastNameBox.BackColor = Color.Red; return false; }
             else if (CreditCardNumberBox.TextLength == 0 || CreditCardNumberBox.TextLength < 13) { CreditCardNumberBox.BackColor = Color.Red; return false; }
             else if (CleringNumberBox.TextLength == 0 || CleringNumberBox.TextLength < 3) { CleringNumberBox.BackColor = Color.Red; return false; }
@@ -376,33 +420,8 @@ namespace Projektarbete
                 return true;
             }
         }
-
-        private void DiscountBox_TextChanged(object sender, EventArgs e)
-        {
-
-            if (DiscountBox.TextLength > 0)
-            {
-
-                price = SetCheckout.Discount(DiscountBox.Text, price);
-                LabelTotalPrice.Text = price.ToString();
-                if (SetCheckout.Send)
-                {
-                    DiscountBox.BackColor = Color.Aquamarine;
-                    MessageBox.Show("You have discount is set!");
-                    DiscountBox.Enabled = false;
-                }
-
-                else
-                {
-                    DiscountBox.BackColor = Color.LightCoral;
-                }
-            }
-            else
-            {
-                DiscountBox.BackColor = Color.White;
-            }
-        }
-
+      
+       // Här kontrollerar vi att priset stämmer överens med varorna som är sparade.
         public void GetPrice(double getPrice, List<Product> Items)
         {
 
@@ -413,6 +432,8 @@ namespace Projektarbete
             price = getPrice;
         }
 
+
+        // Här skapar vi en textfil och skickar in data och återlämnar en string.
         private string Order()
         {
             try
@@ -471,95 +492,7 @@ namespace Projektarbete
             return null;
         }
 
-        private void CompletePurchase_Click(object sender, EventArgs e)
-        {
-            bool check = TexBoxesCheck();
-            if (check)
-            {
-                SendMail sendMail = new SendMail();
-
-                sendMail.CustomerMail = EmailBox.Text;
-                sendMail.SendMailNow(Order());
-                cat.CartLayoutPanel.Controls.Clear();
-                cat.ItemsInTheCart.Clear();
-                cat.PriceCount();
-
-                this.Close();
-            }
-        }
-
-        private void PhoneBox_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(PhoneBox.Text, "[a-z]"))
-            {
-                PhoneBox.Text = PhoneBox.Text.Remove(PhoneBox.Text.Length - 1);
-            }
-        }
-
-        //private void EmailBox_TextChanged(object sender, EventArgs e)
-        //{
-        //    List<string> num = new List<string> { "@" };
-        //    foreach (string s in num)
-        //    {
-        //        if (EmailBox.Text.Contains(s))
-        //        {
-
-        //        }
-        //        else
-        //        {
-        //            EmailBox.Text = "@";
-        //            break;
-        //        }
-        //    }
-        //}
-
-        private void NameBox_TextChanged(object sender, EventArgs e)
-        {
-            List<string> num = new List<string> { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-            foreach (string s in num)
-            {
-                if (NameBox.Text.Contains(s))
-                {
-                    NameBox.Clear();
-                    break;
-                }
-            }
-        }
-
-        private void LastNameBox_TextChanged(object sender, EventArgs e)
-        {
-            List<string> num = new List<string> { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-            foreach (string s in num)
-            {
-                if (LastNameBox.Text.Contains(s))
-                {
-                    LastNameBox.Clear();
-                    break;
-                }
-            }
-        }
-
-        private void CreditCardNumberBox_TextChanged(object sender, EventArgs e)
-        {
-
-            if (System.Text.RegularExpressions.Regex.IsMatch(CreditCardNumberBox.Text, "[A-z]"))
-            {
-                CreditCardNumberBox.Text = CreditCardNumberBox.Text.Remove(CreditCardNumberBox.Text.Length - 1);
-                CreditCardNumberBox.Select(CreditCardNumberBox.Text.Length, 0);
-            }
-            else
-            {
-                if (CreditCardNumberBox.Text.StartsWith("4"))
-                {
-                    CVisa.Checked = true;
-                }
-                else if (CreditCardNumberBox.Text.StartsWith("5"))
-                {
-                    CMaster.Checked = true;
-                }
-            }
-        }
-
+        // lägger till mellanslag var fjärde inmatning.
         private string YourText(string text)
         {
             switch (text.Length)
@@ -577,6 +510,92 @@ namespace Projektarbete
             return text;
         }
 
+        // Här sätter vi in våra event Handlers
+
+
+        // Här skapar vi en order som sparas på datorn och Mailar iväg den till användaren och avslutar detta Form.
+        private void CompletePurchase_Click(object sender, EventArgs e)
+        {
+            bool check = TexBoxesCheck();
+            if (check)
+            {
+                sendMail.CustomerMail = EmailBox.Text;
+                sendMail.SendMailNow(Order());
+                GetCarData.CartLayoutPanel.Controls.Clear();
+                GetCarData.ItemsInTheCart.Clear();
+                GetCarData.PriceCount();
+                this.Close();
+            }
+        }
+
+        //alla textboxes gör Ungefär samma kontroll ser till att oligitlig data inte läggs in 
+
+        // Gör samma sak som övriga texboxes
+        private void PhoneBox_TextChanged(object sender, EventArgs e)
+        {
+            if (TextboxTexChangedControll(PhoneBox.Text,true,false))
+            {
+                PhoneBox.Text = PhoneBox.Text.Remove(PhoneBox.Text.Length - 1);
+                PhoneBox.Select(PhoneBox.Text.Length, 0);
+            }
+        }
+        // Gör samma sak som övriga texboxes
+        private void NameBox_TextChanged(object sender, EventArgs e)
+        {
+            if (TextboxTexChangedControll(NameBox.Text, false, true))
+            {
+                NameBox.Text = NameBox.Text.Remove(NameBox.Text.Length - 1);
+                NameBox.Select(NameBox.Text.Length, 0);
+            }
+        }
+        // Gör samma sak som övriga texboxes
+        private void LastNameBox_TextChanged(object sender, EventArgs e)
+        {
+                if (TextboxTexChangedControll(LastNameBox.Text,false,true))
+                {
+                    LastNameBox.Text = LastNameBox.Text.Remove(LastNameBox.Text.Length - 1);
+                    LastNameBox.Select(LastNameBox.Text.Length, 0);
+                }
+            
+        }
+
+
+        // Gör samma sak som övriga texboxes
+        private void CreditCardNumberBox_TextChanged(object sender, EventArgs e)
+        {
+
+
+            if (TextboxTexChangedControll(CreditCardNumberBox.Text, true, false)) 
+            {
+                CreditCardNumberBox.Text = CreditCardNumberBox.Text.Remove(CreditCardNumberBox.Text.Length - 1);
+                CreditCardNumberBox.Select(CreditCardNumberBox.Text.Length, 0);
+            }
+            else
+            {
+                // här lägger vi till "Väljer vi vilket kort användaren väljer beroande på vilken siffra kortnummer startar på".
+                if (CreditCardNumberBox.Text.StartsWith("4"))
+                {
+                    CVisa.Checked = true;
+                }
+                else if (CreditCardNumberBox.Text.StartsWith("5"))
+                {
+                    CMaster.Checked = true;
+                }
+            }
+        }
+       
+      
+        // Gör samma sak som övriga texboxes
+        private void CleringNumberBox_TextChanged(object sender, EventArgs e)
+        {
+            if (TextboxTexChangedControll(CleringNumberBox.Text, true,false))
+            {
+                CleringNumberBox.Text = CleringNumberBox.Text.Remove(CleringNumberBox.Text.Length - 1);
+                
+            }
+        }
+
+        // Bugfix för att kunna använda radera knappen i CreditCardNumberBox.
         private void CreditCardNumberBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Back)
@@ -587,24 +606,34 @@ namespace Projektarbete
             }
         }
 
-        private void CleringNumberBox_TextChanged(object sender, EventArgs e)
+
+        //Här gör vi en kontroll på vårt kunds Rabattkod
+        private void DiscountBox_TextChanged(object sender, EventArgs e)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(CleringNumberBox.Text, "[^0-9]"))
+
+            if (DiscountBox.TextLength > 0)
             {
-                CleringNumberBox.Text = CleringNumberBox.Text.Remove(CleringNumberBox.Text.Length - 1);
+
+                price = SetCheckout.Discount(DiscountBox.Text, price);
+                LabelTotalPrice.Text = price.ToString();
+                if (SetCheckout.Send)
+                {
+                    DiscountBox.BackColor = Color.Aquamarine;
+                    MessageBox.Show("You have discount is set!");
+                    DiscountBox.Enabled = false;
+                }
+
+                else
+                {
+                    DiscountBox.BackColor = Color.LightCoral;
+                }
+            }
+            else
+            {
+                DiscountBox.BackColor = Color.White;
             }
         }
 
-        //MainForm Changes
-        private void FormStyles()
-        {
-            this.Controls.Add(CustomerLayoutPanel);
-            Text = "Nordic Data Store";
-            Size = new Size(450, 830);
-            StartPosition = FormStartPosition.CenterScreen;
-            FormBorderStyle = FormBorderStyle.FixedDialog;
-            MinimizeBox = false;
-            MaximizeBox = false;
-        }
+      
     }
 }
