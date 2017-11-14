@@ -13,6 +13,7 @@ namespace Projektarbete
         public enum Filetype {Folder, Txt, Picture}
         public Filetype GetFiletype { get; set; }
 
+        // kontrollerar att filen existerar och återskapar de
         public void FilesExistt( string path, Filetype filetype)
         {
             if(filetype == Filetype.Folder)

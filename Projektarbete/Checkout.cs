@@ -27,7 +27,7 @@ namespace Projektarbete
                 return DiscuntCodeIsInvaluable;
             }
         }
-
+        // kontroller filen Discount och skickar tillbaka ett värde om det finns rabbat kod 
         public double Discount(string DiscontCode, double TotaltPrice)
         {
             try
