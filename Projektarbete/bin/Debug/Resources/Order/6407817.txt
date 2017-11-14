@@ -1,0 +1,22 @@
+Your order Was Created 2017-11-10 11:16:17
+Your order number is : 6407817
+Dear Agustin Martinez. Thanks for your order! 
+**********************
+# Shipping Information #
+# telephone number: 0793470923 #
+#Adreess: Amerikagatan 1A #
+# City: Göteborg#
+You have ordered following items:
+
+**************************************************************************
+Harman Onyx Studio 3 You have ordered 1 pieces of these. The price per unit is $399 Dollars 
+
+**************************************************************************
+Nintendo Mini Nes You have ordered 1 pieces of these. The price per unit is $129 Dollars 
+
+**************************************************************************
+Apple AirPods You have ordered 1 pieces of these. The price per unit is $130 Dollars 
+
+**************************************************************************
+Nintendo Switch You have ordered 1 pieces of these. The price per unit is $399 Dollars 
+ The toltal Price Was $1057 Dollars
